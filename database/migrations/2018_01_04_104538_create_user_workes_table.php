@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateUserWorkesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //
+    Schema::create('user_works', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
+            $table->integer('catagory_id')->unsigned();
+			$table->foreign('catagory_id')->references('id')->on('catagories');
+			$table->string('description');
+			$table->timestamps();
+		});
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+	 Schema::drop('user_works');
+    }
+}

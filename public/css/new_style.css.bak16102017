@@ -1,0 +1,325 @@
+.m_b_30 { margin-bottom: 30px; }
+.m_b_10 { margin-bottom: 10px; }
+
+/**************************************************************************/
+/*                         UPDATE USER PROFILE                            */
+/**************************************************************************/
+
+div#how-it-works {
+    position: absolute;
+    width: 10px;
+    height: 75px;
+    background: red;
+    top: 0;
+    left: -100px;
+    opacity: 0;
+    transform: translateY(-100%);
+}
+.manage-profile .upload-file label.btn.btn-default {
+    height: 48px;
+    line-height: 35px;
+}
+.manage-profile textarea.form-control {
+    border-radius: 0;
+    height: 111px;
+    resize: none;
+}
+.manage-profile .upload-file span.buttonText { margin-left: 5px; }
+.social-networks { float: left; width: 100%; }
+.social-networks .fa { margin-top: 17px; }
+
+/*******************************************************************/
+/*                         VIEW-PURCHASE                           */
+/*******************************************************************/
+
+.view-purchase .dish-pic {
+    max-width: 100px;
+    margin: 0 auto;
+}
+.view-purchase .status p {
+    opacity: 0.5;
+}
+.view-purchase .status .active {
+    color: black;
+    opacity: 1!important;
+}
+.view-purchase .flex-outer {
+    display: flex;
+    align-items: center;
+}
+.view-purchase .divider {
+    /* float: left; */
+    width: 98%;
+    /* background: yellow; */
+    padding-bottom: 0px;
+    border-bottom: 1px dashed #d0cfcf;
+    margin: 19px auto;
+    padding: 7px 20px;
+    display: table;
+	height:1px;
+}
+.view-purchase .links {
+    color: #e47f02;
+}
+.view-purchase .links:hover {
+    color: #bb6a06;
+}
+
+/*************************************************************************/
+/*                         MANAGE FOOD LISTING                           */
+/*************************************************************************/
+
+.manage-food-listing .food-img {
+    /*width: 260px;*/
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.col-md-9 > ul {
+    float: left;
+    list-style: outside none none;
+    margin: 0 0 0 -40px;
+    width: 100%;
+}
+.col-md-9 li {
+    float: left;
+    width: 35%;
+}
+
+.food-img img {
+    float: left;
+    height: auto;
+    margin: 0 0 0 15px;
+    width: 85%;
+	border: 1px solid #ccc;
+}
+
+.col-md-9 > p {
+    color: #3c2d21;
+}
+.col-md-9 > p a {
+    color: #3c2d21;
+}
+
+.manage-food-listing .food-img-new {
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.links.buynow {
+    border: 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    padding: 11px;
+    position: fixed;
+    right: 6px;
+    top: 44%;
+	z-index:999999999;
+	color:#fff;
+	background: #e47f02 none repeat scroll 0 0;
+}
+
+.nbs-flexisel-container {
+    z-index: 99;
+}
+
+.links.buynow:hover{color:#fff;}
+img.primg {width:260px !important;}
+/*************************************************************************/
+/*                         EDIT FOOD LISTING                           */
+/*************************************************************************/
+
+.edit-food-listing .food-img {
+    width: 49px;
+    height: 49px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.edit-food-listing .close-bt {
+    position: absolute;
+    right: -11px;
+    top: -4px;
+    line-height: 1;
+    color: black;
+    opacity: 0.5;
+}
+.edit-food-listing .close-bt:hover {
+    opacity: 1;
+}
+
+/*******************************************************************/
+/*                         MEDIA QUERIES                           */
+/*******************************************************************/
+
+@media screen and (max-width: 767px) {
+	.view-purchase .flex-outer {
+	    display: block;
+	}
+}
+
+/*****************************************************************/
+/*                         PLACE ORDER                           */
+/*****************************************************************/
+
+.place-order .quantity input {
+    width: 40px;
+    text-align: center;
+}
+
+/********************************************************************/
+/*                         ON OFF BUTTONS                           */
+/********************************************************************/
+/*
+.social-networks .checkbox-in {
+    background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    position: relative;
+    width: 80px;
+    height: 30px;
+    margin-top: 9px;
+}
+.social-networks .checkbox-in::before {
+    color: #00b200;
+    content: "ON";
+    font: bold 12px/26px Arial,sans-serif;
+    left: 10px;
+    position: absolute;
+    top: 3px;
+    z-index: 0;
+}
+.social-networks .checkbox-in::after {
+    color: #d40000;
+    content: "OFF";
+    font: bold 12px/26px Arial,sans-serif;
+    position: absolute;
+    right: 10px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.15);
+    top: 3px;
+    z-index: 0;
+}
+.social-networks .checkbox-in label {
+    z-index: 1;
+    transition: all 0.4s ease 0s;
+    background: #fcf6de none repeat scroll 0 0;
+    border-radius: 50px;
+    cursor: pointer;
+    height: 20px;
+    left: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    border: 1px solid rgba(164, 121, 82, 0.46);
+}
+.social-networks .checkbox-in input[type="checkbox"]:checked + label {
+    left: 45px;
+}
+.social-networks .checkbox-in input[type="checkbox"] {
+	display: none;
+}
+*/
+
+.marg-top { margin-top:25px; width:100%; float:left;}
+.divider {
+    border-bottom: 1px dashed hsl(0, 1%, 81%);}
+
+
+
+
+.top-inp { width: 100%; float: left; }
+
+/*.top-inp .select{
+    background: #e47f02;
+    color: #fff;
+    font-size: 16px;
+    height: 50px;
+    vertical-align: top;
+    padding: 0 18px; width: auto;
+    font-weight: 400;
+    border: 1px solid #e47f02;}*/
+
+
+.submit { float: left; margin-left: 5px;}
+
+/*.submit {
+    text-shadow: none;
+    background: #e47f02;
+    color: #fff;
+    font-size: 16px;
+    height: 50px;
+    vertical-align: top;
+    padding: 0 18px;
+    font-weight: 400;
+    border: 1px solid #e47f02; width: auto; float: left;
+}*/
+.top-inp {
+    width: 75%; margin: 0 auto;float: none;
+}
+
+
+.top-inp .input.select {
+    width: 80%;
+    float: left;
+    display: flex;
+    margin: 0 auto;
+}
+
+select#DishLocationId {
+    width: 100%!important; 
+}
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+        opacity : 0.4;
+        display:none;
+	background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+
+
+img#dialogImage{
+    background:red!important;
+    margin: auto;
+    float: none;
+    display: block;
+}
+
+/*.required {
+    color: #d00;
+    content: " *";
+    float: left;
+    width: 8px;
+    margin-top: 15px;
+}*/
+/*.sell-your-food.manage-profile .btn-group.bootstrap-select.form-control {
+    width: 98% !important;
+    float: right !important;
+}
+
+.sell-your-food.manage-profile .form-control {
+    width: 98%;
+}
+
+.sell-your-food .bootstrap-select {
+    width: 98% !important;
+}
+
+.sell-your-food .input-group .form-control {
+    float: left;
+    width: 97%;
+    margin-bottom: 0;
+}*/
