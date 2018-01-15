@@ -1,6 +1,17 @@
 $(document).ready(function() {	
 
+
+	$("#btn").on('click',function(){
+		if ($("body").attr('class') == 'folded') {
+			$("#btn").attr("title", "Click here to hide panel");
+			$("body").removeClass("folded");
+		} else {
+			$("#btn").attr("title", "Click here to show panel");
+			$("body").addClass("folded");
+		}
 	
+	});
+
   $(document).on('click', '.chk', function () {
     if ($('.chk:checked').length == $('.chk').length) {
        $("#checkall").prop("checked", true);
@@ -15,7 +26,7 @@ $(document).ready(function() {
 		var regex = new RegExp("^[a-zA-Z0-9]+$");
 		var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
 		if (!regex.test(key)) {
-		   event.preventDefault();
+		  // event.preventDefault();
 		   return false;
 		}
 	});
@@ -97,7 +108,7 @@ $(document).ready(function() {
     });
 
     $('#AdminCurrentpassword,#AdminNewpassword,#AdminConfirmpassword').bind("cut copy paste", function(e) {
-        e.preventDefault();
+        return false;
     });
 
 	$('#CategoryEditForm input').attr("disabled",true);     
