@@ -14,7 +14,7 @@
 			<li>
 				<a href="locations">Locations</a>
 			</li>
-			<li>
+			<!-- li>
 				<a href="">Users</a>
 			</li>
 			<li>
@@ -34,7 +34,7 @@
 			</li>
 			<li>
 				<a href="">Locations</a>
-			</li> 
+			</li--> 
 			 
 		</ul>
 </div>
