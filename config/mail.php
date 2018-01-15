@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'ssl://smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'ssl://mail.zestminds.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME','ranjuzestmind@gmail.com'),
+    'username' => env('MAIL_USERNAME','ranjana@zestminds.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD','ranju@zestmind'),
+    'password' => env('MAIL_PASSWORD','26zestminds09'),
 
     /*
     |--------------------------------------------------------------------------
