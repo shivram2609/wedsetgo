@@ -13,9 +13,9 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public $email_body = 'test';
-    public $email_from = 'ranjuzestmind@gmail.com';
+    public $email_from = 'ranjana@zestminds.com';
     public $email_subject = 'test';
-    public $staticLink = "http://localhost:8000/";
+    public $staticLink = "http://35.154.146.218:8000/";
     
 	public function getEmailData( $slug = NULL ) {
 		$data = DB::table('cmsemails')->select('cmsemails.*')->where(['cmsemails.slug'=>$slug])->first();
