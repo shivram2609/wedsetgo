@@ -11,23 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('user', array('as' => 'user.index', 'uses' => 'UserController@index'));
-Route::get('news/register', array('as' => 'news.register', 'uses' => 'UserController@register'));
-Route::post('user/store', array('as' => 'user.store', 'uses' => 'UserController@store'));
-Route::get('login', array('as' => 'news.login', 'uses' => 'UserController@login'));
-Route::post('user/authenticate', array('as' => 'user.authenticate', 'uses' => 'UserController@authenticate'));
-Route::get('logout', array('as' => 'user.logout', 'uses' => 'UserController@logout'));
-Route::get('news/account', array('as' => 'news.account', 'uses' => 'UserController@account'))->middleware('auth');
+	Route::get('/', ['as' => 'home_path', 'uses' => function () {
+    return view('home');
+}]);
+	Route::get('user', array('as' => 'user.index', 'uses' => 'UserController@index'));
+	Route::get('register', array('as' => 'news.register', 'uses' => 'UserController@register'));
+	Route::post('user/store', array('as' => 'user.store', 'uses' => 'UserController@store'));
+	Route::get('login', array('as' => 'news.login', 'uses' => 'UserController@login'));
+	Route::post('user/authenticate', array('as' => 'user.authenticate', 'uses' => 'UserController@authenticate'));
+	Route::get('logout', array('as' => 'user.logout', 'uses' => 'UserController@logout'));
+	Route::get('news/account', array('as' => 'news.account', 'uses' => 'UserController@account'))->middleware('auth');
 
-Route::get('forgotpassword', array('as' => 'news.forgotpassword', 'uses' => 'UserController@forgotpassword'));
-Route::post('forgotpassword', array('as' => 'news.forgotpassword', 'uses' => 'UserController@forgotpassword'));
+	Route::get('forgotpassword', array('as' => 'news.forgotpassword', 'uses' => 'UserController@forgotpassword'));
+	Route::post('forgotpassword', array('as' => 'news.forgotpassword', 'uses' => 'UserController@forgotpassword'));
 
 	Route::get('resetpassword/{token}', array('as' => 'news.resetpassword', 'uses' => 'UserController@resetpassword'));
 	Route::get('resetpassword', array('as' => 'news.resetpassword', 'uses' => 'UserController@resetpassword'));
 	Route::post('resetpassword/{token}', array('as' => 'news.resetpassword', 'uses' => 'UserController@resetpassword'));
+	
+	Route::get('confirmation/{token}', array('as' => 'user.confirmation', 'uses' => 'UserController@confirmation'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));

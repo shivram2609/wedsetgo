@@ -28,7 +28,9 @@
 							@endforeach
 						</div>
 					@endif
-					@include('includes.adminleft')
+					@if(Auth::check())
+						@include('includes.adminleft')
+					@endif
 					@yield('content')
 				</div>
 			 </div>

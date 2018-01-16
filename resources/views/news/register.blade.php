@@ -1,49 +1,45 @@
-
- @extends('layouts.master')
- 
+@extends('layouts.admin')
 @section('title', $title)
- 
-@section('sidebar')
-  @parent
-    // you can add something here
-@endsection
- 
 @section('content')
- 
-    <h1>{{ $title }}</h1>
- 
-    {!! Form::open([
+   {!! Form::open([
         'route' => 'user.store'
     ]) !!}
- 
-    <table>
-        <tr>
-            <td>{!! Form::label('first_name', 'First Name', ['class' => 'control-label']) !!}</td>
-            <td>{!! Form::text('first_name', null, ['class' => 'form-control', 'size' => 40, ]) !!}</td>
-        </tr>
-        <tr>
-            <td>{!! Form::label('last_name', 'Last Name', ['class' => 'control-label']) !!}</td>
-            <td>{!! Form::text('last_name', null, ['class' => 'form-control', 'size' => 40, ]) !!}</td>
-        </tr>
-        <tr>
-            <td>{!! Form::label('email', 'Email', ['class' => 'control-label']) !!}</td>
-            <td>{!! Form::email('email', null, ['class' => 'form-control', 'size' => 40, ]) !!}</td>
-        </tr>
-        <tr>
-            <td>{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}</td>
-            <td>{!! Form::password('password', null, ['class' => 'form-control', 'size' => 64, ]) !!}</td>
-        </tr>        
-        <tr>
-            <td>{!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}</td>
-            <td>{!! Form::password('password_confirmation', null, ['class' => 'form-control', 'size' => 64, ]) !!}</td>
-        </tr>              
-        <tr>
-            <td></td>
-            <td>{!! Form::submit('Submit', ['class' => 'btn btn-submit']) !!}</td>
-        </tr>
-    </table>        
-    
-    {!! Form::close() !!}
+ <div class="top-space login-container">
+			<div class="login-inner">
+			<h1 class="heading">{{ $title }}</h1>
+  			    <div class="tab-content">
+				<div id="user" class="">
+					<div class="form-group">
+						{!! Form::label('first_name', 'First Name', ['class' => 'control-label']) !!}	
+						{!! Form::text('first_name', null, ['class' => 'form-control', 'size' => 40, ]) !!}			
+					</div>
+					<div class="form-group">
+						{!! Form::label('last_name', 'Last Name', ['class' => 'control-label']) !!}
+						{!! Form::text('last_name', null, ['class' => 'form-control', 'size' => 40, ]) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
+						{!! Form::email('email', null, ['class' => 'form-control', 'size' => 40, ]) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
+						{!! Form::password('password', null, ['class' => 'form-control', 'size' => 64, ]) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
+						{!! Form::password('password_confirmation', null, ['class' => 'form-control', 'size' => 64, ]) !!}
+					</div>
+					<div class="form-group text-right border-top">
+						{!! Form::submit('Signup', ['class' => 'btn btn-submit']) !!}
+					</div>
+                   
+                    <div class="text-center border-top">
+                     <div class="form-group clearfix"></div>
+					</div>
+				 </div>
+			</div>
+			</div>
+        </div>
+{!! Form::close() !!}
  
 @endsection
-

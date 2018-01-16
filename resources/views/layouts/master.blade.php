@@ -1,20 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-		<link rel="stylesheet" href="/css/admin/admin.css">
-		<link rel="stylesheet" href="/css/admin/banner.css">
-		<link rel="stylesheet" href="/css/admin/jquery-ui.css">
-		<link rel="stylesheet" href="/css/admin/ui.css">
-		<script type="text/javascript" src="/js/admin/validate.js"></script>
-        <title>@yield('title')</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+	<link rel="stylesheet" href="css/style.css">
+   <title>@yield('title')</title>	
     </head>
-    <body>
+   <body>
+	   
 		@if(Session::has('flash_message'))
             <div style="color:green; border:1px solid #aaa; padding:4px; margin-top:10px">
                 {{ Session::get('flash_message') }}
             </div>
         @endif
-		<div class="main_box">
-			@include('includes.adminheader')
+			@include('includes.header')			
 			@if($errors->any())
 				<div style="color:red; border:1px solid #aaa; padding:4px; margin-top:10px">
 					@foreach($errors->all() as $error)
@@ -22,12 +30,12 @@
 					@endforeach
 				</div>
 			@endif
-			 <div id="container">
+			 
+			 
 				<div id="content">
 					@yield('content')
-				</div>
+				
 			 </div>
-			@include('includes.adminfooter')
-		</div>	
+			@include('includes.footer')
 	</body>
 </html>

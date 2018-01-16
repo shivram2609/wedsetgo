@@ -1285,7 +1285,7 @@ td.centeralign{text-align:center;}
 .admin_footer{text-align:center;}
 .admin_footer .co-head{float:left;width:100%;}
 .admin_footer address{color: #761b31;display:inline-block;font-style:normal;}
-.user-name a{font-family:arial;text-decoration: none;font-weight:normal;color:#0060ff;margin: 0 0 0 5px;}
+.user-name a{font-family:arial;text-decoration: none;font-weight:normal;color:#761b31;margin: 0 0 0 5px;}
 .user-name a:hover{color:#f88017;}
 .login_outer .error-message{text-align:left;}
 .co-head_1{float:left;width:100%;text-align:center;}

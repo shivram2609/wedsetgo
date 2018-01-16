@@ -63,35 +63,30 @@ class UserController extends Controller
                         );
         
         $input = $request->all();        
-        //dd($request->email);
-        //die;
-       //dd($input); // dd() helper function is print_r alternative
+        $token = str_random(64);
         $user = User::create(array(
-                        'email' => $request->email,
-                        'password' => bcrypt($request->password),
-                        'user_type_id' => 1,
-                        
-                    ));
-        UserDetail::create(array(
+			'email' => $request->email,
+			'password' => bcrypt($request->password),
+			'user_type_id' => 3,
+			'confimation_token'=>$token
+        ));
+        if ( $user ) {
+			echo $user->id;
+			UserDetail::create(array(
 						'user_id'=>$user->id,
 						'first_name' => $request->first_name, 
 						'last_name' => $request->last_name
 					));
+			Controller::getEmailData('SIGNUP');
+			$this->email_body = str_replace("{USER}",ucfirst($request->first_name),$this->email_body);
+			$link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
+			$this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
+			Controller::sendMail($request->email);
+			Session::flash('flash_message', 'User registration successfully, please check your email to comnfirm your account.');
+		} else {
+			Session::flash('flash_message', 'User registration can not be done, Please try again.');
+		}
 			
-           Session::flash('flash_message', 'User registration successful!');
-          
-            $data = array(
-						'first_name' => $request->first_name, 
-                        'email' => $request->email,
-					);
-			Mail::send('emails.registgerwelcome',$data, function($message) use ($data)
-            {
-				
-                $message->from('ranjuzestmind@gmail.com', "zestminds");
-                $message->subject('Welcome to Zestminds');
-                $message->to($data['email']);
-                 //dd($message);
-            });
         //return redirect()->back();
         //return redirect('user');
         return redirect()->route('news.login');
@@ -122,6 +117,10 @@ class UserController extends Controller
 				Session::put("users",$users);
 				if (Auth::user()->user_type_id == 1) {
 					return redirect()->route('admin.admindashboard');
+				} elseif (Auth::user()->user_type_id == 2){
+
+				} elseif(Auth::user()->user_type_id == 3){
+					return redirect()->route('home_path');
 				} else {
 					return redirect()->route('user.index');
 				}
@@ -240,6 +239,20 @@ class UserController extends Controller
 		}
 		return view('news.resetpassword', array('title' => 'Reset Password'));
 	}	
+	
+	public function confirmation(Request $request, $token){
+		if (!empty($token)) {
+			if ( User::where('users.confimation_token',$token)->update(['users.is_active' => 1])) {
+				User::where('users.confimation_token',$token)->update(['users.confimation_token' => '']);
+				Session::flash('flash_message', 'Account confirmed successfully.');
+				return redirect()->route('news.login');
+			} else {
+				Session::flash('flash_message', 'Invalid request.');
+				return redirect()->route('news.login');
+			}
+		}
+		
+	}
 	 
 }
 	/* end of function */
