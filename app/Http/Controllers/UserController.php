@@ -71,7 +71,7 @@ class UserController extends Controller
 			'confimation_token'=>$token
         ));
         if ( $user ) {
-			echo $user->id;
+			//echo $user->id;
 			UserDetail::create(array(
 						'user_id'=>$user->id,
 						'first_name' => $request->first_name, 
