@@ -42,7 +42,7 @@
 		<div class="text-center links-icon">
 			 @foreach ($catgagory as $catgagories)
 				<a href="#" title="<?php echo $catgagories->name; ?>" class="icon-links">
-					<img src="img/<?php echo $catgagories->image; ?>" alt="<?php echo $catgagories->name; ?>" class="img-reponsive" width="90" height="75">{{$catgagories->name}}
+					<img src="categories/<?php echo $catgagories->image; ?>" alt="<?php echo $catgagories->name; ?>" class="img-reponsive" width="90" height="75">{{$catgagories->name}}
 				</a>
 			@endforeach
 				
