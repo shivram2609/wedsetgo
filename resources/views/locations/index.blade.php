@@ -23,6 +23,7 @@
 	<thead>
 		<tr>
 				<th>Name</th>
+				<th>Status</th>
 				<th>Created</th>
 				<th>Modified</th>
 				<th class="actions"><?php echo 'Actions'; ?></th>
@@ -32,6 +33,7 @@
 	 @foreach ($locations as $location)
 		<tr>
 			<td>{{$location->location_name}}</td>
+			<td><?php echo (empty($location->is_active)?'Inactive':'Active'); ?>&nbsp;</td>
 			<td>{{$location->created_at}}&nbsp;</td>
 			<td>{{$location->updated_at}}&nbsp;</td>
 			<td class="actions">

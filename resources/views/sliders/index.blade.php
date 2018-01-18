@@ -25,6 +25,7 @@
 				<th>Heading</th>
 				<th>Description</th>
 				<th>Image</th>
+				<th>Status</th>
 				<th>Created</th>
 				<th>Modified</th>
 				<th class="actions"><?php echo 'Actions'; ?></th>
@@ -40,6 +41,7 @@
 		   <?php } else { ?>
 				<td> No Image</td>
 			<?php } ?>
+			<td><?php echo (empty($slider->is_active)?'Inactive':'Active'); ?>&nbsp;</td>
 			<td>{{$slider->created_at}}&nbsp;</td>
 			<td>{{$slider->updated_at}}&nbsp;</td>
 			<td class="actions">

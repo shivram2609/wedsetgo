@@ -60,7 +60,7 @@ class CmspagesController extends Controller
                             'seourl' => 'required|max:255',
                             'metadesc' => 'required|max:255',
                             'metakeyword' => 'required|max:255',
-                            'status' => 'required',
+               
                             ));
          $data = array();
          $data['name'] = $request->name;
@@ -69,7 +69,7 @@ class CmspagesController extends Controller
          $data['seourl'] = $request->seourl;
          $data['metadesc'] = $request->metadesc;
          $data['metakeyword'] = $request->metakeyword;
-         $data['status'] = $request->status;
+         $data['status'] = ($request->is_active == 'on')?1:0;
          if( empty($id) ){
 				$result = Cmspage::create($data);
 				$flash_message = 'Cmspages created successfully.';
@@ -87,7 +87,7 @@ class CmspagesController extends Controller
 			}
 		} elseif ($request->isMethod('get') && !empty($id)) {
 			$pages = DB::table('cmspages')->where('id',$id)->first();
-			return view('cmspages.add', array('title' => 'Edit page',"pages"=>$pages));
+			return view('cmspages.add', array('title' => 'Update page',"pages"=>$pages));
 		} else {
 			return view('cmspages.add', array('title' => 'Add page')); 
 		}

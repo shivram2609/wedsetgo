@@ -16,8 +16,13 @@
 		{!! Form::text('metadesc', (isset($pages->metadesc)?$pages->metadesc:''), ['class' => 'form-control']) !!}
 		{!! Form::label('metakeyword', 'Metakeyword', ['class' => 'control-label']) !!}
 		{!! Form::text('metakeyword', (isset($pages->metakeyword)?$pages->metakeyword:''), ['class' => 'form-control']) !!}
-		{!! Form::label('status', 'Status', ['class' => 'control-label']) !!}
-		{!! Form::checkbox('status', 1,(isset($pages->status)?$pages->status:''), ['class' => 'form-control']) !!}
+		<br/>
+		<br/>
+		<?php if (isset($pages->status) && $pages->status == 1 ) { ?>
+			<input type="checkbox" name="is_active" id="is_active" checked /><label for="is_active">Active</label>
+		<?php } else { ?>
+			<input type="checkbox" name="is_active" id="is_active" /><label for="is_active">Active</label>
+		<?php } ?>
 
 	</fieldset>
 	{!! Form::submit($title, ['class' => 'btn btn-submit']) !!}

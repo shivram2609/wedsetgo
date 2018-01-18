@@ -53,7 +53,7 @@ class SliderimagesController extends Controller
 				$request->file('image_file')->move($destination,$filename);
 				$data['image'] = $filename;
 			}
-			$data['is_active'] = 1;
+			$data['is_active'] = ($request->is_active == 'on')?1:0;
 			$data['heading'] = $request->heading;
 			$data['description'] = $request->description;
 			if( empty($id) ){
@@ -73,7 +73,7 @@ class SliderimagesController extends Controller
 			}
 		} elseif ($request->isMethod('get') && !empty($id)) {
 			$slider = DB::table('slider_images')->where('id',$id)->first();
-			return view('sliders.add', array('title' => 'Edit Slider Image',"slider"=>$slider));
+			return view('sliders.add', array('title' => 'Update Slider Image',"slider"=>$slider));
 		} else {
 			return view('sliders.add', array('title' => 'Add Slider Image')); 
 		}

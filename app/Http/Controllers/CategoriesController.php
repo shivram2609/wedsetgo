@@ -31,6 +31,7 @@ class CategoriesController extends Controller
      */
     public function add(Request $request,$id = NULL	 ) {
 		if ($request->isMethod('post') || $request->isMethod('put')) {
+			//dd($request->all());
 			$this->validate($request, array(
                                 'name' => 'required|max:255',
                                 'image' => 'image:jpg,png|max:5000',
@@ -44,6 +45,7 @@ class CategoriesController extends Controller
 				$data['image'] = $filename;
 			}
 			$data['name'] = $request->name;
+			$data['is_active'] = ($request->is_active == 'on')?1:0;
 			if( empty($id) ){
 				$result = Catagory::create($data);
 				$flash_message = 'Category created successfully.';
@@ -61,7 +63,7 @@ class CategoriesController extends Controller
 			}
 		} elseif ($request->isMethod('get') && !empty($id)) {
 			$category = DB::table('catagories')->where('id',$id)->first();
-			return view('categories.add', array('title' => 'Edit Category',"category"=>$category));
+			return view('categories.add', array('title' => 'Update Category',"category"=>$category));
 		} else {
 			return view('categories.add', array('title' => 'Add Category')); 
 		}

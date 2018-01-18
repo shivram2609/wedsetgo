@@ -43,7 +43,7 @@
 			<td>{{$page->seourl}}</td>
 			<td>{{$page->metadesc}}</td>
 			<td>{{$page->metakeyword}}</td>
-			<td>{{$page->status}}</td>
+			<td><?php echo (empty($page->status)?'Inactive':'Active'); ?>&nbsp;</td>
 			<td>{{$page->created_at}}&nbsp;</td>
 			<td>{{$page->updated_at}}&nbsp;</td>
 			<td class="actions">

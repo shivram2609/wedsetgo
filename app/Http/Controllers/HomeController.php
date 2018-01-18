@@ -18,8 +18,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$slider =  DB::table('slider_images')->get();
-		$catgagory =  DB::table('catagories')->get();
+		$slider =  DB::table('slider_images')->where(['is_active'=>1])->get();
+		$catgagory =  DB::table('catagories')->where(['is_active'=>1])->get();
         return view('home', array('title' => 'Home', 'slider'=>$slider, 'catgagory'=>$catgagory));
     }
 

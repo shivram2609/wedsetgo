@@ -24,6 +24,7 @@
 		<tr>
 				<th>Name</th>
 				<th>Image</th>
+				<th>Status</th>
 				<th>Created</th>
 				<th>Modified</th>
 				<th class="actions"><?php echo 'Actions'; ?></th>
@@ -38,6 +39,7 @@
 		   <?php } else { ?>
 				<td> No Image</td>
 			<?php } ?>
+			<td><?php echo (empty($category->is_active)?'Inactive':'Active'); ?>&nbsp;</td>
 			<td>{{$category->created_at}}&nbsp;</td>
 			<td>{{$category->updated_at}}&nbsp;</td>
 			<td class="actions">

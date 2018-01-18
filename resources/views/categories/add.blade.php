@@ -17,9 +17,16 @@
 
 		<br/>
 		{!! Form::file('image_file', array('class' => 'form-control')) !!}
+		<br/>
+		<br/>
+		<?php if (isset($category->is_active) && $category->is_active == 1 ) { ?>
+			<input type="checkbox" name="is_active" id="is_active" checked /><label for="is_active">Active</label>
+		<?php } else { ?>
+			<input type="checkbox" name="is_active" id="is_active" /><label for="is_active">Active</label>
+		<?php } ?>
 	</fieldset>
 		{!! Form::submit($title, ['class' => 'btn btn-submit']) !!}
-		<a href="{{ url('cmsemails') }}" class="btn btn-submit add-btn clear-category"> Cancel</a>
+		<a href="{{ url('catagories') }}" class="btn btn-submit add-btn clear-category"> Cancel</a>
 		{!! Form::close() !!}
 </div>
 @endsection

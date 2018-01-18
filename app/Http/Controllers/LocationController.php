@@ -31,6 +31,7 @@ class LocationController extends Controller
                             ));
 			$data = array();
 			$data['location_name'] = $request->name;
+			$data['is_active'] = ($request->is_active == 'on')?1:0;
 			if( empty($id) ){
 				$result = Location::create($data);
 				$flash_message = 'Location created successfully.';
@@ -48,7 +49,7 @@ class LocationController extends Controller
 			}
 		} elseif ($request->isMethod('get') && !empty($id)) {
 			$location = DB::table('locations')->where('id',$id)->first();
-			return view('locations.add', array('title' => 'Edit location',"location"=>$location));
+			return view('locations.add', array('title' => 'Update location',"location"=>$location));
 		} else {
 			return view('locations.add', array('title' => 'Add location')); 
 		}
