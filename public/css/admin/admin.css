@@ -39,6 +39,7 @@ a {
     color: #761b31;
     text-decoration: underline;
     font-weight: bold;
+    padding: 0 0 0 20px;
 }
 a:hover {
     color: #761b31;
@@ -58,7 +59,7 @@ h1 {
 }
 h2 {
     background:#fff;
-    color: #0060ff;
+    color: #761b31;
     font-family:'arial';
     font-size: 24px;}
 
@@ -481,7 +482,7 @@ fieldset {
 }
 fieldset legend {
 
-    color: #0060ff;
+    color: #761b31;
     font-size: 22px;
     font-family:arial;
     -webkit-padding-start: 0px!important;

@@ -1,7 +1,7 @@
 <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
+        <a class="navbar-brand" href="#"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,11 +18,10 @@
 			<?php }else{ ?>
 			<div class="login-signup"><a href="login" title="Login">Login</a> / <a href="register" title="Login">Signup</a></div>
 			<?php } ?>
-				
 		</div>		
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/" title="HOME">HOME</a>
+              <a class="nav-link" href="#" title="HOME">HOME</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" title="PHOTO STREAM">PHOTO STREAM</a>
@@ -43,4 +42,3 @@
         </div>
       </div>
     </nav>
-    

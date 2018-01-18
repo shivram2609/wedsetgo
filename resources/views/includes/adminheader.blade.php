@@ -1,5 +1,5 @@
 <div class="admin_header">
-	<a class="navbar-brand" href="/"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
+	<a class="navbar-brand" href="/"><img src="<?php echo asset("/img/logo.png")?>" alt="wedding" width="75" height="79"></a>
 	 <?php if (Auth::check()) { ?>
 	<h2 class="user-name">Hi! {{Session::get("users")->first_name}} <a href="{{ url('logout') }}">Logout</a></h2>
         <div class="clear"></div>

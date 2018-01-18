@@ -1,4 +1,3 @@
-
   <!-- Footer -->
     <footer class="py-5 footer">
       <div class="container">
@@ -11,6 +10,7 @@
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="#" title="About">About</a></li>
+				<li><a href="#" title="Contact">Contact</a></li>
 				<li><a href="#" title="Photo Stream">Photo Stream</a></li>
 				<li><a href="#" title="Create a free account">Create a free account</a></li>
 				<li><a href="#" title="Find professionals">Find professionals</a></li>
@@ -52,4 +52,21 @@
 
 	});
 	</script>
+	<script>
+      function initMap() {
+        var uluru = {lat: 30.709223, lng: 76.702360};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+   
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0avQvJwTdIsYBoEhOy4Q7hgsHuKGgqtU &callback=initMap">
+    </script>
   

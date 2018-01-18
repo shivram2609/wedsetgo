@@ -11,9 +11,8 @@
 |
 */
 
-	Route::get('/', ['as' => 'home_path', 'uses' => function () {
-    return view('home');
-}]);
+
+    Route::get('/', array('as' => 'home_path', 'uses' => 'HomeController@index'));
 	Route::get('user', array('as' => 'user.index', 'uses' => 'UserController@index'));
 	Route::get('register', array('as' => 'news.register', 'uses' => 'UserController@register'));
 	Route::post('user/store', array('as' => 'user.store', 'uses' => 'UserController@store'));
@@ -30,6 +29,10 @@
 	Route::post('resetpassword/{token}', array('as' => 'news.resetpassword', 'uses' => 'UserController@resetpassword'));
 	
 	Route::get('confirmation/{token}', array('as' => 'user.confirmation', 'uses' => 'UserController@confirmation'));
+	
+	Route::get('contact_us', array('as' => 'news.contact-us', 'uses' => 'HomeController@contactus'));
+	Route::post('contact_us', array('as' => 'news.contact-us', 'uses' => 'HomeController@contactus'));
+	
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
@@ -53,6 +56,25 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('delete_location/{id}', array('as' => 'locations.destroy', 'uses' => 'LocationController@destroy'));
 	
 	Route::post('static_pages', array('as' => 'cmspages.add', 'uses' => 'CmspagesController@add'));
+	Route::get('static_pages/{id}', array('as' => 'cmspages.add', 'uses' => 'CmspagesController@add'));
 	Route::get('static_pages', array('as' => 'cmspages.add', 'uses' => 'CmspagesController@add'));
+	Route::post('static_pages/{id}', array('as' => 'cmspages.add', 'uses' => 'CmspagesController@add'));
+	Route::put('static_pages', array('as' => 'cmspages.add', 'uses' => 'CmspagesController@add'));
+	Route::get('staticpages', array('as' => 'cmspages.admin_index', 'uses' => 'CmspagesController@index'));
+	Route::get('delete_page/{id}', array('as' => 'cmspages.destroy', 'uses' => 'CmspagesController@destroy'));
+
+	Route::get('cmsemails', array('as' => 'cmsemails.admin_index', 'uses' => 'CmsemailsController@index'));
+	Route::get('cmsemail/{id}', array('as' => 'cmsemails.edit', 'uses' => 'CmsemailsController@edit'));
+	Route::post('cmsemail/{id}', array('as' => 'cmsemails.edit', 'uses' => 'CmsemailsController@edit'));
+	Route::put('cmsemail', array('as' => 'cmsemails.edit', 'uses' => 'CmsemailsController@edit'));
+	
+	Route::post('slider_images', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
+	Route::get('slider_images', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
+	Route::post('slider_images/{id}', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
+	Route::get('slider_images/{id}', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
+	Route::put('slider_images', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
+	Route::get('sliders', array('as' => 'sliders.index', 'uses' => 'SliderimagesController@index'));
+	Route::get('delete_sliderimage/{id}', array('as' => 'sliders.destroy', 'uses' => 'SliderimagesController@destroy'));
+
 });
 Route::get('/fbAuth{auth?}','UserController@getLoginFacebook');

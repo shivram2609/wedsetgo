@@ -3,16 +3,16 @@
 		<ul>
 			<ul class="admintoggel">
 			<li>
-				<a href="admin" title="dashboard">Dashboard </a>
+				<a href="/admin" title="dashboard">Dashboard </a>
 			</li>
 			<li>
-				<a href="ad_changepassword" title="change Password">Change Password</a>
+				<a href="/ad_changepassword" title="change Password">Change Password</a>
 			</li> 
 			<li>
-				<a href="catagories">Categories</a>
+				<a href="/catagories">Categories</a>
 			</li>
 			<li>
-				<a href="locations">Locations</a>
+				<a href="/locations">Locations</a>
 			</li>
 			<!-- li>
 				<a href="">Users</a>
@@ -23,18 +23,24 @@
 			<li>
 				<a href="">Dishes</a>
 			</li>
-			<li>
-				<a href="">Email Templates</a>
-			</li>
+			
 			<li>
 				<a href="">Testimonials</a>
 			</li>
 			<li>
 				<a href="">Static Pages</a>
 			</li>
+			<li --->
 			<li>
-				<a href="">Locations</a>
-			</li--> 
+				<a href="/cmsemails">Email Templates</a>
+			</li>
+			<li>
+				<a href="/staticpages">Static Pages</a>
+			</li>
+			<li>
+				<a href="/sliders">Slider Images</a>
+			</li>
+			 
 			 
 		</ul>
 </div>

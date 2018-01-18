@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cmspage extends Model
 {
-    / protected $table = 'cmspages';
+     protected $table = 'cmspages';
 
     /**
      * The attributes that are mass assignable.

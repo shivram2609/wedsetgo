@@ -19,7 +19,7 @@
 		{!! Form::file('image_file', array('class' => 'form-control')) !!}
 	</fieldset>
 		{!! Form::submit($title, ['class' => 'btn btn-submit']) !!}
-		<a href="{{ url('catagories') }}" class="btn btn-submit add-btn clear-category"> Cancel</a>
+		<a href="{{ url('cmsemails') }}" class="btn btn-submit add-btn clear-category"> Cancel</a>
 		{!! Form::close() !!}
 </div>
 @endsection
