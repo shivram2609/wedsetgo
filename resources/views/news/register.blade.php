@@ -29,6 +29,8 @@
 						{!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
 						{!! Form::password('password_confirmation', null, ['class' => 'form-control', 'size' => 64, ]) !!}
 					</div>
+					<a href="socialAuth/twitter">Login With Twitter</a>
+					<a href="socialAuth/facebook">Login With Twitter</a>
 					<div class="form-group text-right border-top">
 						{!! Form::submit('Signup', ['class' => 'btn btn-submit']) !!}
 					</div>

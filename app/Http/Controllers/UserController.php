@@ -7,10 +7,9 @@ use App\User;
 use App\UserDetail; 
 use Session;
 use Auth;
-use \Hybrid_Auth as Hybridauth;
 use Config;
 use DB;
-use \Hybrid_Endpoint as HybridEndpoint;
+use Socialite;
  
 class UserController extends Controller
 {    
@@ -108,10 +107,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function authenticate(Request $request)
+    public function authenticate(Request $request, $identifier =NULL)
     {
-		$loginCredetials = array('email' => $request->email, 'password' => $request->password ); 
+		if ( empty($identifier) ) {
+			$loginCredetials = array('email' => $request->email, 'password' => $request->password ); 
+		} else {
+			$loginCredetials = array('identifier' => $identifier,'password' => $identifier ); 
+		}
 		if (Auth::attempt($loginCredetials)){ 
+			
+			//die("here");
 			if (Auth::user()->is_active == 1) {
 				$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 				Session::put("users",$users);
@@ -121,12 +126,13 @@ class UserController extends Controller
 
 				} elseif(Auth::user()->user_type_id == 3){
 					return redirect()->route('home_path');
+					
 				} else {
 					return redirect()->route('user.index');
 				}
 			} else {
-				Session::flash('flash_message', 'Your account is not active.');
-				return redirect()->route('news.login');
+					Session::flash('flash_message', 'Your account is not active.');
+					return redirect()->route('news.login');
 			}
         } else {
 			Session::flash('flash_message', 'Incorrect username or password.');
@@ -253,7 +259,46 @@ class UserController extends Controller
 		}
 		
 	}
-	 
+	
+	public function getSocialLogin($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+	
+	public function twitterCallBack(Request $request) {
+		$user = Socialite::driver("twitter")->user();
+		$this->checkorcreate($request,$user,'Twitter');
+		return redirect()->route('home_path');
+	}
+	public function facebookCallBack(Request $request) {
+		$user = Socialite::driver("facebook")->user();
+		$this->checkorcreate($request,$user,'Facebook');
+		return redirect()->route('home_path');
+	}
+	
+	function checkorcreate( $request,$user, $logintype ) {	
+		$users = DB::table('users')->select('users.*')->where(['users.identifier'=>$user->id])->first();	
+		if(empty($users)){
+			$socialUser = User::create(array(
+				'identifier' => $user->id,
+				'email' => $user->id."@".$logintype.".com",
+				'password' => bcrypt($user->id),
+				'login_type' => $logintype,
+				'is_active' => 1,
+				'user_type_id' => 3
+			));
+			if ( $socialUser ) {
+				//echo $user->id;
+				UserDetail::create(array(
+							'user_id'=>$socialUser->id,
+							'first_name' => $user->name,
+						));
+			}
+		 }
+		 if ( $this->authenticate($request,$user->id)) {
+				
+			}
+	}
 }
 	/* end of function */
 

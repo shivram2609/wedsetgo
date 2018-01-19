@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b52281f3bde415d5a935c0154a546411",
+    "content-hash": "8bb997205baf8fdbd5d558458d5a9c90",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
@@ -437,63 +437,6 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "hybridauth/hybridauth",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "3602ec44b9e7ed2940da2429f8d9dbb5c4a007b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/3602ec44b9e7ed2940da2429f8d9dbb5c4a007b0",
-                "reference": "3602ec44b9e7ed2940da2429f8d9dbb5c4a007b0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hybridauth\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Miled",
-                    "email": "hybridauth@gmail.com"
-                }
-            ],
-            "description": "PHP Social Authentication Library",
-            "homepage": "https://hybridauth.github.io",
-            "keywords": [
-                "Authentication",
-                "OpenId",
-                "api",
-                "authorization",
-                "facebook",
-                "google",
-                "oauth",
-                "social",
-                "twitter"
-            ],
-            "time": "2017-12-30T15:45:18+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3842,9 +3785,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "hybridauth/hybridauth": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

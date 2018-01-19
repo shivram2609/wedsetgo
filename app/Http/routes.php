@@ -77,4 +77,14 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('delete_sliderimage/{id}', array('as' => 'sliders.destroy', 'uses' => 'SliderimagesController@destroy'));
 
 });
-Route::get('/fbAuth{auth?}','UserController@getLoginFacebook');
+
+	Route::get('socialAuth/{provider}', array("as" => "socialAuth", 'uses'=>'UserController@getSocialLogin'));
+	
+	Route::get('twitterCallBack', array("as" => "twitterCallBack", 'uses'=>'UserController@twitterCallBack'));
+	Route::get('facebookCallBack', array("as" => "facebookCallBack", 'uses'=>'UserController@facebookCallBack'));
+	Route::get('googleCallBack', array("as" => "goolgeCallBack", 'uses'=>'UserController@googleCallBack'));
+	
+	//Route::get('gettwitter', array("as" => "gettwitter", 'uses'=>'UserController@callback'));
+	Route::get('logout', array("as" => 'logout', 'uses'=>'UserController@logout'));
+
+

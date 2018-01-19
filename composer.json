@@ -8,9 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "laravel/socialite": "2.*",
-        "hybridauth/hybridauth":"dev-master",
-        "ckeditor/ckeditor": "^4.8" 
+        "ckeditor/ckeditor": "^4.8",
+        "laravel/socialite": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
