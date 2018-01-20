@@ -278,22 +278,26 @@ class UserController extends Controller
 	
 	public function googleCallBack(Request $request) {
 		$user = Socialite::driver("google")->user();
-		dd($user);
-		$this->checkorcreate($request,$user,'Facebook');
-		return redirect()->route('home_path');
+		//dd($user);
+		$this->checkorcreate($request,$user,'Google');
+		//return redirect()->route('home_path');
 	}
 	
 	function checkorcreate( $request,$user, $logintype ) {	
 		$users = DB::table('users')->select('users.*')->where(['users.identifier'=>$user->id])->first();	
 		if(empty($users)){
-			$socialUser = User::create(array(
+			$newUser = array(
 				'identifier' => $user->id,
 				'email' => $user->id."@".$logintype.".com",
 				'password' => bcrypt($user->id),
 				'login_type' => $logintype,
 				'is_active' => 1,
 				'user_type_id' => 3
-			));
+			);
+			if ( $logintype == 'Google' ) {
+				$newUser['email'] = $user->email;
+			}
+			$socialUser = User::create($newUser);
 			if ( $socialUser ) {
 				//echo $user->id;
 				UserDetail::create(array(
@@ -301,10 +305,15 @@ class UserController extends Controller
 							'first_name' => $user->name,
 						));
 			}
-		 }
-		 if ( $this->authenticate($request,$user->id)) {
-				
-			}
+			$userId = $socialUser->id;
+		} else {
+			$userId = $users->id
+		}
+		if ( Auth::loginUsingId($userId) ) {
+			$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
+			Session::put("users",$users);
+			return redirect()->route('home_path');
+		}
 	}
 }
 	/* end of function */
