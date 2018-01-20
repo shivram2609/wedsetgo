@@ -307,6 +307,7 @@ class UserController extends Controller
 			$userId = $users->id;
 		}
 		if ( Auth::loginUsingId($userId) ) {
+			dd(Auth::user());
 			if (Auth::user()->is_active == 1) {
 				Session::flash('flash_message', 'Your account is not active.');
 				return redirect()->route('logout');
