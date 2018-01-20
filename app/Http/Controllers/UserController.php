@@ -278,9 +278,7 @@ class UserController extends Controller
 	
 	public function googleCallBack(Request $request) {
 		$user = Socialite::driver("google")->user();
-		//dd($user);
-		$this->checkorcreate($request,$user,'Google');
-		//return redirect()->route('home_path');
+		return $this->checkorcreate($request,$user,'Google');
 	}
 	
 	function checkorcreate( $request,$user, $logintype ) {	
