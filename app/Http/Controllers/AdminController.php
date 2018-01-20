@@ -28,9 +28,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function index(Request $request)
     {
-        //
+		$users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.user_type_id','!=', 1)->where('users.email', 'LIKE', '%' . $request->search_user . '%')->paginate(10);
+       return view('admin.admin_userlist', array('title' => 'User List', 'users'=>$users ));
     }
 
     /**

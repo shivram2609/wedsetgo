@@ -18,7 +18,7 @@ class SliderimagesController extends Controller
      */
     public function index(Request $request)
     {
-       $sliders = DB::table('slider_images')->where ( 'image', 'LIKE', '%' . $request->search_slider . '%' )->paginate(2);
+       $sliders = DB::table('slider_images')->where ( 'image', 'LIKE', '%' . $request->search_slider . '%' )->paginate(10);
 		return view('sliders.index', array('title' => 'List Of Slider Images','sliders'=>$sliders,"path"=>storage_path()));
     }
 

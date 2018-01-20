@@ -22,8 +22,9 @@
 							
 						</div>
 						<div class="col-sm-6 form-group text-right">
-							<a href="forgotpassword" title="Forgot Password?">Forgot Password?</a>
 							<a href="socialAuth/twitter">Login With Twitter</a>
+							<a href="socialAuth/facebook">Login With Facebook</a>
+							<a href="socialAuth/google">Login With Google</a>
 						</div>
 					</div>
 					<div class="form-group text-right border-top">

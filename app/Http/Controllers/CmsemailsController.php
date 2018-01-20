@@ -17,7 +17,7 @@ class CmsemailsController extends Controller
      */
     public function index(Request $request)
     {
-			$cmsemails = DB::table('cmsemails')->where ( 'subject', 'LIKE', '%' . $request->search_emails . '%' )->paginate(2);
+			$cmsemails = DB::table('cmsemails')->where ( 'subject', 'LIKE', '%' . $request->search_emails . '%' )->paginate(10);
 			return view('cmsemails.admin_index', array('title' => 'List Of Cmsemails','cmsemails'=>$cmsemails));
     }
 

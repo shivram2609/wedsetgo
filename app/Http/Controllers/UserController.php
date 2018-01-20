@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\User;
 use App\UserDetail; 
 use Session;
+use Catagory;
 use Auth;
 use Config;
 use DB;
@@ -115,8 +116,6 @@ class UserController extends Controller
 			$loginCredetials = array('identifier' => $identifier,'password' => $identifier ); 
 		}
 		if (Auth::attempt($loginCredetials)){ 
-			
-			//die("here");
 			if (Auth::user()->is_active == 1) {
 				$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 				Session::put("users",$users);
@@ -125,7 +124,7 @@ class UserController extends Controller
 				} elseif (Auth::user()->user_type_id == 2){
 
 				} elseif(Auth::user()->user_type_id == 3){
-					return redirect()->route('home_path');
+					return redirect()->route('news.edit-profile');
 					
 				} else {
 					return redirect()->route('user.index');
@@ -311,13 +310,52 @@ class UserController extends Controller
 			if (Auth::user()->is_active == 1) {
 				$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 				Session::put("users",$users);
-				return redirect()->route('home_path');
+				return redirect()->route('news.edit-profile');
 			} else {
 				Session::flash('flash_message', 'Your account is not active.');
 				return redirect()->route('logout');
 			}
 		}
 	}
+	
+	public function editprofile(Request $request){
+		
+		if ($request->isMethod('post')){
+			 $this->validate($request, array(
+                                'first' => 'required|max:255',
+                                'lastname' => 'required|max:255',
+                                'email' => 'required|email|max:255',
+                            )
+                        );
+			$socialArray['fb'] = $request->fb;
+			$socialArray['twitter'] = $request->twitter;
+			$socialArray['google'] = $request->google;
+			$socialVal = serialize($socialArray);
+			$data = array();
+			$data['first_name'] = $request->first;
+			$data['last_name'] = $request->lastname;
+			$data['phone_no'] = $request->phone;
+			$data['category_id'] = $request->category_id;
+			$data['gender'] = $request->gender;
+			$data['website'] = $request->website;
+			$data['dob'] = $request->dob;
+			$data['address'] = $request->address;
+			$data['trade_description'] = $request->trade_description;
+			$data['detail'] = $request->detail;
+			$data['social_media'] = $socialVal;
+			if(!empty($request)){
+				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
+				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);
+			}
+			
+		}
+		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
+		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
+		
+		$socialVal = unserialize($user->social_media);
+		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal));
+	}
+	
 }
 	/* end of function */
 

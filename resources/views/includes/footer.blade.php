@@ -52,4 +52,14 @@
 
 	});
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.pt-BR.js"></script>
+	<script>
+	$('.input-group.date').datepicker({
+    	format: 'yyyy-mm-dd',
+    	language: 'pt-BR',
+    	weekStart: 0,
+    	todayHighlight: true
+    });
+	</script>
 	

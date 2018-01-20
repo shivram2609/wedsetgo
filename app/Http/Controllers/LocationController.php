@@ -13,7 +13,7 @@ use Session;
 class LocationController extends Controller
 {
     public function index(Request $request){
-		$locations = DB::table('locations')->where ( 'location_name', 'LIKE', '%' . $request->search_locations . '%' )->paginate(4);
+		$locations = DB::table('locations')->where ( 'location_name', 'LIKE', '%' . $request->search_locations . '%' )->paginate(10);
 		return view('locations.index', array('title' => 'Locations','locations'=>$locations));
        
     }

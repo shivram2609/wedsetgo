@@ -19,7 +19,7 @@ class CmspagesController extends Controller
      */
     public function index(Request $request)
     {
-        $pages = DB::table('cmspages')->where ( 'name', 'LIKE', '%' . $request->search_pages . '%' )->paginate(2);
+        $pages = DB::table('cmspages')->where ( 'name', 'LIKE', '%' . $request->search_pages . '%' )->paginate(10);
 		return view('cmspages.admin_index', array('title' => 'List Of Cmspages','pages'=>$pages));
     }
 

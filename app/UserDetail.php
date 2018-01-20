@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 namespace App;
 
@@ -14,7 +14,7 @@ class UserDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'first_name', 'last_name', 'gender', 'profile_image'];
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'gender', 'profile_image', 'detail', 'phone_no','website', 'category_id', 'dob', 'address', 'trade_description', 'social_media'];
 
 
 	public function user() {

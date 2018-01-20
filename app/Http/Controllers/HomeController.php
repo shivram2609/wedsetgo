@@ -101,7 +101,7 @@ class HomeController extends Controller
 						$this->email_body .= "Sender Email: " .$request['email']. "<br/><br/>";
 						$this->email_body .= "Message: " .nl2br($request['message']);
 						$this->email_subject = "Contact Request regarding ";
-						Controller::sendMail('ranjuzestmind@gmail.com');  
+						Controller::sendMail('contactwedsetgo@gmail.com');  
 						Session::flash('flash_message', 'Your message send successffuly.');
 					}
 					

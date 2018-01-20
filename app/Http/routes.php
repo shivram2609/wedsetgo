@@ -33,11 +33,17 @@
 	Route::get('contact_us', array('as' => 'news.contact-us', 'uses' => 'HomeController@contactus'));
 	Route::post('contact_us', array('as' => 'news.contact-us', 'uses' => 'HomeController@contactus'));
 	
+	Route::get('edit_profile', array('as' => 'news.edit-profile', 'uses' => 'UserController@editprofile'))->middleware('auth');
+	Route::post('edit_profile', array('as' => 'news.edit-profile', 'uses' => 'UserController@editprofile'))->middleware('auth');
+	
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
 	Route::get('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'UserController@adminchangepassword'));
 	Route::post('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'UserController@adminchangepassword'));
+	
+	Route::get('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
+	Route::post('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
 	
 	Route::post('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
@@ -75,6 +81,7 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::put('slider_images', array('as' => 'sliders.add', 'uses' => 'SliderimagesController@add'));
 	Route::get('sliders', array('as' => 'sliders.index', 'uses' => 'SliderimagesController@index'));
 	Route::get('delete_sliderimage/{id}', array('as' => 'sliders.destroy', 'uses' => 'SliderimagesController@destroy'));
+	
 
 });
 
