@@ -146,7 +146,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function logout() {
-        Auth::logout();        
+        Auth::logout();  
+        Session::flush();      
         return redirect()->route('news.login');
     }
     
@@ -267,13 +268,11 @@ class UserController extends Controller
 	
 	public function twitterCallBack(Request $request) {
 		$user = Socialite::driver("twitter")->user();
-		$this->checkorcreate($request,$user,'Twitter');
-		return redirect()->route('home_path');
+		return $this->checkorcreate($request,$user,'Twitter');
 	}
 	public function facebookCallBack(Request $request) {
 		$user = Socialite::driver("facebook")->user();
-		$this->checkorcreate($request,$user,'Facebook');
-		return redirect()->route('home_path');
+		return $this->checkorcreate($request,$user,'Facebook');
 	}
 	
 	public function googleCallBack(Request $request) {
