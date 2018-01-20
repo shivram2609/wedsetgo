@@ -276,6 +276,13 @@ class UserController extends Controller
 		return redirect()->route('home_path');
 	}
 	
+	public function googleCallBack(Request $request) {
+		$user = Socialite::driver("google")->user();
+		dd($user);
+		$this->checkorcreate($request,$user,'Facebook');
+		return redirect()->route('home_path');
+	}
+	
 	function checkorcreate( $request,$user, $logintype ) {	
 		$users = DB::table('users')->select('users.*')->where(['users.identifier'=>$user->id])->first();	
 		if(empty($users)){
