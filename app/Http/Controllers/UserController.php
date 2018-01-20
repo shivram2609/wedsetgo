@@ -272,7 +272,6 @@ class UserController extends Controller
 	}
 	public function facebookCallBack(Request $request) {
 		$user = Socialite::driver("facebook")->user();
-		dd($user);
 		return $this->checkorcreate($request,$user,'Facebook');
 	}
 	
@@ -286,7 +285,7 @@ class UserController extends Controller
 		if(empty($users)){
 			$newUser = array(
 				'identifier' => $user->id,
-				'email' => $user->id."@".$logintype.".com",
+				'email' => (isset($user->email) && !empty($user->email))?$user->email:$user->id."@".$logintype.".com",
 				'password' => bcrypt($user->id),
 				'login_type' => $logintype,
 				'is_active' => 1,
