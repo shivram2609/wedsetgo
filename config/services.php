@@ -45,8 +45,8 @@ return [
 		'redirect' => 'http://wedsetgo.zestminds.com:8000/facebookCallBack'
     ],
     'google' => [
-		'client_id'=>' 942571363480-aeh2p4ts11lgjhfuo6i2gv342t4qdrmt.apps.googleusercontent.com ',
-		'client_secret'=>' QFTM5dxJbifZDL9RxOsxNQAI ',
+		'client_id'=>' 942571363480-aeh2p4ts11lgjhfuo6i2gv342t4qdrmt.apps.googleusercontent.com',
+		'client_secret'=>' QFTM5dxJbifZDL9RxOsxNQAI',
 		'redirect' => 'http://wedsetgo.zestminds.com:8000/googleCallBack'
     ]
 
