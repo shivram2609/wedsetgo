@@ -307,14 +307,14 @@ class UserController extends Controller
 			$userId = $users->id;
 		}
 		if ( Auth::loginUsingId($userId) ) {
-			dd(Auth::user());
+			//dd(Auth::user()->is_active);
 			if (Auth::user()->is_active == 1) {
-				Session::flash('flash_message', 'Your account is not active.');
-				return redirect()->route('logout');
-			} else {
 				$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 				Session::put("users",$users);
 				return redirect()->route('home_path');
+			} else {
+				Session::flash('flash_message', 'Your account is not active.');
+				return redirect()->route('logout');
 			}
 		}
 	}
