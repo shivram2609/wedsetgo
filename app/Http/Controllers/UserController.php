@@ -307,7 +307,7 @@ class UserController extends Controller
 			}
 			$userId = $socialUser->id;
 		} else {
-			$userId = $users->id
+			$userId = $users->id;
 		}
 		if ( Auth::loginUsingId($userId) ) {
 			$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
