@@ -272,6 +272,7 @@ class UserController extends Controller
 	}
 	public function facebookCallBack(Request $request) {
 		$user = Socialite::driver("facebook")->user();
+		dd($user);
 		return $this->checkorcreate($request,$user,'Facebook');
 	}
 	
