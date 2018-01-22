@@ -1,22 +1,39 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-		<div class="feature-img" style="background-image: url('img/slider001.jpg')">
+	{!! Form::open(array('novalidate'=>true,"files"=>true)) !!}
+	 <?php if(!empty($user->background_image)) { ?>
+		<div class="feature-img" style="background-image: url('uploads/background/<?php echo $user->background_image;?>">
+		<?php } else { ?>
+			<div class="feature-img" style="background-image: url('img/slider001.jpg')">
+		<?php }?>
+			    <label class="btn btn-default btn-file hover-color" style="float:right; background-color:#fff; paddding:20px; margin-top:10px;margin-right:10px; padding:10px;">
+					<i class="fa fa-pencil" aria-hidden="true"></i>			
+					Change background Image <input type="file" style="display: none;" name="background_image">
+				</label>
 			<div class="user-imgText">
+			<?php if(!empty($user->profile_image)) { ?>
+				<div class="user-img" >
+						<img src="/uploads/avatars/{{ $user->profile_image }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">				
+				</div>
+				<?php } else { ?>
 				<div class="user-img" >
 					<img src="img/user-dummy.jpg" class="img-fluid" alt="user" width="180" height="180">
 				</div>
+					<?php }?>
 				<div class="user-text">
-					<a href="javascript:void(0);" title="edit" class="pull-right btn btn-white">
-						<i class="fa fa-pencil" aria-hidden="true"></i>  Edit Profile
-					</a>
-					<img src="images/wed-set-go.png" alt="user" width="123" height="23"><br>
+					<?php echo ucfirst($user->first_name);?><br/>
 					Wedding Planning Website
 				</div>
-				
-			</div>
 		</div>
+		
+		</div>
+		
 		<div class="user-nav">
+			<label class="btn btn-default btn-file hover-color" style="background-color:#f7f7f7; paddding:20px; margin-top:10px;margin-right:10px; padding:10px;"> 
+				<i class="fa fa-pencil" aria-hidden="true"></i>	 
+					Change Profile Image <input type="file" style="display:none;" name="profile_image">
+				</label>
 			<a href="javascript:void(0);" title="Your Profile">Your Profile</a> <a href="javascript:void(0);" title="My Work">My Work</a> <a href="javascript:void(0);" class="active" title="My Vision Books">My Vision Books</a> <a href="javascript:void(0);" title="Reviews">Reviews</a> <a href="javascript:void(0);" title="Messages">Messages</a>
 		</div>
 		<div class="dashboard-wrapper">
@@ -28,7 +45,6 @@
 					  <a href="javascript:void(0);" title="Invite Friends" class="btn btn-gray form-group">Following</a>
 					  </div> 
 				</div>
-				{!! Form::open(array('novalidate'=>true)) !!}
 				<div class="dashboard-form">
 					<div class="row">
 						<div class="col-sm-6 form-group">
@@ -104,8 +120,8 @@
 					</div>
 					{!! Form::submit('Update Profile', ['class' => 'btn btn-submit']) !!}
 				</div>
-			{!! Form::close() !!}
 		</div>
+		{!! Form::close() !!}
 	</div>
 @endsection
 

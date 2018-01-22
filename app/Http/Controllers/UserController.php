@@ -122,7 +122,7 @@ class UserController extends Controller
 				if (Auth::user()->user_type_id == 1) {
 					return redirect()->route('admin.admindashboard');
 				} elseif (Auth::user()->user_type_id == 2){
-
+					return redirect()->route('news.edit-profile');
 				} elseif(Auth::user()->user_type_id == 3){
 					return redirect()->route('news.edit-profile');
 					
@@ -343,6 +343,20 @@ class UserController extends Controller
 			$data['trade_description'] = $request->trade_description;
 			$data['detail'] = $request->detail;
 			$data['social_media'] = $socialVal;
+			$file = $request->file('profile_image');
+			if($request->file('profile_image')){
+				$destination = "uploads/avatars";
+				$filename = $file->getClientOriginalName();
+				$request->file('profile_image')->move($destination,$filename);
+				$data['profile_image'] = $filename;
+			}
+			$file = $request->file('background_image');
+			if($request->file('background_image')){
+				$destination = "uploads/background";
+				$filename = $file->getClientOriginalName();
+				$request->file('background_image')->move($destination,$filename);
+				$data['background_image'] = $filename;
+			}
 			if(!empty($request)){
 				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
 				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);

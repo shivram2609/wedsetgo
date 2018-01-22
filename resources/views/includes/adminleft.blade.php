@@ -33,6 +33,9 @@
 			</li>
 			<li --->
 			<li>
+				<a href="/users">User List</a>
+			</li>
+			<li>
 				<a href="/cmsemails">Email Templates</a>
 			</li>
 			<li>

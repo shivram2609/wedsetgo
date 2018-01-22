@@ -30,7 +30,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-		$users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.user_type_id','!=', 1)->where('users.email', 'LIKE', '%' . $request->search_user . '%')->paginate(10);
+		$users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.user_type_id','!=', 1)->where('users.email', 'LIKE', '%' . $request->search_user . '%')->orWhere('user_details.first_name', 'LIKE', '%' . $request->search_user . '%')->paginate(10);
        return view('admin.admin_userlist', array('title' => 'User List', 'users'=>$users ));
     }
 
@@ -62,11 +62,24 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id=NULL)
     {
-        //
-    }
-
+		if ($request->isMethod('post') || $request->isMethod('put') || empty($id)) {
+			  $data = array();           
+			  $data['is_active'] = ($request->is_active == 'on')?1:0;
+			  if( !empty($id) ){
+				$result = DB::table('users')->where('id',$request->id)->update($data);
+				Session::flash('flash_message','User updated successfully.');
+				return redirect()->route('admin.admin_userlist');
+			  } else {
+				Session::flash('flash_message','An error occured, Please try again.');
+				return redirect()->route('admin.admin_userlist');
+				}
+		} else {			
+				$users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
+				return view('admin.edit', array('title' => 'Update User',"users"=>$users));
+		}
+	}
     /**
      * Update the specified resource in storage.
      *
@@ -87,6 +100,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+		DB::table('user_details')->where('user_details.user_id', $id)->delete();
+		DB::table('users')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $id)->delete();
+		Session::flash('flash_message', 'Record has been delete successfully.');
+		return redirect()->route('admin.admin_userlist');	
     }
 }

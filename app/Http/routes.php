@@ -44,9 +44,12 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	
 	Route::get('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
 	Route::post('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
+	Route::get('user/{id}', array('as' => 'admin.edit', 'uses' => 'AdminController@edit'));
+	Route::post('user/{id}', array('as' => 'admin.edit', 'uses' => 'AdminController@edit'));
+	Route::get('delete_user/{id}', array('as' => 'admin.destroy', 'uses' => 'AdminController@destroy'));
 	
 	Route::post('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
-	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
+	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'Cat	egoriesController@add'));
 	Route::post('catagory/{id}', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::get('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::put('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
