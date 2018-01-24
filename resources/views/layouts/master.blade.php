@@ -20,7 +20,12 @@
    <body>
 	   
 		@if(Session::has('flash_message'))
-            <div style="color:green; border:1px solid #aaa; padding:4px; margin-top:10px">
+            <div class="success_message">
+                {{ Session::get('flash_message') }}
+            </div>
+        @endif
+		@if(Session::has('error'))
+            <div class="error_message">
                 {{ Session::get('flash_message') }}
             </div>
         @endif

@@ -3,14 +3,14 @@
       <div class="container">
 	  <div class="row">
 		<div class="col-sm-3">
-			 <a class="navbar-brand" href="#"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
+			 <a class="navbar-brand" href="/"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
 		</div>
 		<div class="col-sm-3">
 			<h3 class="footer-heading">About wed.Set.Go</h3>
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="#" title="About">About</a></li>
-				<li><a href="contact_us" title="Contact">Contact</a></li>
+				<li><a href="contact_us" title="Contact Us">Contact Us</a></li>
 				<li><a href="#" title="Photo Stream">Photo Stream</a></li>
 				<li><a href="#" title="Create a free account">Create a free account</a></li>
 				<li><a href="#" title="Find professionals">Find professionals</a></li>
@@ -61,5 +61,32 @@
     	weekStart: 0,
     	todayHighlight: true
     });
+     $(document).ready(function(){
+		 
+            setTimeout(function() {
+				$('.flash_message').fadeOut('fast');
+				$('.error_message').fadeOut('fast');
+				$('.success_message').fadeOut('fast');
+            }, 3000);
+            
+            $("#signup").on("click",function(e){
+				$("#signIn").modal("hide");
+			});
+            
+            $("#signinmodal").on("click",function(e){
+				$("#signUp").modal("hide");
+			});
+            
+            $("#forgotlink").on("click",function(e){
+				$("#signIn").modal("hide");
+				$("#signUp").modal("hide");
+			});
+            
+     
+           
+            
+            
+ });
+	
 	</script>
 	

@@ -46,6 +46,8 @@ abstract class Controller extends BaseController
 				throw new Exception;
 			}
 		} catch (Exception $e) {
+			echo $e->getMessage();
+			die;
 			return false;
 		} 	
 	}

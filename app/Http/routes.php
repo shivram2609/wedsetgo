@@ -35,6 +35,7 @@
 	
 	Route::get('edit_profile', array('as' => 'news.edit-profile', 'uses' => 'UserController@editprofile'))->middleware('auth');
 	Route::post('edit_profile', array('as' => 'news.edit-profile', 'uses' => 'UserController@editprofile'))->middleware('auth');
+	Route::get('request_for_professtional', 'UserController@sendRquestProfessional')->middleware('auth');
 	
 
 Route::group(['middleware' => 'admin.middleware'], function () {
@@ -47,6 +48,15 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('user/{id}', array('as' => 'admin.edit', 'uses' => 'AdminController@edit'));
 	Route::post('user/{id}', array('as' => 'admin.edit', 'uses' => 'AdminController@edit'));
 	Route::get('delete_user/{id}', array('as' => 'admin.destroy', 'uses' => 'AdminController@destroy'));
+	Route::get('professional_list',array('as' => 'admin.professional_list', 'uses'=>'AdminController@professionalList'));
+	Route::post('professional_list',array('as' => 'admin.professional_list', 'uses'=>'AdminController@professionalList'));
+	Route::get('view_professional/{id}',array('as' => 'admin.view_professional', 'uses'=>'AdminController@viewProfessionalList'));
+	Route::post('view_professional/{id}',array('as' => 'admin.view_professional', 'uses'=>'AdminController@viewProfessionalList'));
+	Route::get('approve_professional_request/{id}/{is_approve}', 'AdminController@approveProfessionalrequest');
+	Route::get('more_info/{id}',array('as' => 'admin.more_info', 'uses'=>'AdminController@more_info'));
+	Route::post('more_info/{id}',array('as' => 'admin.more_info', 'uses'=>'AdminController@more_info'));
+
+
 	
 	Route::post('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'Cat	egoriesController@add'));
@@ -85,7 +95,7 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('sliders', array('as' => 'sliders.index', 'uses' => 'SliderimagesController@index'));
 	Route::get('delete_sliderimage/{id}', array('as' => 'sliders.destroy', 'uses' => 'SliderimagesController@destroy'));
 	
-
+	
 });
 
 	Route::get('socialAuth/{provider}', array("as" => "socialAuth", 'uses'=>'UserController@getSocialLogin'));
@@ -96,5 +106,4 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	
 	//Route::get('gettwitter', array("as" => "gettwitter", 'uses'=>'UserController@callback'));
 	Route::get('logout', array("as" => 'logout', 'uses'=>'UserController@logout'));
-
 

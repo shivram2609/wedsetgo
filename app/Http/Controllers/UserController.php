@@ -68,7 +68,8 @@ class UserController extends Controller
 			'email' => $request->email,
 			'password' => bcrypt($request->password),
 			'user_type_id' => 3,
-			'confimation_token'=>$token
+			'confimation_token'=>$token,
+			'porfessional_request'=>0
         ));
         if ( $user ) {
 			//echo $user->id;
@@ -89,7 +90,7 @@ class UserController extends Controller
 			
         //return redirect()->back();
         //return redirect('user');
-        return redirect()->route('news.login');
+        return redirect()->route('home_path');
     }
     
     /**
@@ -135,7 +136,7 @@ class UserController extends Controller
 			}
         } else {
 			Session::flash('flash_message', 'Incorrect username or password.');
-            return redirect()->route('news.login');
+			return redirect()->route('home_path');
         }        
     }
     
@@ -147,7 +148,7 @@ class UserController extends Controller
     public function logout() {
         Auth::logout();  
         Session::flush();      
-        return redirect()->route('news.login');
+        return redirect()->route('home_path');
     }
     
     /**
@@ -214,6 +215,8 @@ class UserController extends Controller
 					$link = "<a href='".$this->staticLink."resetpassword/".$token."'>Click Here</a>";
 					$this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 					Controller::sendMail($request->email);
+					Session::flash('flash_message', 'Mail has been sent please check your email to reset password');
+					return redirect()->route('home_path');
 				}
 								
 			}
@@ -231,7 +234,7 @@ class UserController extends Controller
 			if ( User::where('users.forgot_password_token',$token)->update(['users.password' => bcrypt($request->password)]) ) {
 				User::where('users.forgot_password_token',$token)->update(['users.forgot_password_token' => '']);
 				Session::flash('flash_message', 'Password reset successfully.');
-				return redirect()->route('news.login');
+				return redirect()->route('home_path');
 			} else {
 				Session::flash('flash_message', 'Password could not be reset successfully.');
 			}
@@ -368,6 +371,21 @@ class UserController extends Controller
 		
 		$socialVal = unserialize($user->social_media);
 		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal));
+	}
+	
+	public function sendRquestProfessional(){
+		$users = DB::table('users')->select('users.porfessional_request')->where('id', Auth::user()->id)->first();
+		if($users->porfessional_request==0){
+			$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
+						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
+						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
+						$this->email_subject = "Professional Request";
+						Controller::sendMail('ranjuzestmind@gmail.com');  
+						Session::flash('flash_message', 'Your Request has been sent to site admin.');
+		} else {
+			Session::flash('error_message', 'Request pending Please wait some time');
+		}
+		return redirect()->route('news.edit-profile');
 	}
 	
 }

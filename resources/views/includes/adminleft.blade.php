@@ -36,6 +36,9 @@
 				<a href="/users">User List</a>
 			</li>
 			<li>
+				<a href="/professional_list">Professionals Request</a>
+			</li>
+			<li>
 				<a href="/cmsemails">Email Templates</a>
 			</li>
 			<li>
