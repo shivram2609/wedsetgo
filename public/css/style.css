@@ -366,6 +366,7 @@ a:hover{color:#761b31;}
  .user-imgText .user-text{margin:40px 0 0 170px; color:#fff;}
  .btn-white{background:#fff; color:#2b2b2b;}
  .user-nav{padding:15px 0 15px 180px; margin:0 0 15px; font-size:15px; border-bottom:1px solid #ccc;}
+ .user-nav-ext{padding:0px !important; margin:25px 0 0 auto;}
  .user-nav a{margin:0 25px; color:#2b2b2b; text-decoration:none;}
  .user-nav a:hover, .user-nav a.active{color: #761b31;}
  /* Contact us page css strat*/

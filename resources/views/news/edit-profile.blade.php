@@ -29,7 +29,7 @@
 		
 		</div>
 		
-		<div class="user-nav">
+		<div class="user-nav user-nav-ext">
 			<label class="btn btn-default btn-file hover-color" style="background-color:#f7f7f7; paddding:20px; margin-top:10px;margin-right:10px; padding:10px;"> 
 				<i class="fa fa-pencil" aria-hidden="true"></i>	 
 					Change Profile Image <input type="file" style="display:none;" name="profile_image">
