@@ -59,7 +59,7 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 
 	
 	Route::post('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
-	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'Cat	egoriesController@add'));
+	Route::get('catagory/{id}', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::post('catagory/{id}', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::get('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));
 	Route::put('catagory', array('as' => 'categories.add', 'uses' => 'CategoriesController@add'));

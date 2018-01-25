@@ -166,7 +166,7 @@ class AdminController extends Controller
 				return redirect()->route('admin.admin_userlist');
 			} else {
 				Session::flash('error_message', 'error occured.');			
-				return view('admin.more_info', array('title' => 'Professional More Information'));
+				return view('admin.more_info', array('title' => 'Professional More Information','id'=>$id));
 			}
 	}
 }

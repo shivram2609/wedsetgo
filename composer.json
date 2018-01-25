@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.1.*",
         "ckeditor/ckeditor": "^4.8",
         "laravel/socialite": "~2.0",
-         "intervention/image": "dev-master"
+         "intervention/image": "dev-master",
+         "google/recaptcha": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

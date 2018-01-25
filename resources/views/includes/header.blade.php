@@ -75,7 +75,7 @@
 			  {!! Form::input('password', 'password_confirmation', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Confirm Password' ,'required'=>'Please enter confirm password']) !!}
 			 </div>
 			 <div class="text-center">
-				<div class="g-recaptcha" data-sitekey="6Ld2bUIUAAAAAO70rIM8nBUDozBi48Slt-6pUFYx"></div>
+				<div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"></div>
 			  
 			 </div>
 			  <div class="form-group text-center">
