@@ -57,13 +57,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
 		$input = $request->all();
-		print_r($input);
-		print_r($request);
-		$request->captcha = $this->captchaCheck();
-		dd($request);
+		$input['captcha'] = $this->captchaCheck();
+		dd($input);
 		
 		
-        $this->validate($request, array(
+        $this->validate($input, array(
                                 'first_name' => 'required|max:255',
                                 'last_name' => 'required|max:255',
                                 'email' => 'required|email|max:255|unique:users',
