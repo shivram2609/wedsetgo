@@ -58,7 +58,6 @@ class UserController extends Controller
     {
 		$input = $request->all();
 		$input['captcha'] = $this->captchaCheck();
-		dd($input);
 		
 		
         $this->validate($input, array(
