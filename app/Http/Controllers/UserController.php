@@ -15,7 +15,7 @@ use Socialite;
  
 class UserController extends Controller
 {    
-	use CaptchaTrait;
+	//use CaptchaTrait;
     /**
      * Display a listing of the resource.
      *
