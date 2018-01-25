@@ -54,7 +54,7 @@
 		  <!-- Modal body -->
 		  <div class="modal-body">
 		 {!! Form::open(['route' => 'user.store']) !!}
-		 {!! Form::input('hidden', 'captcha', null) !!}
+		 
 			<div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
 			  {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'First Name','required'=>'Please enter first name' ]) !!}
