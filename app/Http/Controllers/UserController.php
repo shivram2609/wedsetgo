@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Traits;
+use App\Traits\CaptchaTrait;
 use App\User;
 use App\UserDetail; 
 use Session;
@@ -15,7 +15,7 @@ use Socialite;
  
 class UserController extends Controller
 {    
-	//use CaptchaTrait;
+	use CaptchaTrait;
     /**
      * Display a listing of the resource.
      *
