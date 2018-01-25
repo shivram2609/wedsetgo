@@ -52,8 +52,10 @@
 
 	});
 	</script>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
     <script src="js/bootstrap-datetimepicker.pt-BR.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 	<script>
 	$('.input-group.date').datepicker({
     	format: 'yyyy-mm-dd',

@@ -75,7 +75,8 @@
 			  {!! Form::input('password', 'password_confirmation', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Confirm Password' ,'required'=>'Please enter confirm password']) !!}
 			 </div>
 			 <div class="text-center">
-			  <img src="img/google-captcha.png" alt="Captcha">
+				<div class="g-recaptcha" data-sitekey="6LfwyDEUAAAAAHwP7cx_q_Rdk4UN1dJ8S1XR9A04"></div>
+			  
 			 </div>
 			  <div class="form-group text-center">
 			  {!! Form::submit('Signup', ['class' => 'theme-btn-rct']) !!} <a href="/login" title="Already have an account?" class="already-account" data-toggle="modal" id="signinmodal" data-target="#signIn">Already have an account?</a>
