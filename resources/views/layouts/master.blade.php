@@ -32,7 +32,7 @@
         @endif
 			@include('includes.header')			
 			@if($errors->any())
-				<div style="color:red; border:1px solid #aaa; padding:4px; margin-top:10px">
+				<div class="error_message">
 					@foreach($errors->all() as $error)
 						<p>{{ $error }}</p>
 					@endforeach
