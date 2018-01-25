@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-		$input = $request::all();
+		$input = $request->all();
 		print_r($input);
 		print_r($request);
 		$request->captcha = $this->captchaCheck();
