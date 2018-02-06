@@ -1,0 +1,14 @@
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use DB;
+use View;
+class BaseController extends Controller
+{
+  function __construct() {
+		$category =  DB::table('catagories')->where(['is_active'=>1])->get();
+		View::share('headCategory', $headCategory);
+	}
+}
+?>
