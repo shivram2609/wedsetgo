@@ -5,13 +5,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Traits\CaptchaTrait;
 use App\User;
-use App\UserDetail; 
+use App\UserDetail;
+use App\Follower; 
 use Session;
 use Catagory;
 use Auth;
 use Config;
 use DB;
 use Socialite;
+
  
 class UserController extends Controller
 {    
@@ -127,17 +129,15 @@ class UserController extends Controller
 				Session::put("users",$users);
 				if (Auth::user()->user_type_id == 1) {
 					return redirect()->route('admin.admindashboard');
-				} elseif (Auth::user()->user_type_id == 2){
-					return redirect()->route('news.edit-profile');
-				} elseif(Auth::user()->user_type_id == 3){
-					return redirect()->route('news.edit-profile');
+				} elseif (Auth::user()->user_type_id == 2 || Auth::user()->user_type_id == 3){
+					return redirect('/p/'.Auth::user()->id."-".$users->first_name."-".$users->last_name);
 					
 				} else {
 					return redirect()->route('user.index');
 				}
 			} else {
 					Session::flash('flash_message', 'Your account is not active.');
-					return redirect()->route('news.login');
+					return redirect()->route('home_path');
 			}
         } else {
 			Session::flash('flash_message', 'Incorrect username or password.');
@@ -259,10 +259,10 @@ class UserController extends Controller
 			if ( User::where('users.confimation_token',$token)->update(['users.is_active' => 1])) {
 				User::where('users.confimation_token',$token)->update(['users.confimation_token' => '']);
 				Session::flash('flash_message', 'Account confirmed successfully.');
-				return redirect()->route('news.login');
+				return redirect()->route('home_path');
 			} else {
 				Session::flash('flash_message', 'Invalid request.');
-				return redirect()->route('news.login');
+				return redirect()->route('home_path');
 			}
 		}
 		
@@ -326,7 +326,7 @@ class UserController extends Controller
 		}
 	}
 	
-	public function editprofile(Request $request){
+	public function editprofile(Request $request, $id=Null){
 		
 		if ($request->isMethod('post')){
 			 $this->validate($request, array(
@@ -368,14 +368,16 @@ class UserController extends Controller
 			if(!empty($request)){
 				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
 				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);
+				return redirect('/p/'.Auth::user()->id);
 			}
 			
 		}
 		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
-		
+		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
+		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
 		$socialVal = unserialize($user->social_media);
-		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal));
+		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList));
 	}
 	
 	public function sendRquestProfessional(){
@@ -392,6 +394,51 @@ class UserController extends Controller
 		}
 		return redirect()->route('news.edit-profile');
 	}
+	
+	public function profile($keyword = 	NULL){
+		$keyword = explode("-",$keyword);
+		$id = $keyword[0];
+		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $id)->first();
+		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description","user_details.address",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id');
+		
+		$sellerwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id');
+		
+		$count = DB::table('user_works')->where('user_works.user_id','=', $id)->count();
+		$sellerProfile = $sellerProfile->where('users.id','=',$id)->first();
+		$sellerwork= $sellerwork->where('user_works.user_id','=', $id)->get();
+		if (Auth::check()){
+			$follow = DB::table('followers')->select('followers.*')->where('professional_id', "=", $id)->where('buyer_id', "=", Auth::user()->id)->first();
+		}
+		$followerList=DB::table('followers')->where('professional_id',$id)->where('status',1)->count();
+		$followingList=DB::table('followers')->where('buyer_id',$id)->where('status',1)->count();
+		if (Auth::check()){
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'follow'=>$follow));
+		}
+		return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList));
+	}
+	
+	public function follower($keyword = NULL){
+		$keyword = explode("-",$keyword);
+		$id = $keyword[0];
+		$follower = DB::table('followers')->select('followers.*')->where('buyer_id', Auth::user()->id)->where('professional_id', $id)->first();
+		if(empty($follower)){
+			Follower::create(array(
+			'buyer_id' => Auth::user()->id,
+			'professional_id' => $id,
+			'status'=>1
+        ));
+        Session::flash('flash_message', 'You are now following this user');
+		}elseif($follower->status == 1){
+			$result = DB::table('followers')->where('followers.professional_id',$id)->where('followers.buyer_id',Auth::user()->id)->update(['status'=> 0]);
+			Session::flash('flash_message', 'You are not following this user');
+		}else{
+			$result = DB::table('followers')->where('followers.professional_id',$id)->where('followers.buyer_id',Auth::user()->id)->update(['status'=> 1]);
+			Session::flash('flash_message', 'You are now following this user');
+		}
+		return redirect('/p/'.$id);
+		
+	}
+	
 	
 }
 	/* end of function */

@@ -19,7 +19,7 @@ class CategoriesController extends Controller
      */
     public function index(Request $request)
     {
-		$categories = DB::table('catagories')->where ( 'name', 'LIKE', '%' . $request->search_categories . '%' )->paginate(10);
+		$categories = DB::table('catagories')->where ( 'name', 'LIKE', '%' . $request->search_categories . '%' )->paginate(2);
 		return view('categories.index', array('title' => 'List Of Catagories','categories'=>$categories,"path"=>storage_path()));
        
     }

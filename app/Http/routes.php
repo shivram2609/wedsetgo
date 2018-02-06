@@ -37,6 +37,9 @@
 	Route::post('edit_profile', array('as' => 'news.edit-profile', 'uses' => 'UserController@editprofile'))->middleware('auth');
 	Route::get('request_for_professtional', 'UserController@sendRquestProfessional')->middleware('auth');
 	
+	Route::get('p/{string}', array('as' => 'news.profile', 'uses' => 'UserController@profile'));
+	Route::get('f/{string}', 'UserController@follower');
+	Route::get('p/{string}', array('as' => 'news.profile', 'uses' => 'UserController@profile'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
@@ -98,6 +101,18 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	
 });
 
+	
+	Route::get('my_work',array('as' => 'userwork.user_work', 'uses'=>'UserworkController@index'))->middleware("auth","professional");
+	Route::get('add_work',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");
+	Route::post('add_work',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");
+	Route::get('add_work/{id}',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");
+	Route::post('add_work/{id}',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");	
+	Route::get('photostream-gridview',array('as' => 'userwork.photostream_gridview', 'uses'=>'UserworkController@photostream_gridview'));
+	Route::get('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
+	Route::post('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
+	Route::get('vision_book',array('as' => 'userwork.my_vision_book', 'uses'=>'UserworkController@my_vision_book'));
+	Route::get('seller',array('as' => 'userwork.seller_listing', 'uses'=>'UserworkController@seller_listing'));
+	
 	Route::get('socialAuth/{provider}', array("as" => "socialAuth", 'uses'=>'UserController@getSocialLogin'));
 	
 	Route::get('twitterCallBack', array("as" => "twitterCallBack", 'uses'=>'UserController@twitterCallBack'));

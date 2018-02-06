@@ -19,7 +19,7 @@
 				}
 			}else{
 				
-				return redirect('login');
+				return redirect('home_path');
 	  	    }
            
             return redirect()->guest('/');

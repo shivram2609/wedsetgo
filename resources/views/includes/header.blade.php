@@ -1,6 +1,6 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/"><img src="img/logo.png" alt="wedding" width="75" height="79"></a>
+        <a class="navbar-brand" href="/"><img src="{{URL::to('img/logo.png')}}" alt="wedding" width="75" height="79"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,12 +8,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
 <div class="header-rt-top">
 			<div class="search-box">
-				<form>
-					<input type="text" placeholder="Search Professional, Products, Services And More..."> <button class="search-btn" type="submit">Search</button>
-				</form>
+				{!! Form::open(["method"=>"get","url"=>"photostream-gridview"]) !!}
+					<input type="text" name="search_key" placeholder="Search Professional, Products, Services And More..."> <button class="search-btn" type="submit">Search</button>
+				{!! Form::close() !!}
 			</div>
 			<?php if (Auth::check()) { ?>
-			<div class="login-signup">Welcome  {{Session::get("users")->first_name}} /<a href="logout" title="Login">Logout</a></div>
+			<div class="login-signup"><a href="/edit_profile" title="Edit Profile">Welcome  {{Session::get("users")->first_name}}</a> /<a href="/logout" title="Login">Logout</a></div>
 			<?php }else{ ?>
 			<div class="login-signup"><a href="#" title="Login" data-toggle="modal" data-target="#signIn">Login</a> / <a href="#" title="Login" data-toggle="modal" data-target="#signUp">Signup</a></div>
 			<?php } ?>
@@ -23,19 +23,24 @@
               <a class="nav-link" href="/" title="HOME">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" title="PHOTO STREAM">PHOTO STREAM</a>
+              <a class="nav-link" href="/photostream-gridview" title="PHOTO STREAM">PHOTO STREAM</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" title="FIND PROFESSIONALS">FIND PROFESSIONALS</a>
+              <a class="nav-link dropdown-toggle" href="#" title="FIND PROFESSIONALS" data-toggle="dropdown">FIND PROFESSIONALS <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+				  @foreach ($headCategory as $headCategories)
+				<li><a href="/seller?catagory_id=<?php echo $headCategories->id; ?>" title="<?php echo $headCategories->name; ?>" class=""><img class="nav_image" src="/categories/<?php echo $headCategories->image;?>" >{{$headCategories->name}}</a></li>
+				@endforeach
+			</ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" title="ABOUT">ABOUT</a>
             </li>
 			<li class="nav-item social-links">
-              <a class="nav-link" href="#" title="Facebook"><img src="img/facebook-icon.png" alt="Facebook"></a>
-			 <a class="nav-link" href="#" title="Twitter"><img src="img/twitter-icon.png" alt="Twitter"></a>
-			 <a class="nav-link" href="#" title="Google Plus"><img src="img/googlePlus-icon.png" alt="Google Plus"></a>
-			 <a class="nav-link" href="#" title="Linkedin"><img src="img/linkedin-icon.png" alt="Linkedin"></a>
+             <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+			 <a class="nav-link" href="#" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
+			 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
+			 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
             </li>
           </ul>
         </div>

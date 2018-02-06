@@ -25,8 +25,7 @@
 					<?php echo ucfirst($user->first_name);?><br/>
 					Wedding Planning Website
 				</div>
-		</div>
-		
+		</div>		
 		</div>
 		
 		<div class="user-nav user-nav-ext">
@@ -34,20 +33,20 @@
 				<i class="fa fa-pencil" aria-hidden="true"></i>	 
 					Change Profile Image <input type="file" style="display:none;" name="profile_image">
 				</label>
-			<a href="javascript:void(0);" title="Your Profile">Your Profile</a> <a href="javascript:void(0);" title="My Work">My Work</a> <a href="javascript:void(0);" class="active" title="My Vision Books">My Vision Books</a> <a href="javascript:void(0);" title="Reviews">Reviews</a> <a href="javascript:void(0);" title="Messages">Messages</a>
+					 <a href="{{ url('/p') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Your Profile">Your Profile</a>
+							<a href="/vision_book" class="" title="My Vision Books">My Vision Books</a> 
+						 <?php if (Auth::user()->user_type_id == 2){ ?> 
+							<a href="/my_work" title="My Work">My Work</a>	 
+							<?php }?>
+							<a href="javascript:void(0);" title="Reviews">Reviews</a>
+					 <a href="javascript:void(0);" title="Messages">Messages</a>
 			<?php if(($user->porfessional_request== 0) AND ($user->user_type_id== 3)) { ?>
 			<a href="{{action('UserController@sendRquestProfessional')}}">Request for professional</a>
 			<?php }?>
 		</div>
 		<div class="dashboard-wrapper">
 			
-				<div class="dashboard-left">
-					<a href="javascript:void(0);" title="Invite Friends" class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Invite Friends</a>
-					 <div class="btn-group">
-					  <a href="javascript:void(0);" title="Invite Friends" class="btn btn-gray form-group">Followers</a>
-					  <a href="javascript:void(0);" title="Invite Friends" class="btn btn-gray form-group">Following</a>
-					  </div> 
-				</div>
+				@include('includes.follower')
 				<div class="dashboard-form">
 					<div class="row">
 						<div class="col-sm-6 form-group">

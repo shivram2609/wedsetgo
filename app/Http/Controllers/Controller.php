@@ -7,8 +7,10 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Cmsemail;
+use App\Catagory;
 use Mail;
 use DB;
+use View;
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -17,7 +19,10 @@ abstract class Controller extends BaseController
     public $email_subject = 'test';
     public $staticLink = "http://35.154.146.218:8000/";
     public $email_title = "WedSetGo";
-    //public $staticLink = "http://localhost:8000/";
+    function __construct() {
+		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
+		View::share('headCategory', $headCategory);
+	}
     
     public function getEmailData( $slug = NULL ) {
 		$data = DB::table('cmsemails')->select('cmsemails.*')->where(['cmsemails.slug'=>$slug])->first();
@@ -46,9 +51,13 @@ abstract class Controller extends BaseController
 				throw new Exception;
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
-			die;
+			//echo $e->getMessage();
+			//die;
 			return false;
 		} 	
+	}
+	
+	public function headerCategories(){
+		
 	}
 }

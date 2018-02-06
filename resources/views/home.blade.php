@@ -37,7 +37,7 @@
 	<div class="container">
 		<h1 class="main-heading">Design the wedding you’ve always wanted...</h1>
 		<div class="btn-outer">
-			<a href="#" title="Brides & Grooms Get Started" class="theme-btn btn">Brides & Grooms Get Started</a> <a href="#" title="Professionals Get Started " class="theme-btn btn">Professionals Get Started </a>
+			<a href="#" title="Brides & Grooms Get Started" class="theme-btn btn" data-toggle="modal" data-target="#signUp">Brides & Grooms Get Started</a> <a href="#" title="Professionals Get Started " class="theme-btn btn" data-toggle="modal" data-target="#signUp">Professionals Get Started </a>
 		</div>
 		<div class="text-center links-icon">
 			 @foreach ($catgagory as $catgagories)

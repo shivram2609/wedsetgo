@@ -6,18 +6,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home</title>
+    <title><?php echo (isset($title)?($title ." - WedSetGo"):'WedSetGo'); ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--link href="css/bootstrap.min.css" rel="stylesheet"-->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom styles -->
-	<link rel="stylesheet" href="css/style.css">
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-   <title>@yield('title')</title>	
-    </head>
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" >
+	<!-- Custom styles -->
+	 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
+	 </head>
    <body>
 	   
 		@if(Session::has('flash_message'))

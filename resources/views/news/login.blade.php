@@ -18,8 +18,7 @@
 						{!! Form::password('password', null, ['class' => 'form-control', 'size' => 64, ]) !!}
 					</div>
 					<div class="row">
-						<div class="col-sm-6 form-group">
-							
+						<div class="col-sm-6 form-group">							
 						</div>
 						<div class="col-sm-6 form-group text-right">
 							<a href="socialAuth/twitter">Login With Twitter</a>
