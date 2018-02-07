@@ -12,7 +12,7 @@
 					<?php }?>
 					<h1 class="heading-main">Services Provided</h1>
 					<?php if(!empty($sellerProfile->trade_description)){ ?>
-						<p class="short_desc">{{ str_limit($sellerProfile->trade_description, 150) }}</p>
+						<p class="short_desc">{{ str_limit($sellerProfile->trade_description, 70) }}</p>
 						<p class="long_desc hide">{{ $sellerProfile->trade_description }}</p>
 					<a href="javascript:void(0);" title="Read more" class="btn read-more" id="read-more">Read more <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 					<?php }?>

@@ -16,6 +16,7 @@ use Auth;
 use Config;
 use DB;
 use Socialite;
+use App\Follower;
  
 class UserworkController extends Controller{
 	public function index(Request $request)

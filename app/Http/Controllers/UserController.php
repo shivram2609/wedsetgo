@@ -259,10 +259,10 @@ class UserController extends Controller
 			if ( User::where('users.confimation_token',$token)->update(['users.is_active' => 1])) {
 				User::where('users.confimation_token',$token)->update(['users.confimation_token' => '']);
 				Session::flash('flash_message', 'Account confirmed successfully.');
-				return redirect()->route('home_path');
+				return redirect($this->staticLink);
 			} else {
 				Session::flash('flash_message', 'Invalid request.');
-				return redirect()->route('home_path');
+				return redirect($this->staticLink);
 			}
 		}
 		

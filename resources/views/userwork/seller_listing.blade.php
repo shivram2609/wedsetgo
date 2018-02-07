@@ -42,10 +42,6 @@
 						<br>
 					<b>Category:</b><br>
 						{{$sellerLists->name}}<br>
-						<b>Followers:</b><br>
-						
-						<b>Unfollowers:</b><br>
-						
 						<br>
 						<div class="share-links">
 						like the idea and the concept :
