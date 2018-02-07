@@ -9,6 +9,8 @@
 				<div class="col-md-9 form-group">
 					<?php if(!empty($sellerProfile->detail)) { ?>
 						<p>{{$sellerProfile->detail}}</p>
+					<?php } else {?>
+						Welcome new user, Please start your work.
 					<?php }?>
 					<h1 class="heading-main">Services Provided</h1>
 					<?php if(!empty($sellerProfile->trade_description)){ ?>
