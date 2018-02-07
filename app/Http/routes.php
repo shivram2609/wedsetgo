@@ -107,7 +107,7 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::post('add_work',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");
 	Route::get('add_work/{id}',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");
 	Route::post('add_work/{id}',array('as' => 'userwork.add_work', 'uses'=>'UserworkController@add'))->middleware("auth","professional");	
-	Route::get('photostream-gridview',array('as' => 'userwork.photostream_gridview', 'uses'=>'UserworkController@photostream_gridview'));
+	Route::get('photostream',array('as' => 'userwork.photostream_gridview', 'uses'=>'UserworkController@photostream_gridview'));
 	Route::get('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
 	Route::post('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
 	Route::get('vision_book',array('as' => 'userwork.my_vision_book', 'uses'=>'UserworkController@my_vision_book'));

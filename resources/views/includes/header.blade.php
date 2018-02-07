@@ -23,7 +23,7 @@
               <a class="nav-link" href="/" title="HOME">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/photostream-gridview" title="PHOTO STREAM">PHOTO STREAM</a>
+              <a class="nav-link" href="/photostream" title="PHOTO STREAM">PHOTO STREAM</a>
             </li>
             <li class="nav-item">
               <a class="nav-link dropdown-toggle" href="#" title="FIND PROFESSIONALS" data-toggle="dropdown">FIND PROFESSIONALS <b class="caret"></b></a>

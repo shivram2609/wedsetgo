@@ -420,6 +420,7 @@ class UserController extends Controller
 	public function follower($keyword = NULL){
 		$keyword = explode("-",$keyword);
 		$id = $keyword[0];
+		$users = DB::table('user_details')->select('user_details.*')->where('user_details.user_id',$id)->first();		
 		$follower = DB::table('followers')->select('followers.*')->where('buyer_id', Auth::user()->id)->where('professional_id', $id)->first();
 		if(empty($follower)){
 			Follower::create(array(
@@ -435,7 +436,7 @@ class UserController extends Controller
 			$result = DB::table('followers')->where('followers.professional_id',$id)->where('followers.buyer_id',Auth::user()->id)->update(['status'=> 1]);
 			Session::flash('flash_message', 'You are now following this user');
 		}
-		return redirect('/p/'.$id);
+		return redirect('/p/'.$id."-".$users->first_name."-".$users->last_name);
 		
 	}
 	

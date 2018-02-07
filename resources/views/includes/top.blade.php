@@ -1,10 +1,9 @@
 <!-- Page Content -->
 <div class="container">
 	<?php if(!empty($user->background_image)) { ?>
-		
 	<div class="feature-img" style="background-image: url('/uploads/background/<?php echo $user->background_image;?>')">
 	<?php } else { ?>
-		<div class="feature-img" style="background-image: url('img/slider001.jpg')">
+		<div class="feature-img" style="background-image: url('{{ asset('img/slider001.jpg') }}')">
 	<?php }?>
 		<div class="user-imgText">
 		<?php if(!empty($user->profile_image)) { ?>
@@ -13,7 +12,7 @@
 			</div>
 			<?php } else { ?>
 			<div class="user-img" >
-				<img src="img/user-dummy.jpg" class="img-fluid" alt="user" width="180" height="180">
+				<img src="{{URL::to('img/user-dummy.jpg')}}" class="img-fluid" alt="user" width="180" height="180">
 			</div>
 				<?php }?>
 			<div class="user-text">

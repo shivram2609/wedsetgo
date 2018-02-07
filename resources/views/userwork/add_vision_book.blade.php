@@ -39,16 +39,18 @@
 								
 								<b><a id="add_title" href="javascript:void(0);" class="">Add</button></b>
 								{!! Form::select('vision_book_id', $visionbook,(isset($visionbook->vision_book_id)?$visionbook->vision_book_id:''), array("class"=>"form-control custom-select", "id"=>"vision_title")) !!}	
+								<br>
+								<br>
 							<?php } else { ?>
-								
 								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title'  ]) !!}
+								<br>
 							 <?php } ?>
-							{!! Form::input('text', 'vision_title', null, ['class' => 'form-control hide', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title' ,"disabled"=>"disabled" ]) !!}
-							 
-							 {!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
+								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control hide', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title' ,"disabled"=>"disabled" ]) !!}
+								 
+								 {!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
 							 <br>
 							 {!! Form::submit('Submit', ['class' => 'btn theme-btn-rct']) !!}
-						{!! Form::close() !!}
+							{!! Form::close() !!}
 						
 						<div class="share-links">
 						like the idea and the concept :
@@ -76,10 +78,7 @@
 			</a>
 		  
 	</div>
-	<div class="col-sm-8 slider-btn"><a href="javascript:void(0);" title="Save"><i class="fa fa-plus" aria-hidden="true"></i>
-	 Save</a> <a href="javascript:void(0);" title="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i>
-	 Email</a> <a href="javascript:void(0);" title="Email" class="pull-right"><i class="fa fa-expand" aria-hidden="true"></i>
-	</a></div>
+
 	 </div>	
 	</div>	
 </div>

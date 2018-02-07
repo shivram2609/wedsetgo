@@ -7,14 +7,19 @@
 		<div class="dashboard-form overview">
 			<div class="row">
 				<div class="col-md-9 form-group">
-					<p>{{$sellerProfile->detail}}</p>
+					<?php if(!empty($sellerProfile->detail)){ ?>
+						<p>{{$sellerProfile->detail}}</p>
+					<?php }?>
 					<h1 class="heading-main">Services Provided</h1>
-					<p class="short_desc">{{ str_limit($sellerProfile->trade_description, 150) }}</p>
-					<p class="long_desc hide">{{ $sellerProfile->trade_description }}</p>
+					<?php if(!empty($sellerProfile->trade_description)){ ?>
+						<p class="short_desc">{{ str_limit($sellerProfile->trade_description, 150) }}</p>
+						<p class="long_desc hide">{{ $sellerProfile->trade_description }}</p>
 					<a href="javascript:void(0);" title="Read more" class="btn read-more" id="read-more">Read more <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+					<?php }?>
 					<?php if($user->user_type_id == 2) { ?>
 						<h2 class="heading-main">{{$count}} Works <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
 						<?php $i = 0; $j = 1; ?>
+						<?php if(!empty($sellerwork)) { ?>
 						@foreach ($sellerwork as $sellerworks)
 						<?php ++$i; ?>
 						<?php if ($j == 1) { ?> <div class="product-grid-list"> <?php  } ?>
@@ -45,7 +50,7 @@
 						<?php if ($j == 4) { ?> </div> <?php  $j = 1; } ?>
 						@endforeach
 						<?php if ($j < 4) { ?> </div> <?php   } ?>
-					<?php } ?>
+					<?php } ?><?php } ?>
 				</div>
 				<div class="col-md-3 form-group">
 					<div class="right-row">

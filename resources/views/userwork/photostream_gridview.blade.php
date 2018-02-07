@@ -26,8 +26,10 @@
 				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
 				
 			</div>
-			{!! Form::submit('Submit', ['class' => 'btn btn-submit']) !!}
-			<a href="{{ url('/photostream-gridview') }}" class="btn btn-submit"> Clear</a>
+			<div class="submit-grid">
+			{!! Form::submit('Submit', ['class' => 'btn btn-submit clear-grid']) !!}
+			<a href="{{ url('/photostream-gridview?view=') }}<?php echo $view; ?>" class="btn btn-submit clear-grid"> Clear</a>
+			</div>
 		</div>
 		{!! Form::close() !!}
 	</div>

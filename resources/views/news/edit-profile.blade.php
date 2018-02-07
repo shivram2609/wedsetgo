@@ -3,9 +3,9 @@
 <div class="container">
 	{!! Form::open(array('novalidate'=>true,"files"=>true)) !!}
 	 <?php if(!empty($user->background_image)) { ?>
-		<div class="feature-img" style="background-image: url('uploads/background/<?php echo $user->background_image;?>">
+		<div class="feature-img" style="background-image: url('/uploads/background/<?php echo $user->background_image;?>')">
 		<?php } else { ?>
-			<div class="feature-img" style="background-image: url('img/slider001.jpg')">
+			<div class="feature-img" style="background-image: url('{{ asset('img/slider001.jpg') }}')">
 		<?php }?>
 			    <label class="btn btn-default btn-file hover-color" style="float:right; background-color:#fff; paddding:20px; margin-top:10px;margin-right:10px; padding:10px;">
 					<i class="fa fa-pencil" aria-hidden="true"></i>			
@@ -18,7 +18,7 @@
 				</div>
 				<?php } else { ?>
 				<div class="user-img" >
-					<img src="img/user-dummy.jpg" class="img-fluid" alt="user" width="180" height="180">
+					<img src="{{URL::to('img/user-dummy.jpg')}}" class="img-fluid" alt="user" width="180" height="180">
 				</div>
 					<?php }?>
 				<div class="user-text">
@@ -41,7 +41,7 @@
 							<a href="javascript:void(0);" title="Reviews">Reviews</a>
 					 <a href="javascript:void(0);" title="Messages">Messages</a>
 			<?php if(($user->porfessional_request== 0) AND ($user->user_type_id== 3)) { ?>
-			<a href="{{action('UserController@sendRquestProfessional')}}">Request for professional</a>
+				<a href="{{action('UserController@sendRquestProfessional')}}" >Request for professional</a>
 			<?php }?>
 		</div>
 		<div class="dashboard-wrapper">
@@ -120,7 +120,7 @@
 							{!! Form::input('text','twitter', (isset($socialVal['twitter'])?$socialVal['twitter']:''), ['class' => 'form-control twitter-icon', 'size' => 40,'placeholder' => 'Twitter' ]) !!}
 						</div>
 					</div>
-					{!! Form::submit('Update Profile', ['class' => 'btn btn-submit']) !!}
+					{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
 				</div>
 		</div>
 		{!! Form::close() !!}

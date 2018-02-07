@@ -198,7 +198,7 @@ class UserworkController extends Controller{
 		  if ( isset($tmpQuery['view']) ) {
 			  unset($tmpQuery['view']);
 		  }
-		  $pageCount = ($view == ("full_view")?1:((isset($tmpQuery['record_per_page']) && !empty($tmpQuery['record_per_page']))?$tmpQuery['record_per_page']:1));
+		  $pageCount = ($view == ("full_view")?1:((isset($tmpQuery['record_per_page']) && !empty($tmpQuery['record_per_page']))?$tmpQuery['record_per_page']:5));
 		  $tmpQString = '';
 		  if (!empty($tmpQuery)) {
 			  

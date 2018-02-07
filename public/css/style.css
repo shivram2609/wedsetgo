@@ -267,7 +267,7 @@ font-weight: normal;
 src: local('../fonts/Avenir Next LT Pro Ultra Light Condensed Italic'), url('../fonts/AvenirNextLTPro-UltLtCnIt.woff') format('woff');
 }
 body{font-family: 'Avenir Next LT Pro Regular'; padding:110px 0 0; color:#2b2b2b;}
-a{transition:all 0.5s ease 0s;}
+a{transition:all 0.5s ease 0s; color:#761b31; }
 a:hover{color:#761b31;}
 .navbar-brand img{ -webkit-transition: all 0.3s ease; transition: all 0.3s ease;}
 .navbar{border-bottom:1px solid #efefef;}
@@ -339,7 +339,7 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
 .about-list ul{margin:0px; padding:0px; list-style:none;display:inline-block; width:100%; }
 .about-list ul li{margin:0px 2%; padding:0 0 0 35px; background:url(../images/tick-mark.png) no-repeat 0 5px; float:left;  }
 /* Photo stream list view */
-.filter-bar{background:#e5e5e5; padding:5px 0; text-align:center;}
+.filter-bar{background:#e5e5e5; padding:5px 0; text-align: right;}
 .filter-sections{display:inline-block; vertical-align:middle; margin:0 20px 0 0;}
 .filter-sections:last-child{max-width: 275px; width: 100%; margin:0px;}
 .views-icons{display:inline-block; border:1px solid #ccc; vertical-align:middle; margin:0 20px;}
@@ -379,7 +379,7 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
 .productFull-viewList .carousel-fade .carousel-inner .prev.right {opacity: 1;}
 .productFull-viewList .carousel-fade .carousel-control {z-index: 2;}
 
-.productFull-viewList .carousel-caption{vertical-align:top; color:#9e9e9e; font-size:15px; position:relative; padding-bottom:80px;}
+.productFull-viewList .carousel-caption{vertical-align:top; color:#000; font-size:15px; position:relative; padding-bottom:80px;}
 .productFull-viewList .carousel-caption .heading{display:flex; font-family: 'Avenir Next LT Pro Demi'; font-size:18px; margin:10px 0 30px;}
 .productFull-viewList .carousel-caption .heading img{width:51px; height:47px; margin:0 20px 0 0; vertical-align:middle;}
 .productFull-viewList .carousel-caption b{margin:10px 0 0;color:#000;}
@@ -634,3 +634,20 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
     height: 50px;
     float: left;
 }
+.col-md-3.form-group {
+   padding: 4px 0 0 0;
+}
+.clear-grid
+{padding: 8px !important; border-radius: 7%;padding-top: 8px !important; padding-bottom: 8px !important;padding-left: 18px !important;padding-right: 18px !important;
+}
+
+.btn.clear-grid {
+    background: #761b31;
+    border-color: #761b31;
+    color: #fff !important;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+.submit-grid{margin: 4px 21px 0 0;}

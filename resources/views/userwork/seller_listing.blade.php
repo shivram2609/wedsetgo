@@ -9,27 +9,27 @@
 			
 			<div class="filter-sections">
 				Show Per Page
-				{!! Form::select('record_per_page', ["1"=>"1"],(isset($tmpQuery['record_per_page'])? $tmpQuery['record_per_page']:""), array("class"=>"custom-select")) !!}				
+				{!! Form::select('record_per_page', ["5"=>"5","10"=>"10","15"=>"15"],(isset($tmpQuery['record_per_page'])? ($tmpQuery['record_per_page']=='5'?'5':($tmpQuery['record_per_page']=='10'?'10':'15')) :''), array("class"=>"custom-select")) !!}			
 			</div>
 			<div class="filter-sections">
 				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
 				
 			</div>
-			{!! Form::submit('Submit', ['class' => 'btn btn-submit']) !!}
-			<a href="{{ url('/seller') }}" class="btn btn-submit"> Clear</a>
+			{!! Form::submit('Submit', ['class' => 'btn btn-submit clear-grid']) !!}
+			<a href="{{ url('/seller') }}" class="btn btn-submit clear-grid"> Clear</a>
 		</div>
 		{!! Form::close() !!}
 	</div>
 	 <!-- filter bar end-->
 	 <!-- list container start -->
 <div class="container">	
+	@foreach($sellerList as $sellerLists)
 	<div class="product-list">
-   @foreach($sellerList as $sellerLists)
 	<div class="img-sec">
 			<?php if(!empty($sellerLists->profile_image)) { ?>
 						<img src="/uploads/avatars/{{$sellerLists->profile_image}}" alt="img012" class="img-reponsive" width="981" height="844">
 					<?php } else { ?>
-						<img src="img/img014.jpg" alt="img012" class="img-reponsive" width="981" height="844">
+						<img src="{{URL::to('img/user-dummy.jpg')}}" alt="img012" class="img-reponsive" width="981" height="844">
 					<?php } ?>
 				</div>
 				<div class="text-sec">
@@ -50,15 +50,15 @@
 						<div class="share-links">
 						like the idea and the concept :
 							<div class="social-links">
-								 <a class="nav-link" href="#" title="Facebook"><img src="img/facebook-icon.png" alt="Facebook"></a>
-								 <a class="nav-link" href="#" title="Twitter"><img src="img/twitter-icon.png" alt="Twitter"></a>
-								 <a class="nav-link" href="#" title="Google Plus"><img src="img/googlePlus-icon.png" alt="Google Plus"></a>
-								 <a class="nav-link" href="#" title="Linkedin"><img src="img/linkedin-icon.png" alt="Linkedin"></a>
+								 <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+								 <a class="nav-link" href="#" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
+								 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
+								 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
 							</div>
 						</div>
 				</div>
-				   @endforeach
 				</div>
+				 @endforeach
 	<nav>
 		@include('includes.pagination', ['paginator' => $sellerList->appends(request()->query())])
 	</nav>
