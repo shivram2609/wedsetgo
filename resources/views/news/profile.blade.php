@@ -19,7 +19,7 @@
 					<?php if($user->user_type_id == 2) { ?>
 						<h2 class="heading-main">{{$count}} Works <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
 						<?php $i = 0; $j = 1; ?>
-						<?php if(!empty($sellerwork)) { ?>
+						
 						@foreach ($sellerwork as $sellerworks)
 						<?php ++$i; ?>
 						<?php if ($j == 1) { ?> <div class="product-grid-list"> <?php  } ?>
@@ -50,8 +50,7 @@
 						<?php if ($j == 4) { ?> </div> <?php  $j = 1; } ?>
 						@endforeach
 						<?php if ($j < 4) { ?> </div> <?php   } ?>
-					<?php } ?><?php } ?>
-				</div>
+					<?php } ?>
 				<div class="col-md-3 form-group">
 					<div class="right-row">
 						<b><i class="fa fa-user" aria-hidden="true"></i> Contact:</b> 

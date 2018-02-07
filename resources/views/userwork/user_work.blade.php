@@ -43,7 +43,7 @@
 							<?php } ?>
 							<div class="text">
 								<b>{{$userworks->title}}</b>
-								{{ str_limit($userworks->description, 50) }}
+								{{ str_limit($userworks->description, 30) }}
 							</div>
 						</div>
 					  </div>

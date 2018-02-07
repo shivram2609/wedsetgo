@@ -19,7 +19,7 @@
 			</div>
 			<div class="filter-sections">
 				Show Per Page
-				{!! Form::select('record_per_page', ["5"=>"5","10"=>"10","15"=>"15"],(isset($tmpQuery['record_per_page'])? ($tmpQuery['record_per_page']=='5'?'5':($tmpQuery['record_per_page']=='10'?'10':'15')) :''), array("class"=>"custom-select")) !!}
+				{!! Form::select('record_per_page', ["6"=>"6","12"=>"12","18"=>"18"],(isset($tmpQuery['record_per_page'])? ($tmpQuery['record_per_page']=='5'?'5':($tmpQuery['record_per_page']=='10'?'10':'15')) :''), array("class"=>"custom-select")) !!}
 				
 			</div>
 			<div class="filter-sections">
