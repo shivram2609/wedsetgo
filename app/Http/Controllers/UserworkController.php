@@ -148,42 +148,50 @@ class UserworkController extends Controller{
 	 public function add_vision_book(Request $request, $id=NULL){
 		 $id = explode("-",$id);
 		 $id = $id[0];
-		 $visionbook= DB::table('vision_books')->where('user_id', '=',Auth::user()->id )->orderBy('vision_title')->lists('vision_title', 'id');
+		 if(Auth::check()){
+			$visionbook= DB::table('vision_books')->where('user_id', '=',Auth::user()->id )->orderBy('vision_title')->lists('vision_title', 'id');
+		}
 		 $userphotogrid = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address",'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.id','=', $id)->first();
 		 $source = "work_image/".$userphotogrid->images;
 		 $token = str_random(100);
-		 $filename = $token."_".Auth::user()->id."_".$userphotogrid->images;
-		 $destination = "visionbook_images/".$filename;
-		 if ($request->isMethod('post')){
-			 if(!empty($id) && !empty($userphotogrid)  ){
-				 if ( copy($source,$destination) ) {
-						if(empty($request->vision_book_id)){
-							$visionbook = VisionBook::create(array(
-							'user_id' => $userphotogrid->user_id,
-							'vision_title' => $request->vision_title,
-							));
-							$tmp_id = $visionbook->id;
-						} else {
-							$tmp_id = $request->vision_book_id;
-						}
-						
-					VisionBookCollection::create(array(
-									'vision_book_id'=>$tmp_id,
-									'old_title' => $userphotogrid->title,
-									'old_description' => $userphotogrid->description,
-									'images' => $filename,
-									'comments' => $request->comments,
-									'user_work_id'=>$userphotogrid->id,
-									
+		 if(Auth::check()){
+				$filename = $token."_".Auth::user()->id."_".$userphotogrid->images;
+				$destination = "visionbook_images/".$filename;
+			
+			 if ($request->isMethod('post')){
+				 if(!empty($id) && !empty($userphotogrid)  ){
+					 if ( copy($source,$destination) ) {
+							if(empty($request->vision_book_id)){
+								$visionbook = VisionBook::create(array(
+								'user_id' => Auth::user()->id,
+								'vision_title' => $request->vision_title,
 								));
-					Session::flash('flash_message', 'Add in vision book successfuly');
-					return redirect()->route('userwork.photostream_gridview');
-				} else {
-					Session::flash('flash_message', ' Not add in vision book');
+								$tmp_id = $visionbook->id;
+							} else {
+								$tmp_id = $request->vision_book_id;
+							}
+							
+						VisionBookCollection::create(array(
+										'vision_book_id'=>$tmp_id,
+										'old_title' => $userphotogrid->title,
+										'old_description' => $userphotogrid->description,
+										'images' => $filename,
+										'comments' => $request->comments,
+										'user_work_id'=>$userphotogrid->id,
+										
+									));
+						Session::flash('flash_message', 'Add in vision book successfuly');
+						return redirect()->route('userwork.photostream_gridview');
+					} else {
+						Session::flash('flash_message', ' Not add in vision book');
+					}
 				}
 			}
-		}
+	}
+		if(Auth::check()){
 		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, 'visionbook'=>$visionbook, "id"=>$id)); 
+	 }
+		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid)); 
 	 }
 	 
 	public function my_vision_book(){

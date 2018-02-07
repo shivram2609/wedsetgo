@@ -21,9 +21,7 @@
 						<div class="text">
 							<b>{{$userphotogrids->title}}</b>
 								{{ str_limit($userphotogrids->description, 30) }}
-							@if(Auth::check())
 							<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-submit"> Add to vision book</a>
-							@endif
 						</div>
 					</div>
 				</div>

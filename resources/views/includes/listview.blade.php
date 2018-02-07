@@ -24,9 +24,7 @@
 					<b>Tags:</b><br>
 					{{$userphotogrids->tag}}
 					<br>
-					@if(Auth::check())
 					<b><a href="{{ url('/v') }}/{{$userphotogrids->id}}" class="btn btn-submit"> Add to vision book</a></b>
-					@endif
 					<div class="share-links">
 					like the idea and the concept :
 						<div class="social-links">

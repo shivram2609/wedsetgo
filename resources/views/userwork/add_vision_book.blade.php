@@ -34,24 +34,27 @@
 						<b>Tags:</b><br>
 						{{$userphotogrid->tag}} <br>
 					</p>
+						@if(Auth::check())
 						{!! Form::open() !!}
 						    <?php if(!empty($visionbook)) { ?>
 								
 								<b><a id="add_title" href="javascript:void(0);" class="">Add</button></b>
 								{!! Form::select('vision_book_id', $visionbook,(isset($visionbook->vision_book_id)?$visionbook->vision_book_id:''), array("class"=>"form-control custom-select", "id"=>"vision_title")) !!}	
 								<br>
+								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control hide', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title' ,"disabled"=>"disabled" ]) !!}
+								 <br>
+								 {!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
 								<br>
 							<?php } else { ?>
 								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title'  ]) !!}
 								<br>
+								{!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
+								
 							 <?php } ?>
-								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control hide', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title' ,"disabled"=>"disabled" ]) !!}
-								 
-								 {!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
 							 <br>
 							 {!! Form::submit('Submit', ['class' => 'btn theme-btn-rct']) !!}
 							{!! Form::close() !!}
-						
+						@endif
 						<div class="share-links">
 						like the idea and the concept :
 						<div class="social-links">

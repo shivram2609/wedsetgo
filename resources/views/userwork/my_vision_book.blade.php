@@ -6,7 +6,7 @@
 			</a> </h1>
 			<h2 class="heading-sub"><span><i class="fa fa-home" aria-hidden="true"></i> Add Photos</h2>
 				<div class="file-loading">
-					<a href="/photostream-gridview"><span class="add-icon"></span></a>
+					<a href="/photostream"><span class="add-icon"></span></a>
 					<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Work
 				</div>

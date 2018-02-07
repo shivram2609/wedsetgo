@@ -27,7 +27,7 @@
 							<?php  ++$i; 
 							++$j; ?>
 							
-							<div class="list-box <?php echo ($j>5)?"hide":""; ?>" >
+							<div class="list-box <?php echo ($j>3)?"hide":""; ?>" >
 								<div class="inner-box">
 									<div class="img-box">
 										<?php if(!empty($sellerworks->images)) { ?>
@@ -44,7 +44,7 @@
 										<?php }?>
 									
 										<div class="text">
-											<b>{{$sellerworks->title}}</b>
+												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}" class="btn btn-submit"> {{$sellerworks->title}}</a></b>
 											{{ str_limit($sellerworks->description, 50) }}
 										</div>
 									</div>
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<?php if (isset($j) && $j >5) {  ?>
+			<?php if (isset($j) && $j >3) {  ?>
 				<div class="text-center"><button class="btn btn-border" id="load_more">Load More</button></div>
 			<?php } ?>
 		</div>

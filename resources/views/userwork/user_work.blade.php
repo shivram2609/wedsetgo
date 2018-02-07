@@ -42,7 +42,7 @@
 							<div class="img"><img src="img/dummy-user.jpg" alt="user" class="img-reponsive" width="47" height="51"></div>
 							<?php } ?>
 							<div class="text">
-								<b>{{$userworks->title}}</b>
+							<b><a href="{{ url('/v') }}/{{$userworks->id}}" class="btn btn-submit"> {{$userworks->title}}</a></b>
 								{{ str_limit($userworks->description, 30) }}
 							</div>
 						</div>
