@@ -17,7 +17,7 @@ abstract class Controller extends BaseController
     public $email_body = '';
     public $email_from = 'ranjana@zestminds.com';
     public $email_subject = 'test';
-    public $staticLink = "http://35.154.146.218:8000/";
+    public $staticLink = "http://wedsetgo.zestminds.com:8000/";
     public $email_title = "WedSetGo";
     function __construct() {
 		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
