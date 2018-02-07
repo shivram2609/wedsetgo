@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
 <div class="header-rt-top">
 			<div class="search-box">
-				{!! Form::open(["method"=>"get","url"=>"photostream-gridview"]) !!}
+				{!! Form::open(["method"=>"get","url"=>"photostream"]) !!}
 					<input type="text" name="search_key" placeholder="Search Professional, Products, Services And More..."> <button class="search-btn" type="submit">Search</button>
 				{!! Form::close() !!}
 			</div>
