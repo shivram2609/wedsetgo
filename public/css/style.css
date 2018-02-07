@@ -610,7 +610,7 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
 	padding: ;
 	top: 0;
 }
-.data { float:left; }
+.data { float:left; width:100%;}
 .overview .product-grid-list .list-box .text-box .text b {
     font-size: 12px;
 }

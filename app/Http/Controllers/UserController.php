@@ -402,7 +402,6 @@ class UserController extends Controller
 		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description","user_details.address",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id');
 		
 		$sellerwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id');
-		
 		$count = DB::table('user_works')->where('user_works.user_id','=', $id)->count();
 		$sellerProfile = $sellerProfile->where('users.id','=',$id)->first();
 		$sellerwork= $sellerwork->where('user_works.user_id','=', $id)->get();

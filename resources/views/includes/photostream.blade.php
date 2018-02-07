@@ -1,8 +1,8 @@
-<?php $i = 1; ?>
+<?php $i = 0; ?>
 <?php if (!empty($userphotogrid)) { ?> 
 @foreach($userphotogrid as $userphotogrids)
-<?php if ($i == 1) { ?> <div class="data"> <?php  } ?>
-<?php ++$i;  ?>
+<?php if ($i == 0) {  ?> <div class="data"> <?php  } ?>
+<?php  ++$i; ?>
 			<div class="list-box">
 				<div class="inner-box">
 					<div class="img-box">
@@ -28,8 +28,9 @@
 					</div>
 				</div>
 			</div>
-<?php if ($i == 4) { ?> </div> <?php  $i = 1; } ?>
+<?php if ($i == 3) { ?></div> <?php $i = 0; } ?>
 @endforeach
-<?php if ($i < 4) { ?> </div> <?php   } ?>
+<?php if ($i > 0 && $i < 3) { ?></div> <?php } ?>
+						
 
 <?php } ?>
