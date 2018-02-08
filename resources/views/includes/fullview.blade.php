@@ -47,13 +47,8 @@
 	 </div>
 </div>
 
-	<div class="col-sm-8 slider-btn"><a href="{{ url('/v') }}/{{$userphotogrids->id}}" title="Save"><i class="fa fa-plus" aria-hidden="true"></i>
+	<div class="col-sm-8 slider-btn"><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" title="Save"><i class="fa fa-plus" aria-hidden="true"></i>
 	 Save</a> 
-	 @if(Auth::check())
-		 <a href="javascript:void(0);" title="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i>
-		 Email</a> <a href="javascript:void(0);" title="Email" class="pull-right"><i class="fa fa-expand" aria-hidden="true"></i>
-		</a>
-	 @endif
 	</div>
 
 @endforeach

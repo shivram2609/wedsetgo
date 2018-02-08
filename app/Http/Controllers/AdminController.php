@@ -108,8 +108,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-		DB::table('user_details')->where('user_details.user_id', $id)->delete();
-		DB::table('users')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $id)->delete();
+		DB::table('user_details')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $id)->delete();
+		DB::table('users')->where('id', $id)->delete();
 		Session::flash('flash_message', 'Record has been delete successfully.');
 		return redirect()->route('admin.admin_userlist');	
     }
@@ -168,5 +168,30 @@ class AdminController extends Controller
 				Session::flash('error_message', 'error occured.');			
 				return view('admin.more_info', array('title' => 'Professional More Information','id'=>$id));
 			}
+	}
+	
+	public function professionalWorkList(Request $request){
+		$keyword = $request->search_professional;
+		$professionalWorkList = DB::table('users')->select('users.user_type_id','user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_works.title",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->Leftjoin('catagories','catagories.id' , '=', 'user_details.category_id')->join('user_works','user_works.user_id' , '=', 'users.id')->join('user_work_images','user_work_images.user_work_id' , '=', 'user_works.id')->where('users.user_type_id','=', 2)->where('users.is_active','=', 1)->where(function($q) use ($keyword){
+			
+						                     $q->orWhere('user_details.first_name', 'LIKE', '%'.$keyword.'%');
+				                             $q->orWhere('user_details.last_name', 'LIKE', '%'.$keyword.'%');
+				                             $q->orWhere('catagories.name', 'LIKE', '%'.$keyword.'%');
+				                             $q->orWhere('user_works.title', 'LIKE', '%'.$keyword.'%');
+			                                })->paginate(5);
+		return view('admin.professionalwork', array('title' => 'Professional Work List', 'professionalWorkList'=>$professionalWorkList));
+	}
+	
+	
+	public function viewProfessionalWorkList(Request $request, $id){
+		$viewprofessionalWorkList = DB::table('users')->select('users.user_type_id','user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_works.title",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->Leftjoin('catagories','catagories.id' , '=', 'user_details.category_id')->join('user_works','user_works.user_id' , '=', 'users.id')->join('user_work_images','user_work_images.user_work_id' , '=', 'user_works.id')->where('user_works.id', $id)->first();
+		return view('admin.viewProfessional_work_list', array('title' => 'View Professional Work List', 'viewprofessionalWorkList'=>$viewprofessionalWorkList,));
+	}
+	
+	public static function update_user_status($id=NULL, $status=NULL){
+		$status = empty($status)?1:0;
+		$result = DB::table('user_works')->where('id',$id)->update(['status'=> $status]);
+		Session::flash('flash_message', 'Professional Work Status update successfully.');
+		return redirect()->route('admin.professionalwork');
 	}
 }

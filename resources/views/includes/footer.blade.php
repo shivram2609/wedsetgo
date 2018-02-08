@@ -110,10 +110,32 @@
 				$(".long_desc").show();
 				$(this).hide();
 			});
+			
+			
+		$('.pull-right').click(function(){
+			$('.visionbook_detail').addClass('hide');
+			$('.pull-right').addClass('hide');
+			$('.pull-left').removeClass('hide');
+			$('.visionbook_image').addClass('holder col-sm-12');
+			
+			
+		});	
+		$('.pull-left').click(function(){
+			$('.visionbook_detail').removeClass('hide');
+			$('.pull-right').removeClass('hide');
+			$('.pull-left').addClass('hide');
+			$('.visionbook_image').removeClass('holder col-sm-12');
+			
+			
+		});	
+			
+			
+			
 			  
 		});
 	
 	</script>
+	
 	<script>
 		$(window).scroll(function() {
 		  if ($(document).scrollTop() > 50) {

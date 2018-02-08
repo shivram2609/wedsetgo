@@ -64,6 +64,7 @@ class UserworkController extends Controller{
 					'description' => $request->description,
 					'title' => $request->title,
 					'tag' => $request->tag,
+					'status' => 1,
 					));
 					 if($userwork){
 					UserWorkImage::create(array(
@@ -91,7 +92,6 @@ class UserworkController extends Controller{
   }
   
 	  public function photostream_gridview(Request $request){
-		  //dd($request->query());
 		  $view = $tmpQuery = $request->query();
 		  $view = isset($view['view'])?$view['view']:'grid';
 		  if ( isset($tmpQuery['view']) ) {
@@ -108,7 +108,7 @@ class UserworkController extends Controller{
 			  }
 		   }
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
-		  $searchEntity = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address",'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id');
+		  $searchEntity = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address",'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.status',1);
 		  if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$searchEntity->where('user_works.catagory_id','=', $tmpQuery['catagory_id']);
 		  }
@@ -147,6 +147,7 @@ class UserworkController extends Controller{
 	 }
 	 
 	 public function add_vision_book(Request $request, $id=NULL){
+		 
 		 $id = explode("-",$id);
 		 $id = $id[0];
 		 if(Auth::check()){
@@ -190,9 +191,9 @@ class UserworkController extends Controller{
 			}
 	}
 		if(Auth::check()){
-		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, 'visionbook'=>$visionbook, "id"=>$id)); 
+		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, 'visionbook'=>$visionbook, "id"=>$id, "url"=>$request->fullUrl())); 
 	 }
-		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid)); 
+		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, "url"=>$request->fullUrl())); 
 	 }
 	 
 	public function my_vision_book(){

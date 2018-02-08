@@ -98,6 +98,11 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('sliders', array('as' => 'sliders.index', 'uses' => 'SliderimagesController@index'));
 	Route::get('delete_sliderimage/{id}', array('as' => 'sliders.destroy', 'uses' => 'SliderimagesController@destroy'));
 	
+	Route::get('professional_work_list',array('as' => 'admin.professionalwork', 'uses'=>'AdminController@professionalWorkList'));
+	//Route::post('professional_work_list',array('as' => 'admin.professionalwork', 'uses'=>'AdminController@professionalWorkList'));
+	 Route::get('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
+	 Route::post('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
+	 Route::get('professional_status/{id}/{status}', 'AdminController@update_user_status');
 	
 });
 

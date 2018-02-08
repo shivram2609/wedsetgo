@@ -24,7 +24,7 @@
 					<b>Tags:</b><br>
 					{{$userphotogrids->tag}}
 					<br>
-					<b><a href="{{ url('/v') }}/{{$userphotogrids->id}}" class="btn btn-submit"> Add to vision book</a></b>
+					<b><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-submit"> Add to vision book</a></b>
 					<div class="share-links">
 					like the idea and the concept :
 						<div class="social-links">
