@@ -147,7 +147,7 @@ class UserworkController extends Controller{
 	 }
 	 
 	 public function add_vision_book(Request $request, $id=NULL){
-		 
+		 	 
 		 $id = explode("-",$id);
 		 $id = $id[0];
 		 if(Auth::check()){

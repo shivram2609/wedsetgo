@@ -8,7 +8,7 @@
 				<div class="file-loading">
 					<a href="/photostream"><span class="add-icon"></span></a>
 					<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Work
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Vision Book
 				</div>
 		
 			<!--div class="masonry"-->

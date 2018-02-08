@@ -35,6 +35,7 @@
 						{{$userphotogrid->tag}} <br>
 					</p>
 						@if(Auth::check())
+						<?php if($userphotogrid->user_id != Auth::user()->id) { ?>
 						{!! Form::open() !!}
 						    <?php if(!empty($visionbook)) { ?>
 								
@@ -54,6 +55,7 @@
 							 <br>
 							 {!! Form::submit('Submit', ['class' => 'btn theme-btn-rct']) !!}
 							{!! Form::close() !!}
+						<?php } ?>
 						@endif
 						<div class="share-links">
 						like the idea and the concept :

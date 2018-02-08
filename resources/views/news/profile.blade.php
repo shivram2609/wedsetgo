@@ -49,7 +49,7 @@
 										<?php }?>
 									
 										<div class="text">
-												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}" class="btn btn-submit"> {{$sellerworks->title}}</a></b>
+												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}-{{$user->first_name}}-{{$user->last_name}}" class="btn btn-submit"> {{$sellerworks->title}}</a></b>
 											{{ str_limit($sellerworks->description, 50) }}
 										</div>
 									</div>
