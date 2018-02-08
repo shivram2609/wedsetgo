@@ -31,6 +31,6 @@
 		</tr>
 	</tbody>
 	</table>
-		<a href="/professional_status/{{$viewprofessionalWorkList->id}}/{{$viewprofessionalWorkList->status}}/" onclick="return confirm('are you sure to <?php echo (empty($viewprofessionalWorkList->status)?"Make in active":"Make in inactive"); ?> request?');" class="btn btn-submit add-btn clear-category" id="professional_view"> <?php echo (empty($viewprofessionalWorkList->status)?'Make in active':'Make in Inactive'); ?>&nbsp;</a>
+		<a href="/professional_status/{{$viewprofessionalWorkList->id}}/{{$viewprofessionalWorkList->status}}/" onclick="return confirm('are you sure to <?php echo (empty($viewprofessionalWorkList->status)?"Make it active":"Make it inactive"); ?> request?');" class="btn btn-submit add-btn clear-category" id="professional_view"> <?php echo (empty($viewprofessionalWorkList->status)?'Make it active':'Make it Inactive'); ?>&nbsp;</a>
 </div>
 @endsection
