@@ -1,9 +1,7 @@
-<?php $i = 0; ?>
+<div class="masonry">
 <?php if (!empty($userphotogrid)) { ?> 
 @foreach($userphotogrid as $userphotogrids)
-<?php if ($i == 0) {  ?> <div class="data"> <?php  } ?>
-<?php  ++$i; ?>
-			<div class="list-box">
+			<div class="list-box img-item">
 				<div class="inner-box">
 					<div class="img-box">
 						<?php if(!empty($userphotogrids->images)) { ?>
@@ -20,15 +18,15 @@
 						<?php } ?>
 						<div class="text">
 							<b>{{$userphotogrids->title}}</b>
-								{{ str_limit($userphotogrids->description, 30) }}
-							<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-submit"> Add to vision book</a>
+								<p>{{ str_limit($userphotogrids->description, 30) }}</p>
+							<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
 						</div>
 					</div>
 				</div>
 			</div>
-<?php if ($i == 3) { ?></div> <?php $i = 0; } ?>
 @endforeach
-<?php if ($i > 0 && $i < 3) { ?></div> <?php } ?>
+
 						
 
 <?php } ?>
+</div>

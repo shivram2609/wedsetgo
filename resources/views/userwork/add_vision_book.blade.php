@@ -9,12 +9,19 @@
 	<div class="carousel-item active">
 
 		<div class="row">
-		  <div class="holder col-sm-8 visionbook_image">
+		  <div class="holder col-sm-8 visionbook_image text-center">
 			  <?php if(!empty($userphotogrid->images)) { ?>
 				<img src="/work_image/{{$userphotogrid->images}}" alt="img012" class="img-fluid" width="981" height="844">
 			 <?php } else { ?>
 				<img src="img/img015.jpg" alt="img012" class="img-fluid" width="981" height="844">
 			<?php } ?>
+			<div class="slider-btn">
+				 <a href="mailto:?subject=Wedsetgo:{{$userphotogrid->title}}&body={{$url}}" title="Email" text=""><i class="fa fa-envelope-o" aria-hidden="true"></i>
+				 Email</a>
+				  <a href="javascript:void(0);" title="Email" class="pullright"><i class="fa fa-expand" aria-hidden="true"></i>
+				  <a href="javascript:void(0);" title="Email" class="pullleft hide" ><i class="fa fa-compress" aria-hidden="true"></i>
+				</a>
+			</div>
 		  </div>
 		  <div class="col-sm-4 visionbook_detail">
 			<div class="carousel-caption">
@@ -71,13 +78,7 @@
 		  </div>
 		 </div>
 	</div>
-		<div class="col-sm-8 slider-btn">
-		 <a href="mailto:?subject=Wedsetgo:{{$userphotogrid->title}}&body={{$url}}" title="Email" text=""><i class="fa fa-envelope-o" aria-hidden="true"></i>
-		 Email</a>
-		  <a href="javascript:void(0);" title="Email" class="pull-right"><i class="fa fa-expand" aria-hidden="true"></i>
-		  <a href="javascript:void(0);" title="Email" class="pull-left hide" ><i class="fa fa-compress" aria-hidden="true"></i>
-		</a>
-	</div>
+		
 
 	 </div>
 	<div class="controllers col-sm-8 col-xs-12">

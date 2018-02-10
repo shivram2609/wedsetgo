@@ -64,7 +64,7 @@ class UserworkController extends Controller{
 					'description' => $request->description,
 					'title' => $request->title,
 					'tag' => $request->tag,
-					'status' => 1,
+					'status' => 1
 					));
 					 if($userwork){
 					UserWorkImage::create(array(
@@ -146,8 +146,7 @@ class UserworkController extends Controller{
 		  return view('userwork.photostream_gridview', array('tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString,'view'=>$view,'request'=>$request,'title' => 'Photo Stream', 'userphotogrid'=>$userphotogrid, 'catagory'=>$catagory)); 
 	 }
 	 
-	 public function add_vision_book(Request $request, $id=NULL){
-		 	 
+	 public function add_vision_book(Request $request, $id=NULL){		 	 
 		 $id = explode("-",$id);
 		 $id = $id[0];
 		 if(Auth::check()){
@@ -197,8 +196,9 @@ class UserworkController extends Controller{
 	 }
 	 
 	public function my_vision_book(){
+		
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
-		$myVisionBook= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.old_title','vision_book_collections.comments')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_books.user_id','=', Auth::user()->id)->get();		
+		$myVisionBook= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.old_title','vision_book_collections.comments')->leftjoin('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_books.user_id','=', Auth::user()->id)->groupBy('vision_books.id')->get();
 		 return view('userwork.my_vision_book', array('title' =>'MY Vision Book', 'user'=>$user, 'myVisionBook'=>$myVisionBook, "id"=>Auth::user()->id));
 	}
 	
@@ -234,6 +234,50 @@ class UserworkController extends Controller{
 		  }
 			$sellerList = $templist->paginate($pageCount);
 		 return view('userwork.seller_listing', array('title' =>'Seller', 'tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString, "catagory"=>$catagory,'view'=>$view, 'sellerList'=>$sellerList));
+		
+	}
+	
+	public function list_vision_book($id=NULL){
+		$id = explode("-",$id);
+		$id = $id[0];
+		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
+		$album= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.id as vbc','vision_book_collections.old_title','vision_book_collections.comments')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_book_collections.vision_book_id','=',$id)->get();
+		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album));
+	}
+	
+	public function delete_vision_book($id=NULL){
+		
+		$image = DB::table('vision_books')->select('vision_books.*','vision_book_collections.images')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_book_collections.id','=',$id)->where('vision_books.user_id','=',Auth::user()->id)->first(); 
+		if(!empty($image)){
+			$result= DB::table('vision_book_collections')->where('id', $id)->delete();
+			if(!empty($result)){
+				if ( file_exists("visionbook_images/".$image->images) ) {
+					unlink("visionbook_images/".$image->images);
+					}
+			return redirect('/v_list/'.$image->id."-".$image->vision_title);
+		}
+	}else{
+		return redirect('/vision_book');
+	}
+		
+	}
+	
+	public function delete_vision_book_album($id=NULL){
+		$id = explode("-",$id);
+		$id = $id[0];
+		$album = DB::table('vision_books')->select('vision_books.*','vision_book_collections.images')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_books.id','=',$id)->where('vision_books.user_id','=',Auth::user()->id)->first(); 
+		if(!empty($album)){
+			$result= DB::table('vision_books')->where('id', $id)->delete();
+			$result= DB::table('vision_book_collections')->where('vision_book_id', $id)->delete();
+			if(!empty($result)){
+				if ( file_exists("visionbook_images/".$album->images) ) {
+					unlink("visionbook_images/".$album->images);
+					}
+			return redirect('/vision_book');
+		}
+	}else{
+		return redirect('/vision_book');
+	}
 		
 	}
 		

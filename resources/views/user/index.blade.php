@@ -18,7 +18,7 @@
             Email: {{ Auth::user()->email }}<br>
             
             <a href="{{ url('news/account') }}">My Account</a> | 
-            <a href="{{ url('user/logout') }}">Logout</a> <!-- Can use url() or route() helper functions for URL -->
+            <a href="{{ url('logout') }}">Logout</a> <!-- Can use url() or route() helper functions for URL -->
         </p>
     @else
         <p>

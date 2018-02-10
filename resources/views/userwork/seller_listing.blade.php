@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="filter-bar">
+<div class="filter-bar text-center">
 		{!! Form::open(["method"=>"get"]) !!}
 		<div class="container">
 			I am looking for 

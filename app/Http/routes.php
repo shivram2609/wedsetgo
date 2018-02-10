@@ -40,6 +40,7 @@
 	Route::get('p/{string}', array('as' => 'news.profile', 'uses' => 'UserController@profile'));
 	Route::get('f/{string}', 'UserController@follower');
 	Route::get('p/{string}', array('as' => 'news.profile', 'uses' => 'UserController@profile'));
+	Route::get('message/{id}', array('as' => 'message.message', 'uses' => 'MessageController@index'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
@@ -116,7 +117,17 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
 	Route::post('v/{id}',array('as' => 'userwork.add_vision_book', 'uses'=>'UserworkController@add_vision_book'));
 	Route::get('vision_book',array('as' => 'userwork.my_vision_book', 'uses'=>'UserworkController@my_vision_book'));
+	Route::get('v_list/{id}',array('as' => 'userwork.list_vision_book', 'uses'=>'UserworkController@list_vision_book'));
+	Route::get('v_delete/{id}', array('as' => 'userwork.delete_vision_book', 'uses' => 'UserworkController@delete_vision_book'));
+	Route::get('v_delete_album/{id}', array('as' => 'userwork.delete_vision_book_album', 'uses' => 'UserworkController@delete_vision_book_album'));
 	Route::get('seller',array('as' => 'userwork.seller_listing', 'uses'=>'UserworkController@seller_listing'));
+	
+	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
+	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
+	
+	
+	
+	
 	
 	Route::get('socialAuth/{provider}', array("as" => "socialAuth", 'uses'=>'UserController@getSocialLogin'));
 	

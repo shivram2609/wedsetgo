@@ -38,8 +38,8 @@
 						 <?php if (Auth::user()->user_type_id == 2){ ?> 
 							<a href="/my_work" title="My Work">My Work</a>	 
 							<?php }?>
-							<a href="javascript:void(0);" title="Reviews">Reviews</a>
 					 <a href="javascript:void(0);" title="Messages">Messages</a>
+					 <a href="javascript:void(0);" title="Reviews">Reviews</a>
 			<?php if(($user->porfessional_request== 0) AND ($user->user_type_id== 3)) { ?>
 				<a href="{{action('UserController@sendRquestProfessional')}}" >Request for professional</a>
 			<?php }?>

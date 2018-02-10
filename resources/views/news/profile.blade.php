@@ -26,14 +26,14 @@
 							<h2 class="heading-main">{{$count}} Works <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
 						<?php } else { ?>
 							<h2 class="heading-main">{{$count}} Work <i class="fa fa-angle-right" aria-hidden="true"></i></h2>
-						<?php } $i = 0; $j =0; ?>
-						@foreach ($sellerwork as $sellerworks)
-							<?php if ($i == 0) {  ?><div class="product-grid-list"> <?php } ?>
-							<?php  ++$i; 
-							++$j; ?>
 							
-							<div class="list-box <?php echo ($j>3)?"hide":""; ?>" >
-								<div class="inner-box">
+						<?php } $j =0; ?>
+						<div class="product-grid-list masonry">
+						@foreach ($sellerwork as $sellerworks)
+							<?php ++$j; ?>
+							
+							<div class="list-box img-item <?php echo ($j>3)?"hide":""; ?>" >
+								<div class="inner-box ">
 									<div class="img-box">
 										<?php if(!empty($sellerworks->images)) { ?>
 											<img src="/work_image/{{ $sellerworks->images }}" alt="img001" class="img-reponsive" width="493" height="437">
@@ -49,7 +49,7 @@
 										<?php }?>
 									
 										<div class="text">
-												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}-{{$user->first_name}}-{{$user->last_name}}" class="btn btn-submit"> {{$sellerworks->title}}</a></b>
+												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}-{{$user->first_name}}-{{$user->last_name}}"> {{$sellerworks->title}}</a></b>
 											{{ str_limit($sellerworks->description, 50) }}
 										</div>
 									</div>
@@ -58,12 +58,10 @@
 							
 							
 							
-							<?php if ($i == 3) { ?></div> <?php $i = 0; } ?>
 						@endforeach
-							<?php if ($i > 0 && $i < 3) { ?></div> <?php } ?>
-						
+
 					<?php } ?>
-					
+					</div>
 				</div>	
 				
 				<div class="col-md-3 form-group">

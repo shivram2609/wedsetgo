@@ -11,10 +11,13 @@
 	
 	  <div class="holder col-sm-8">
 		  <?php if(!empty($userphotogrids->images)) { ?>
-			<img src="/work_image/{{$userphotogrids->images}}" alt="img012" class="img-fluid" width="981" height="844">
+			<img src="/work_image/{{$userphotogrids->images}}" alt="img012" class="img-fluid form-group" width="981" height="844">
 		 <?php } else { ?>
-			<img src="img/img015.jpg" alt="img012" class="img-fluid" width="981" height="844">
+			<img src="img/img015.jpg" alt="img012" class="img-fluid form-group" width="981" height="844">
 		<?php } ?>
+		
+		<div class="text-center"><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+	</div>
 	  </div>
 	  <div class="col-sm-4">
 		<div class="carousel-caption">
@@ -47,9 +50,6 @@
 	 </div>
 </div>
 
-	<div class="col-sm-8 slider-btn"><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" title="Save"><i class="fa fa-plus" aria-hidden="true"></i>
-	 Save</a> 
-	</div>
 
 @endforeach
  </div>

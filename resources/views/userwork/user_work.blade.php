@@ -4,17 +4,20 @@
 		<div class="dashboard-wrapper">
 			
 				@include('includes.follower')
+				<div class="dashboard-form text-center">
 				<div class="dashboard-form">
 					
 				</div>
-				<div class="clearfix"></div>
-			 <section class="photo-stream">	
+				
+			 	
 				 <br/>
 				<div class="file-loading create-vision-book">
 					<a href="/add_work"><span class="add-icon"></span></a>
 					<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Work
+					 Add Work
 				</div>
+				</div>
+				<section class="photo-stream">
 			 <h2 class="heading">My Photo Stream</h4>
 			 <form method="get" action="" name="select_category">
 				 <div class="form-group col-sm-12">
@@ -42,7 +45,7 @@
 							<div class="img"><img src="img/dummy-user.jpg" alt="user" class="img-reponsive" width="47" height="51"></div>
 							<?php } ?>
 							<div class="text">
-							<b><a href="{{ url('/v') }}/{{$userworks->id}}-{{$user->first_name}}-{{$user->last_name}}" class="btn btn-submit"> {{$userworks->title}}</a></b>
+							<b><a href="{{ url('/v') }}/{{$userworks->id}}-{{$user->first_name}}-{{$user->last_name}}" > {{$userworks->title}}</a></b>
 								{{ str_limit($userworks->description, 30) }}
 							</div>
 						</div>
