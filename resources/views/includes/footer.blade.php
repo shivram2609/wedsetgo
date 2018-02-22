@@ -10,7 +10,7 @@
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="#" title="About">About</a></li>
-				<li><a href="contact_us" title="Contact Us">Contact Us</a></li>
+				<li><a href="/contact_us" title="Contact Us">Contact Us</a></li>
 				<li><a href="/photostream" title="Photo Stream">Photo Stream</a></li>
 				<li><a href="#" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>
 				<li><a href="/seller" title="Find professionals">Find professionals</a></li>
