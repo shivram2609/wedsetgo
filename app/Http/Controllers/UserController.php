@@ -367,9 +367,10 @@ class UserController extends Controller
 			if(!empty($request)){
 				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
 				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);
+				$user = DB::table('users')->select("porfessional_request", "user_type_id")->where('id',Auth::user()->id)->first();
 				if($request->agree == 1){
-					$users = DB::table('users')->select('users.porfessional_request')->where('id', Auth::user()->id)->first();
-					if($users->porfessional_request==0){
+					$users = DB::table('users')->select('users.porfessional_request','users.user_type_id')->where('id', Auth::user()->id)->first();
+					if($user->user_type_id == 3 AND $user->porfessional_request == 0){
 						$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
 									$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";

@@ -80,7 +80,7 @@
 					</div>
 					<br>
 
-					<?php if($user->porfessional_request == 1) { ?>
+					<?php if($user->porfessional_request == 1 OR $user->user_type_id == 2) { ?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you want to send request for professional please check for fill some  professional details. </input>
 					<?php } else {?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you want to send request for professional please check for fill some  professional details. </input>
