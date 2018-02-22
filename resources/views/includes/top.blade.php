@@ -116,14 +116,9 @@
 					  <li val="<?php echo $i; ?>" class="rate grey-star">&nbsp;</li>
 				  <?php } } ?>
 				  </ul>
+				  <b>Review:</b>
 				  <textarea class="form-control" placeholder="Enter Review" name="review" value=""><?php echo $rating['getProfessionalRate']->comment;?></textarea><br>
-			 <?php } ?>
-		      <b>Review:</b>
-		      
-				
-			 
-			    
-			  
+			 <?php } ?>	  
 			  <input type="hidden" value="<?php echo $id; ?>" name="professional_id"></input>
 			  {!! Form::submit('Rating & Reviews', ['class' => 'btn btn-submit clear-grid']) !!}
 			{!! Form::close() !!}
