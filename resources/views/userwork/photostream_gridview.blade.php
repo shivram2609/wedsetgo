@@ -26,6 +26,11 @@
 				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
 				
 			</div>
+			<div class="filter-sections">
+				Search In
+				{!! Form::select('search_val', [null=>'Please Select',"cName"=>"Category Name","pName"=>"Professional Name","uwName"=>"User Work "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='cName'?'cName':($tmpQuery['search_val']=='pName'?'pName':'uwName')) :''), array("class"=>"custom-select")) !!}
+				
+			</div>
 			<div  class="filter-sections">
 			{!! Form::submit('Submit', ['class' => 'btn btn-submit clear-grid']) !!}
 			<a href="{{ url('/photostream?view=') }}<?php echo $view; ?>" class="btn btn-submit clear-grid"> Clear</a>
@@ -36,18 +41,22 @@
 	 <!-- filter bar end-->
 	 <!-- list container start -->
 	<div class="container">	
-		<?php if ($view == 'grid') {  ?>	
-		<div class="product-grid-list">
-			@include('includes.photostream')
-		</div>
-		<?php } elseif ($view == "list") { ?>
-		<div class="listview">
-			@include('includes.listview')
-		</div>
-		<?php } elseif ($view == "full_view") { ?>
-		<div class="fullview">
-			@include('includes.fullview')
-		</div>
+		<?php if (!empty($count)) {  ?>
+			<?php if ($view == 'grid') {  ?>	
+			<div class="product-grid-list">
+				@include('includes.photostream')
+			</div>
+			<?php } elseif ($view == "list") { ?>
+			<div class="listview">
+				@include('includes.listview')
+			</div>
+			<?php } elseif ($view == "full_view") { ?>
+			<div class="fullview">
+				@include('includes.fullview')
+			</div>
+			<?php } ?>
+		<?php } else { ?>
+			<div class="empty">Sorry, No record found.</div>
 		<?php } ?>
 		<!-- pagination start -->
 		<nav>

@@ -7,6 +7,9 @@
 			I am looking for 
 			{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select")) !!}
 			
+			Search By Location
+			{!! Form::select('location_id', [null=>'Please Select'] +$location,(isset($tmpQuery['location_id'])?$tmpQuery['location_id']:''), array("class"=>"custom-select")) !!} 
+			
 			<div class="filter-sections">
 				Show Per Page
 				{!! Form::select('record_per_page', ["5"=>"5","10"=>"10","15"=>"15"],(isset($tmpQuery['record_per_page'])? ($tmpQuery['record_per_page']=='5'?'5':($tmpQuery['record_per_page']=='10'?'10':'15')) :''), array("class"=>"custom-select")) !!}			
@@ -52,6 +55,7 @@
 								 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
 							</div>
 						</div>
+				
 				</div>
 				</div>
 				 @endforeach

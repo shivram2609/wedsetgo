@@ -10,6 +10,7 @@ use App\UserWork;
 use App\UserWorkImage; 
 use App\VisionBook;
 use App\VisionBookCollection; 
+use App\Location; 
 use Session;
 use Catagory;
 use Auth;
@@ -23,21 +24,19 @@ class UserworkController extends Controller{
     { 
 		
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
-		
 		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
 		if(empty($request->catagory_id)){
 		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->get();
 		} else {
 		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->where('user_works.catagory_id',$request->catagory_id )->get();
 		}
-		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
-		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
-        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followerList, 'followingList'=>$followingList));   
+		$followCount = Controller::followCount(Auth::user()->id);
+        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList']));   
     }
    
     public function add(Request $request,$id = NULL)
     {
-		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
+		$catagory = DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
 		
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 		
@@ -84,9 +83,9 @@ class UserworkController extends Controller{
 				return redirect()->route('userwork.user_work');
 			}
 		}elseif ($request->isMethod('get') && !empty($id)) { 
-				return view('userwork.add_work', array('user_work'=>$user_work,'catagory'=>$catagory, 'user'=>$user, 'title' => 'Update Work', "id"=>$id));
+				return view('userwork.add_work', array('user_work'=>$user_work,'catagory'=>$catagory,  'user'=>$user, 'title' => 'Update Work', "id"=>$id));
 		} else {
-			return view('userwork.add_work', array('catagory'=>$catagory, 'user'=>$user, 'title' => 'Add Work', "id"=>$id)); 
+			return view('userwork.add_work', array('catagory'=>$catagory, 'user'=>$user,  'title' => 'Add Work', "id"=>$id)); 
 		}
 		
   }
@@ -119,7 +118,25 @@ class UserworkController extends Controller{
 					$searchEntity->orderBy('user_works.created_at', 'asc');
 			    }
 		  }
-		  if (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key'])) {
+		  if ( isset($tmpQuery['search_val']) && !empty($tmpQuery['search_val']) && isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key']) ) {
+			  $keyword = $tmpQuery['search_key'];
+			  if ( $tmpQuery['search_val'] == 'pName' ) {
+					$searchEntity->where(function($q) use ($keyword) {
+						$q->orWhere('user_details.first_name', 'LIKE', '%'.$keyword.'%');
+						$q->orWhere('user_details.last_name', 'LIKE', '%'.$keyword.'%');
+					});
+			  } elseif ( $tmpQuery['search_val'] == 'cName' ) {
+				  $searchEntity->where(function($q) use ($keyword) {
+					$q->orWhere('catagories.name', 'LIKE', '%'.$keyword.'%');
+				  });
+			  } elseif ($tmpQuery['search_val'] == 'uwName') {
+					$searchEntity->where(function($q) use ($keyword){
+						$q->orWhere('user_works.description', 'LIKE', '%'.$keyword.'%');
+						$q->orWhere('user_works.title', 'LIKE', '%'.$keyword.'%');
+						$q->orWhere('user_works.tag', 'LIKE', '%'.$keyword.'%');
+					});
+			  }
+		  } elseif (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key'])) {
 			 // die("here");
 			  $keyword = $tmpQuery['search_key'];
 			  $searchEntity->where(function($q) use ($keyword){
@@ -142,8 +159,9 @@ class UserworkController extends Controller{
 			                                }
 		)*/
 		$userphotogrid = $searchEntity->paginate($pageCount);
-		  
-		  return view('userwork.photostream_gridview', array('tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString,'view'=>$view,'request'=>$request,'title' => 'Photo Stream', 'userphotogrid'=>$userphotogrid, 'catagory'=>$catagory)); 
+		$count = $userphotogrid->count();
+		//echo $count;
+		return view('userwork.photostream_gridview', array('tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString,'view'=>$view,'request'=>$request,'title' => 'Photo Stream', 'userphotogrid'=>$userphotogrid, 'catagory'=>$catagory,"count"=>$count)); 
 	 }
 	 
 	 public function add_vision_book(Request $request, $id=NULL){		 	 
@@ -216,12 +234,15 @@ class UserworkController extends Controller{
 				  $tmpQString .= "&".$key."=".$val;
 			  }
 		   }
-		 
+		  $location = DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
-		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->where('users.user_type_id','=', 2);
+		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->join('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2);
 		  
 		   if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$templist->where('user_details.category_id','=', $tmpQuery['catagory_id']);
+		  }
+		   if (isset($tmpQuery['location_id']) && !empty($tmpQuery['location_id'])) {
+				$templist->where('user_details.location_id','=', $tmpQuery['location_id']);
 		  }
 		  if (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key'])) {
 			 // die("here");
@@ -233,7 +254,7 @@ class UserworkController extends Controller{
 				});
 		  }
 			$sellerList = $templist->paginate($pageCount);
-		 return view('userwork.seller_listing', array('title' =>'Seller', 'tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString, "catagory"=>$catagory,'view'=>$view, 'sellerList'=>$sellerList));
+		 return view('userwork.seller_listing', array('title' =>'Seller', 'tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString, "catagory"=>$catagory,'view'=>$view, 'sellerList'=>$sellerList,"location"=>$location));
 		
 	}
 	

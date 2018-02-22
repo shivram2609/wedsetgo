@@ -15,6 +15,9 @@
 				<a href="/locations">Locations</a>
 			</li>
 			<li>
+				<a href="/message">Message</a>
+			</li>
+			<li>
 				<a href="/professional_work_list">Professional Work</a>
 			</li>
 			

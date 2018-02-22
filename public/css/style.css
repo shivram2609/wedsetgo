@@ -62,6 +62,23 @@ td.big {
  width: 117px;
 }
 
+.grey-star{background:url(../img/grey-star.png);display: block;background-size: 20px;float: left;width: 22px;background-repeat: no-repeat;}
+.gold-star{background:url(../img/gold-star.png) !important;display: block;background-size: 20px !important;float: left;width: 22px;background-repeat: no-repeat !important;}
+.rate_me{float:left;width:100%;}
+
+.grey-rating{background: url(../img/grey-star.png); background-size: 20px; width: 100px; background-repeat: repeat-x; height: 20px; float:left;}
+.gold-rating{background: url(../img/gold-star.png); background-size: 20px; width: 0px; background-repeat: repeat-x; height: 20px; float:left;}
+.grey-rating-small{background: url(../img/grey-star.png); background-size: 10px; width: 50px; background-repeat: repeat-x; height: 10px; float:left;}
+.gold-rating-small{background: url(../img/gold-star.png); background-size: 10px; width: 0px; background-repeat: repeat-x; height: 10px; float:left;}
+
+ul.rating-list{width:100;list-style:none; color:#761b31;}
+ul.rating-list li{width:100% !important;border-bottom:1px dashed #9e9e9e;padding:15px 0;}
+ul.rating-list li:hover{background-color:rgba(0,0,0,.075);}
+ul.rating-list p{width:100% !important;}
+ul.rating-list p.add_class{padding-left:10px;}
+p.short-message{font-size:10px;}
+p.short-message img{border:0.5px solid #761b31;border-radius:10px;}
+
 .hide {display:none !important;}
 .show {display:inline-block !important;}
 
@@ -92,6 +109,14 @@ td span.keyword {
 
 pre span.string {
  color: #2e3436;
+}
+
+.empty{
+min-height: 200px;
+text-align: center;
+margin: 50px 0 0 0;
+font-size: 29px;
+color: #761b31;
 }
 
 span.success, span.warning, span.danger {
@@ -691,4 +716,6 @@ ul, ol {
     box-sizing: border-box;
 
 }
+
+.contact-us{width: 65%;margin: 40px 0 0 25px;}
 

@@ -2,8 +2,8 @@
 @section('content')
 @include('includes.top')
 	<div class="dashboard-wrapper">
-			
 		@include('includes.follower')
+		<?php $rate = (number_format($rating['aggregateRating'],2,".",""))*20;  ?>
 		<div class="dashboard-form overview">
 			<div class="row">
 				<div class="col-md-9 form-group">
@@ -71,7 +71,12 @@
 					</div>
 					<div class="right-row">
 						<b><i class="fa fa-map-marker" aria-hidden="true"></i> Location:</b> 
-						<span>{{$sellerProfile->address}}</span>
+						<span>{{$sellerProfile->location_name}}</span>
+					</div>
+					<div class="right-row">
+						<span class="grey-rating">
+							<span class="gold-rating" style="width:<?php echo $rate; ?>px;"></span>
+						</span>
 					</div>
 				</div>
 			</div>

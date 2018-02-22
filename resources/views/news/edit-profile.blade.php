@@ -38,11 +38,8 @@
 						 <?php if (Auth::user()->user_type_id == 2){ ?> 
 							<a href="/my_work" title="My Work">My Work</a>	 
 							<?php }?>
-					 <a href="javascript:void(0);" title="Messages">Messages</a>
-					 <a href="javascript:void(0);" title="Reviews">Reviews</a>
-			<?php if(($user->porfessional_request== 0) AND ($user->user_type_id== 3)) { ?>
-				<a href="{{action('UserController@sendRquestProfessional')}}" >Request for professional</a>
-			<?php }?>
+					 <a href="/message/{{$user->id}}" title="Messages">Messages</a>
+					 <a href="/review/{{$user->id}}" title="Reviews">Reviews</a>
 		</div>
 		<div class="dashboard-wrapper">
 			
@@ -70,16 +67,6 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-6 form-group">
-							{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
-							{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
-						</div>
-						<div class="col-sm-6 form-group">
-							<label>Business Category:</label>
-							{!! Form::select('category_id', $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select")) !!}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6 form-group">
 							<label>Gender:</label>
 							{!! Form::select('gender', ["m"=>"Male","f"=>"Female","o"=>"Other"],(isset($user->gender)?$user->gender:''), array("class"=>"form-control custom-select")) !!}
 						</div>
@@ -91,38 +78,71 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12 form-group">
-							<label>Address:</label>
-							<textarea class="form-control" placeholder="Address" name="address"> <?php echo isset($user->address)?$user->address:''?></textarea>
-						</div>						
-					</div>
-					<div class="row">
-						<div class="col-sm-6 form-group">
-							<label>Trade Description:</label>
-							<textarea class="form-control" placeholder="Description" name="trade_description"><?php echo isset($user->trade_description)?$user->trade_description:''?></textarea>
+					<br>
+
+					<?php if($user->porfessional_request == 1) { ?>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you want to send request for professional please check for fill some  professional details. </input>
+					<?php } else {?>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you want to send request for professional please check for fill some  professional details. </input>
+					<?php }?>
+					   
+					
+					<?php if($user->porfessional_request == 1 OR $user->user_type_id == 2){ ?>
+						<div class="professional_status">
+					<?php } else {?>
+						<div class="professional_status hide">
+					<?php }?>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								{!! Form::label('location', 'Location', ['class' => 'control-label']) !!}
+								{!! Form::select('location_id', $location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select")) !!}
+							</div>
 						</div>
-						<div class="col-sm-6 form-group">
-							<label>Detail:</label>
-							<textarea class="form-control" placeholder="Detail" name="detail"><?php echo isset($user->detail)?$user->detail:''?></textarea>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
+								{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Business Category:</label>
+								{!! Form::select('category_id', $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select")) !!}
+							</div>
 						</div>
-					</div>
-					<div class="row form-group">
-						<label class="col-sm-12">Social Media:</label>
-						<div class="col-sm-4 form-group">
-							
-							{!! Form::input('text','fb', (isset($socialVal['fb'])?$socialVal['fb']:''), ['class' => 'form-control facbook-icon', 'size' => 40,'placeholder' => 'Facebook' ]) !!}
+						<div class="row">
+							<div class="col-sm-12 form-group">
+								<label>Address:</label>
+								<textarea class="form-control" placeholder="Address" name="address"> <?php echo isset($user->address)?$user->address:''?></textarea>
+							</div>						
 						</div>
-						<div class="col-sm-4 form-group">
-							{!! Form::input('text','google', (isset($socialVal['google'])?$socialVal['google']:''), ['class' => 'form-control googlePlus-icon', 'size' => 40,'placeholder' => 'Google' ]) !!}
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>Trade Description:</label>
+								<textarea class="form-control" placeholder="Description" name="trade_description"><?php echo isset($user->trade_description)?$user->trade_description:''?></textarea>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Detail:</label>
+								<textarea class="form-control" placeholder="Detail" name="detail"><?php echo isset($user->detail)?$user->detail:''?></textarea>
+							</div>
 						</div>
-						<div class="col-sm-4 form-group">
-							{!! Form::input('text','twitter', (isset($socialVal['twitter'])?$socialVal['twitter']:''), ['class' => 'form-control twitter-icon', 'size' => 40,'placeholder' => 'Twitter' ]) !!}
+						<div class="row form-group">
+							<label class="col-sm-12">Social Media:</label>
+							<div class="col-sm-4 form-group">
+								
+								{!! Form::input('text','fb', (isset($socialVal['fb'])?$socialVal['fb']:''), ['class' => 'form-control facbook-icon', 'size' => 40,'placeholder' => 'Facebook' ]) !!}
+							</div>
+							<div class="col-sm-4 form-group">
+								{!! Form::input('text','google', (isset($socialVal['google'])?$socialVal['google']:''), ['class' => 'form-control googlePlus-icon', 'size' => 40,'placeholder' => 'Google' ]) !!}
+							</div>
+							<div class="col-sm-4 form-group">
+								{!! Form::input('text','twitter', (isset($socialVal['twitter'])?$socialVal['twitter']:''), ['class' => 'form-control twitter-icon', 'size' => 40,'placeholder' => 'Twitter' ]) !!}
+							</div>
 						</div>
-					</div>
-					{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
+				</div>
+				<br>
+			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
 				</div>
 		</div>
+		
 		{!! Form::close() !!}
 	</div>
 @endsection

@@ -7,6 +7,7 @@ use DB;
 use Auth;
 use App\User;
 use App\Message;
+use App\MessageConversation;
 use Session;
 use App\UserDetail; 
 use App\Http\Requests;
@@ -152,12 +153,18 @@ class AdminController extends Controller
 				$this->validate($request, array(
 									'information' => 'required',
                             ));
-               Message::create(array(
+               $message= Message::create(array(
 						'sender_id' => Auth::user()->id,
 						'receiver_id'=>$id,
-						'message' => $request->information, 
-						'status' => 1
+						'last_message' => $request->information, 
+						'is_new'=>1
 					));
+						MessageConversation::create(array(
+						'sender_id' => Auth::user()->id,
+						'message_id' => $message->id,
+						'message' => $request->information,
+						'is_new'=>1
+				   ));
 				$this->email_body .= "Dear " .ucwords($users->first_name.' '.$users->last_name).",<br/><br/>"; 
 				$this->email_body .= "We have reviewed your application, we need more information about yourself as below:<br/><br/>" .$request->information;
 				$this->email_subject = "More Information Request for Professional";
@@ -193,5 +200,27 @@ class AdminController extends Controller
 		$result = DB::table('user_works')->where('id',$id)->update(['status'=> $status]);
 		Session::flash('flash_message', 'Professional Work Status update successfully.');
 		return redirect()->route('admin.professionalwork');
+	}
+	
+	  public function admin_message(){
+		  
+		  $message= DB::Table('messages')->select('messages.*','udSender.first_name as senderfname','udSender.last_name as senderlname','udReciver.first_name as reciverfname','udReciver.last_name as reciverlname','udSender.profile_image as senderimage','udReciver.profile_image as reciverimage')->join('user_details as udSender', 'udSender.user_id','=','messages.sender_id')->join('user_details as udReciver', 'udReciver.user_id','=','messages.receiver_id')->where("messages.sender_id","=",Auth::user()->id)->orWhere("messages.receiver_id","=",Auth::user()->id)->orderBy("messages.updated_at","desc")->paginate(10);
+		  return view('admin.message', array('title' => 'Messages List', "message"=>$message));
+	  }
+	  
+	  public function admin_message_list($mid = NULL, Request $request){
+		
+		if ($request->isMethod('post')) {
+			       $result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
+					MessageConversation::create(array(
+					'sender_id' => Auth::user()->id,
+					'message_id' => $mid,
+					'message' => $request->message
+					));	
+				}
+		
+		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->get();
+		
+		return view('admin.admin_message_list', array('title' => 'Message', 'listMessage'=>$listMessage));
 	}
 }

@@ -13,7 +13,11 @@
 				{!! Form::close() !!}
 			</div>
 			<?php if (Auth::check()) { ?>
-			<div class="login-signup"><a href="/edit_profile" title="Edit Profile">Welcome  {{Session::get("users")->first_name}}</a> /<a href="/logout" title="Login">Logout</a></div>
+			<div class="login-signup">
+				<?php if(!empty(Session::get("users"))) { ?>
+					<a href="/edit_profile" title="Edit Profile">Welcome  {{Session::get("users")->first_name}}</a>/ 
+				<?php } ?>
+					<a href="/logout" title="Login">Logout</a></div>
 			<?php }else{ ?>
 			<div class="login-signup"><a href="#" title="Login" data-toggle="modal" data-target="#signIn">Login</a> / <a href="#" title="Login" data-toggle="modal" data-target="#signUp">Signup</a></div>
 			<?php } ?>

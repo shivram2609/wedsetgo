@@ -41,6 +41,10 @@
 	Route::get('f/{string}', 'UserController@follower');
 	Route::get('p/{string}', array('as' => 'news.profile', 'uses' => 'UserController@profile'));
 	Route::get('message/{id}', array('as' => 'message.message', 'uses' => 'MessageController@index'));
+	Route::post('user_message', array('as' => 'message.user_message', 'uses' => 'MessageController@user_message'));
+	Route::get('message_list/{id}', array('as' => 'message.message_list', 'uses' => 'MessageController@message_list'));
+	Route::post('message_list/{id}', array('as' => 'message.message_list', 'uses' => 'MessageController@message_list'));
+	Route::post('rating', array('as' => 'message.rating', 'uses' => 'MessageController@rating'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
@@ -104,7 +108,10 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	 Route::get('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
 	 Route::post('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
 	 Route::get('professional_status/{id}/{status}', 'AdminController@update_user_status');
-	
+	 
+	 Route::get('message',array('as' => 'admin.message', 'uses'=>'AdminController@admin_message'));
+	 Route::get('admin_message_list/{id}',array('as' => 'admin.message', 'uses'=>'AdminController@admin_message_list'));
+	 Route::post('admin_message_list/{id}',array('as' => 'admin.admin_message_list', 'uses'=>'AdminController@admin_message_list'));
 });
 
 	
@@ -121,9 +128,11 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('v_delete/{id}', array('as' => 'userwork.delete_vision_book', 'uses' => 'UserworkController@delete_vision_book'));
 	Route::get('v_delete_album/{id}', array('as' => 'userwork.delete_vision_book_album', 'uses' => 'UserworkController@delete_vision_book_album'));
 	Route::get('seller',array('as' => 'userwork.seller_listing', 'uses'=>'UserworkController@seller_listing'));
+	Route::post('seller',array('as' => 'userwork.seller_listing', 'uses'=>'UserworkController@seller_listing'));
 	
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
+	
 	
 	
 	

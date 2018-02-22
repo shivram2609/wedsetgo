@@ -46,14 +46,16 @@
 						{!! Form::open() !!}
 						    <?php if(!empty($visionbook)) { ?>
 								
-								<b><a id="add_title" href="javascript:void(0);" class="">Add</button></b>
+								<b id ="add_title"><label>Select vision book or </label><a id="" href="javascript:void(0);" class=""> Add New</a></b>
 								{!! Form::select('vision_book_id', $visionbook,(isset($visionbook->vision_book_id)?$visionbook->vision_book_id:''), array("class"=>"form-control custom-select", "id"=>"vision_title")) !!}	
 								<br>
+								<b id ="new_title" class="hide"><label>Create new vision book or </label><a id="" href="javascript:void(0);" class=""> existing vision book</a></b>
 								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control hide', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title' ,"disabled"=>"disabled" ]) !!}
 								 <br>
 								 {!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}
 								<br>
 							<?php } else { ?>
+								<label><b>Create new vision book</b></label>
 								{!! Form::input('text', 'vision_title', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Vision Book Title','required'=>'Please Enter Vision Book Title','id'=>'title'  ]) !!}
 								<br>
 								{!! Form::input('text', 'comments', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Enter Comment','required'=>'Please Enter Comment' ]) !!}

@@ -191,7 +191,6 @@ class UserController extends Controller
 									'password' => 'required|min:6|confirmed',
                             ));
 		   $user = Auth::user()->id;
-		   
 		   $currentPassword=bcrypt($request->input('currentpassword'));
 			if ( $res = DB::table('users')->where(['users.id'=>Auth::user()->id],["password"=>$currentPassword])->update(['users.password' => bcrypt($request->input('password'))]) ) {
 				Session::flash('flash_message', 'Password change successfully');   
@@ -327,14 +326,13 @@ class UserController extends Controller
 	}
 	
 	public function editprofile(Request $request, $id=Null){
-		
 		if ($request->isMethod('post')){
 			 $this->validate($request, array(
                                 'first' => 'required|max:255',
                                 'lastname' => 'required|max:255',
                                 'email' => 'required|email|max:255',
-                            )
-                        );
+                            ));
+                            
 			$socialArray['fb'] = $request->fb;
 			$socialArray['twitter'] = $request->twitter;
 			$socialArray['google'] = $request->google;
@@ -351,6 +349,7 @@ class UserController extends Controller
 			$data['trade_description'] = $request->trade_description;
 			$data['detail'] = $request->detail;
 			$data['social_media'] = $socialVal;
+			$data['location_id'] = $request->location_id;
 			$file = $request->file('profile_image');
 			if($request->file('profile_image')){
 				$destination = "uploads/avatars";
@@ -368,16 +367,30 @@ class UserController extends Controller
 			if(!empty($request)){
 				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
 				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);
+				if($request->agree == 1){
+					$users = DB::table('users')->select('users.porfessional_request')->where('id', Auth::user()->id)->first();
+					if($users->porfessional_request==0){
+						$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
+									$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
+						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
+						$this->email_subject = "Professional Request";
+						Controller::sendMail('contactwedsetgo@gmail.com');  
+						Session::flash('flash_message', 'Your Request has been sent to site admin.');
+					}
+				}
 				return redirect('/p/'.Auth::user()->id);
 			}
 			
 		}
-		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
+		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');	
+		$location= DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
+		
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
+		
 		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
 		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
 		$socialVal = unserialize($user->social_media);
-		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList));
+		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'location'=>$location));
 	}
 	
 	public function sendRquestProfessional(){
@@ -396,10 +409,11 @@ class UserController extends Controller
 	}
 	
 	public function profile($keyword = 	NULL){
+		
 		$keyword = explode("-",$keyword);
 		$id = $keyword[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $id)->first();
-		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description","user_details.address",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id');
+		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description","user_details.address",'catagories.name', 'locations.location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id');
 		$sellerwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id');
 		if(Auth::check()){
 			if (Auth::user()->id == $id){
@@ -423,13 +437,15 @@ class UserController extends Controller
 		$sellerwork= $sellerwork->where('user_works.user_id','=', $id)->get();
 		if (Auth::check()){
 			$follow = DB::table('followers')->select('followers.*')->where('professional_id', "=", $id)->where('buyer_id', "=", Auth::user()->id)->first();
+			
 		}
-		$followerList=DB::table('followers')->where('professional_id',$id)->where('status',1)->count();
-		$followingList=DB::table('followers')->where('buyer_id',$id)->where('status',1)->count();
-		if (Auth::check()){
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'follow'=>$follow));
-		}
-		return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList));
+		$rating = Controller::getRatings($id);
+		///dd($rating);
+		$followCount = Controller::followCount($id);
+		//if (Auth::check()){
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating));
+		//}
+		
 	}
 	
 	public function follower($keyword = NULL){

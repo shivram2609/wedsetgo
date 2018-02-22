@@ -97,11 +97,25 @@
 			}
 			  if ( $('#add_title') ) { 
 				$('#add_title').click(function(){
+					
+					$("#new_title").removeClass('hide');
 					$("#title").prop('disabled', false);
 					$("#vision_title").prop('disabled', true);
 					$("#title").removeClass('hide');
 					$("#add_title").addClass('hide');
 					$("#vision_title").addClass('hide');
+					});
+			}	
+			  if ( $('#new_title') ) { 
+				$('#new_title').click(function(){
+					
+					$("#add_title").addClass('hide');
+					$("#title").prop('disabled', true);
+					$("#vision_title").prop('disabled', false);
+					$("#title").addClass('hide');
+					$("#add_title").removeClass('hide');
+					$("#vision_title").removeClass('hide');
+					$("#new_title").addClass('hide');
 					});
 			}	
 			
@@ -152,66 +166,47 @@
 	</script>
 	<script type="text/javascript" src="{{ asset('js/loadmore.js') }}"></script>
 	 <script>
-        jQuery(document).ready(function () {
-            $("#input-21f").rating({
-                starCaptions: function (val) {
-                    if (val < 3) {
-                        return val;
-                    } else {
-                        return 'high';
-                    }
-                },
-                starCaptionClasses: function (val) {
-                    if (val < 3) {
-                        return 'label label-danger';
-                    } else {
-                        return 'label label-success';
-                    }
-                },
-                hoverOnClear: false
-            });
-            var $inp = $('#rating-input');
-
-            $inp.rating({
-                min: 0,
-                max: 5,
-                step: 1,
-                size: 'lg',
-                showClear: false
-            });
-
-            $('#btn-rating-input').on('click', function () {
-                $inp.rating('refresh', {
-                    showClear: true,
-                    disabled: !$inp.attr('disabled')
-                });
-            });
-
-
-            $('.btn-danger').on('click', function () {
-                $("#kartik").rating('destroy');
-            });
-
-            $('.btn-success').on('click', function () {
-                $("#kartik").rating('create');
-            });
-
-            $inp.on('rating.change', function () {
-                alert($('#rating-input').val());
-            });
-
-
-            $('.rb-rating').rating({
-                'showCaption': true,
-                'stars': '3',
-                'min': '0',
-                'max': '3',
-                'step': '1',
-                'size': 'xs',
-                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
-            });
-            $("#input-21c").rating({
-                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
-            });
+        $(document).ready(function () {
+            $(".rate").on("click",function(){
+				var index = $(this).attr("val");
+				$(".rate").each(function(obj){
+					if ( $(this).attr("val") <= index ) {
+						$(this).addClass("gold-star");
+					} else {
+						$(this).removeClass("gold-star");
+					}
+				});
+				$("#rate_val").val($(this).attr("val"));
+			});
+            
+            $(".rate").on("mouseover",function(){
+				var index = $(this).attr("val");
+				$(".rate").each(function(obj){
+					if ( $(this).attr("val") <= index ) {
+						$(this).addClass("gold-star");
+					}
+				});
+			});
+            $(".rate").on("mouseout",function(){
+				//console.log("here");
+				var index = $(this).attr("val");
+				var rateVal = $("#rate_val").val();
+				$(".rate").each(function(obj){
+					//console.log($(this).attr("val"));
+					
+					if ( $(this).attr("val") > rateVal ) {
+						$(this).removeClass("gold-star");
+					}
+				});
+			});
+			
+		$("#checkbox_professional").click(function() {
+			if($(this).is(":checked")) {
+				$('.professional_status').removeClass("hide");
+				}
+			});
+		
+            
         });
     </script>
+ 
