@@ -16,7 +16,8 @@
 	<meta name="twitter:site" content="@zestmindstech">
 	<meta name="twitter:description" content="<?php echo (isset($ogdesc)?($ogdesc):'WedSetGo'); ?>" />
 	<meta name="twitter:title" content="<?php echo (isset($title)?($title):'WedSetGo'); ?>" />
-	<meta name="twitter:image" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
+	<meta name="twitter:creator" content="@zestmindstech">
+	<meta name="twitter:image:src" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
     <title><?php echo (isset($title)?($title ." - WedSetGo"):'WedSetGo'); ?></title>
 
     <!-- Bootstrap core CSS -->
