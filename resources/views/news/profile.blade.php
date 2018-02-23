@@ -49,7 +49,7 @@
 										<?php }?>
 									
 										<div class="text">
-												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}-{{$user->first_name}}-{{$user->last_name}}"> {{$sellerworks->title}}</a></b>
+												<b><a href="{{ url('/v') }}/{{$sellerworks->id}}-{{$sellerworks->title}}"> {{$sellerworks->title}}</a></b>
 											{{ str_limit($sellerworks->description, 50) }}
 										</div>
 									</div>
