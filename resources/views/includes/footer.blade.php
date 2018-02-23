@@ -9,7 +9,7 @@
 			<h3 class="footer-heading">About wed.Set.Go</h3>
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
-				<li><a href="#" title="About">About</a></li>
+				<li><a href="/st/about-us" title="About">About</a></li>
 				<li><a href="/contact_us" title="Contact Us">Contact Us</a></li>
 				<li><a href="/photostream" title="Photo Stream">Photo Stream</a></li>
 				<li><a href="#" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>

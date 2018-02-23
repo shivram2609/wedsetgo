@@ -17,6 +17,7 @@
     
 	<!-- Custom styles -->
 	 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
+	 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5a8fa318e3b02a00133b2f2c&product=inline-share-buttons' async='async'></script>
 	 </head>
    <body>
 	   

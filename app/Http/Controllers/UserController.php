@@ -472,6 +472,11 @@ class UserController extends Controller
 		
 	}
 	
+	public function static_page($slug=NULL){
+		$page = DB::table("cmspages")->where("seourl",$slug)->first();
+		return view('news.static',array("title"=>$page->metatitle,"page"=>$page));
+	}
+	
 	
 }
 	/* end of function */

@@ -45,6 +45,7 @@
 	Route::get('message_list/{id}', array('as' => 'message.message_list', 'uses' => 'MessageController@message_list'));
 	Route::post('message_list/{id}', array('as' => 'message.message_list', 'uses' => 'MessageController@message_list'));
 	Route::post('rating', array('as' => 'message.rating', 'uses' => 'MessageController@rating'));
+	Route::get('st/{slug}', array('as' => 'news.static', 'uses' => 'UserController@static_page'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));

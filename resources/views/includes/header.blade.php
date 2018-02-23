@@ -38,7 +38,7 @@
 			</ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" title="ABOUT">ABOUT</a>
+              <a class="nav-link" href="/st/about-us" title="ABOUT">ABOUT</a>
             </li>
 			<li class="nav-item social-links">
              <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>

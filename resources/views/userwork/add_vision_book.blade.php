@@ -67,12 +67,13 @@
 						<?php } ?>
 						@endif
 						<div class="share-links">
-						like the idea and the concept :
-						<div class="social-links">
-							 <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+						Share it with your friends :
+							<div class="social-links">
+								<div class="sharethis-inline-share-buttons"></div>
+							 <!--a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
 							 <a class="nav-link" href="#" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
 							 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
-							 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
+							 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a-->
 							 </div>
 						</div>  
 						
@@ -99,4 +100,6 @@
 	 </div>	
 	</div>	
 </div>
+
+
 @endsection
