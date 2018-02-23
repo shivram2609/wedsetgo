@@ -51,8 +51,12 @@
     <section class="home-gallery">
 	
 	<div class="masonry">
-	  <div class="img-item"><img src="img/img001.jpg" alt="img001" class="img-reponsive" width="512" height="375"></div>
-	   <div class="img-item"><img src="img/img004.jpg" alt="img004" class="img-reponsive" width="512" height="260"></div>
+	@foreach ($userworks as $userwork)
+		<?php if(!empty($userwork->images)) { ?>
+		  <div class="img-item"><img src="/work_image/{{$userwork->images }}" alt="{{$userwork->images }}" class="img-reponsive" width="512" height="375"></div>
+		<?php } ?>
+	@endforeach
+	   <!--div class="img-item"><img src="img/img004.jpg" alt="img004" class="img-reponsive" width="512" height="260"></div>
 	  <div class="img-item"><img src="img/img005.jpg" alt="img006" class="img-reponsive" width="512" height="520"></div>
 	   <div class="img-item"><img src="img/img009.jpg" alt="img009" class="img-reponsive" width="512" height="375"></div>
 	  <div class="img-item"><img src="img/img003.jpg" alt="img003" class="img-reponsive" width="512" height="375"></div>
@@ -61,7 +65,7 @@
 	  <div class="img-item"><img src="img/img002.jpg" alt="img002" class="img-reponsive" width="512" height="375"></div>
 	  <div class="img-item"><img src="img/img007.jpg" alt="img007" class="img-reponsive" width="512" height="260"></div>
 	  <div class="img-item"><img src="img/img008.jpg" alt="img008" class="img-reponsive" width="512" height="260"></div>
-	  <div class="img-item"><img src="img/img011.jpg" alt="img011" class="img-reponsive" width="512" height="375"></div>
+	  <div class="img-item"><img src="img/img011.jpg" alt="img011" class="img-reponsive" width="512" height="375"></div -->
 	 
 	</div>
 

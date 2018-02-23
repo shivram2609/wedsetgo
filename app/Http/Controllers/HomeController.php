@@ -20,7 +20,8 @@ class HomeController extends Controller
     {
 		$slider =  DB::table('slider_images')->where(['is_active'=>1])->get();
 		$catgagory =  DB::table('catagories')->where(['is_active'=>1])->get();
-        return view('home', array('title' => 'Home', 'slider'=>$slider, 'catgagory'=>$catgagory));
+		$userworks = DB::table('user_works')->select('user_work_images.images')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->where('user_works.status',1)->take(12)->get();
+        return view('home', array('title' => 'Home', 'slider'=>$slider, 'catgagory'=>$catgagory, 'userworks'=>$userworks));
     }
 
     /**
