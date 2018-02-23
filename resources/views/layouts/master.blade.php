@@ -12,6 +12,8 @@
 	<meta property="og:url" content="<?php echo isset($url)?$url:''; ?>" />
 	<meta property="og:site_name" content="wedsetgo" />
 	<meta property="og:image" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@zestmindstech">
 	<meta name="twitter:description" content="<?php echo (isset($ogdesc)?($ogdesc):'WedSetGo'); ?>" />
 	<meta name="twitter:title" content="<?php echo (isset($title)?($title):'WedSetGo'); ?>" />
 	<meta name="twitter:image" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
