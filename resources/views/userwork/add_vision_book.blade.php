@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+<style>#st1{float:left}</style>
 <div class="container">	
 	<!-- list container start -->
 	<div class="productFull-viewList">
@@ -67,16 +68,9 @@
 							{!! Form::close() !!}
 						<?php } ?>
 						@endif
-						<div class="share-links">
-						Share it with your friends :
-							<div class="social-links">
-								<div class="sharethis-inline-share-buttons"></div>
-							 <!--a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
-							 <a class="nav-link" href="#" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
-							 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
-							 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a-->
-							 </div>
-						</div>  
+						<p>Share the link with your friend:</p>
+						<div class="sharethis-inline-share-buttons"></div>
+						  
 						
 			</div>
 		  </div>

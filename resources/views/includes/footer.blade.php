@@ -214,4 +214,9 @@
   $(document).ready(function() {
       $("html").niceScroll({cursorborder:"",cursoropacitymax:0.7,boxzoom:true,scrollspeed:60,mousescrollstep:40,cursorwidth:6,cursorborder:0,cursorcolor:"#808080",autohidemode:!1,zindex:9999999,horizrailenabled:!1,cursorborderradius:0});
   });
+  $(document).ready(function(){
+			//alert("here");
+			$(".st-last").removeAttr("style");
+		});
+  
 </script>

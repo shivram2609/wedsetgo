@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta itemprop="name" content="<?php echo (isset($title)?($title ." - WedSetGo" ):'WedSetGo'); ?>">
+	<meta itemprop="description" content="<?php echo (isset($ogdesc)?($ogdesc):'WedSetGo'); ?>">
+	<meta itemprop="image" content="<?php echo isset($ogimage)?$ogimage:''; ?>">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="<?php echo (isset($title)?($title ." - WedSetGo" ):'WedSetGo'); ?>" />
@@ -30,7 +33,9 @@
     
 	<!-- Custom styles -->
 	 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
-	 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5a8fa318e3b02a00133b2f2c&product=inline-share-buttons' async='async'></script>
+	 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5a8fa318e3b02a00133b2f2c&product=inline-share-buttons' async='async'>
+		
+	 </script>
 	 </head>
    <body>
 	   
