@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="<?php echo (isset($title)?($title):'WedSetGo'); ?>" />
+	<meta property="og:description" content="<?php echo (isset($ogdesc)?($ogdesc):'WedSetGo'); ?>" />
+	<meta property="og:url" content="<?php echo isset($url)?$url:''; ?>" />
+	<meta property="og:site_name" content="wedsetgo" />
+	<meta property="og:image" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
+	<meta name="twitter:description" content="<?php echo (isset($ogdesc)?($ogdesc):'WedSetGo'); ?>" />
+	<meta name="twitter:title" content="<?php echo (isset($title)?($title):'WedSetGo'); ?>" />
+	<meta name="twitter:image" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
     <title><?php echo (isset($title)?($title ." - WedSetGo"):'WedSetGo'); ?></title>
 
     <!-- Bootstrap core CSS -->

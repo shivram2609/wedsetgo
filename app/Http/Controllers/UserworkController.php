@@ -207,10 +207,10 @@ class UserworkController extends Controller{
 				}
 			}
 	}
-		if(Auth::check()){
-		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, 'visionbook'=>$visionbook, "id"=>$id, "url"=>$request->fullUrl())); 
+	if(Auth::check()){
+		 return view('userwork.add_vision_book', array('title' => $userphotogrid->title, 'userphotogrid'=>$userphotogrid, 'visionbook'=>$visionbook, "id"=>$id, "url"=>$request->fullUrl(),"ogdesc"=>$userphotogrid->description,"ogimage"=>$this->staticLink.$source)); 
 	 }
-		 return view('userwork.add_vision_book', array('title' => 'User Works', 'userphotogrid'=>$userphotogrid, "url"=>$request->fullUrl())); 
+		 return view('userwork.add_vision_book', array('title' => $userphotogrid->title, 'userphotogrid'=>$userphotogrid, "url"=>$request->fullUrl(),"ogdesc"=>$userphotogrid->description,"ogimage"=>$this->staticLink.$source)); 
 	 }
 	 
 	public function my_vision_book(){
