@@ -27,22 +27,26 @@
 		  <div class="col-sm-4 visionbook_detail">
 			<div class="carousel-caption">
 				<div class="heading">
-					<?php if(!empty($userphotogrid->profile_image)) { ?>
-						<img src="/uploads/avatars/{{$userphotogrid->profile_image}}" alt="user" class="img-reponsive" width="47" height="51">
-					<?php } else { ?>
-						<img src="images/dummy-user.jpg" alt="user" class="img-reponsive" width="47" height="51">
-					<?php } ?>
-						{{$userphotogrid->title}}
+						<h3>{{ucfirst($userphotogrid->title)}}</h3>
 					</div>
-					<p>{{$userphotogrid->description}}</p>
-					<p><b>Category:</b><br>
-						{{$userphotogrid->name}}<br>
-						<b>Date:</b><br>
-						{{ Carbon\Carbon::parse($userphotogrid->created_at)->format('d-m-Y') }}
-						<br>
-						<b>Tags:</b><br>
-						{{$userphotogrid->tag}} <br>
-					</p>
+						<p><b>Description:</b><br>
+						<p>{{$userphotogrid->description}}</p>
+						<p><b>Category:</b><br>
+							{{$userphotogrid->name}}<br>
+							<b>Date:</b><br>
+							{{ Carbon\Carbon::parse($userphotogrid->created_at)->format('d-m-Y') }}
+							<br>
+							<b>Tags:</b><br>
+							{{$userphotogrid->tag}} <br>
+						</p>
+						<p class=""><b>Created by:</b><br/>
+						<?php if(!empty($userphotogrid->profile_image)) { ?>
+							<img src="/uploads/avatars/{{$userphotogrid->profile_image}}" alt="user" class="img-reponsive product-user" width="47" height="51">
+						<?php } else { ?>
+							<img src="images/dummy-user.jpg" alt="user" class="img-reponsive product-user" width="47" height="51">
+						<?php } ?>
+						<a href="{{ url('/p') }}/{{$userphotogrid->user_id}}-{{$userphotogrid->first_name}}-{{$userphotogrid->last_name}}" title="Your Profile">{{ucfirst($userphotogrid->first_name)}} {{ucfirst($userphotogrid->last_name)}}</a>
+						</p>
 						@if(Auth::check())
 						<?php if($userphotogrid->user_id != Auth::user()->id) { ?>
 						{!! Form::open() !!}
