@@ -53,7 +53,10 @@ class UserworkController extends Controller{
             $file = $request->file('image_file');
 			if($request->file('image_file')){
 				$destination = "work_image/";
-				$filename = $file->getClientOriginalName();
+				
+				$token = str_random(100);
+				$userId = Auth::user()->id;
+				$filename = $token."_".$userId."_".$file->getClientOriginalName();
 				$request->file('image_file')->move($destination,$filename);
 			}
 				if(empty($id)){

@@ -354,14 +354,16 @@ class UserController extends Controller
 			$file = $request->file('profile_image');
 			if($request->file('profile_image')){
 				$destination = "uploads/avatars";
-				$filename = $file->getClientOriginalName();
+				$userId = Auth::user()->id;
+				$filename = $token."_".$userId."_".$file->getClientOriginalName();
 				$request->file('profile_image')->move($destination,$filename);
 				$data['profile_image'] = $filename;
 			}
 			$file = $request->file('background_image');
 			if($request->file('background_image')){
 				$destination = "uploads/background";
-				$filename = $file->getClientOriginalName();
+				$userId = Auth::user()->id;
+				$filename = $token."_".$userId."_".$file->getClientOriginalName();
 				$request->file('background_image')->move($destination,$filename);
 				$data['background_image'] = $filename;
 			}

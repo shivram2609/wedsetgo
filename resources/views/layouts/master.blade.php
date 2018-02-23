@@ -19,7 +19,8 @@
 	<meta name="twitter:creator" content="@zestmindstech">
 	<meta name="twitter:image:src" content="<?php echo isset($ogimage)?$ogimage:''; ?>" />
     <title><?php echo (isset($title)?($title ." - WedSetGo"):'WedSetGo'); ?></title>
-
+	<link rel="shortcut icon" href="/img/favicon.ico" type="img/x-icon"> 
+	<link rel="icon" href="/img/favicon.ico" type="img/x-icon">
     <!-- Bootstrap core CSS -->
     <!--link href="css/bootstrap.min.css" rel="stylesheet"-->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
