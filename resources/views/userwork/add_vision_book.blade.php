@@ -37,7 +37,8 @@
 					<p><b>Category:</b><br>
 						{{$userphotogrid->name}}<br>
 						<b>Date:</b><br>
-						{{$userphotogrid->created_at}}<br>
+						{{ Carbon\Carbon::parse($userphotogrid->created_at)->format('d-m-Y') }}
+						<br>
 						<b>Tags:</b><br>
 						{{$userphotogrid->tag}} <br>
 					</p>

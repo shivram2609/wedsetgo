@@ -350,6 +350,7 @@ class UserController extends Controller
 			$data['detail'] = $request->detail;
 			$data['social_media'] = $socialVal;
 			$data['location_id'] = $request->location_id;
+			$token = str_random(100);
 			$file = $request->file('profile_image');
 			if($request->file('profile_image')){
 				$destination = "uploads/avatars";
