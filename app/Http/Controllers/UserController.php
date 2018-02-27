@@ -462,9 +462,11 @@ class UserController extends Controller
 		$rating = Controller::getRatings($id);
 		///dd($rating);
 		$followCount = Controller::followCount($id);
-		//if (Auth::check()){
+		if (Auth::check()){
 			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating, "follow"=>$follow));
-		//}
+		} else {
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating));
+		}
 		
 	}
 	
