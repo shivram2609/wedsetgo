@@ -45,7 +45,7 @@
 										<?php if(!empty($sellerworks->profile_image)) { ?>
 												<div class="img"><img src="/uploads/avatars/{{ $sellerworks->profile_image }}" alt="user" class="img-reponsive" width="35" height="51"></div>
 											<?php } else { ?>
-												<div class="img"><img src="img/dummy-user.jpg" alt="user" class="img-reponsive" width="35" height="51"></div>
+												<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="user" class="img-reponsive" width="35" height="51"></div>
 										<?php }?>
 									
 										<div class="text">
