@@ -4,7 +4,7 @@
 	<div class="filter-bar">
 		{!! Form::open(["method"=>"get"]) !!}
 		<div class="container">
-			I am looking for 
+			Filter by Category 
 			{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select")) !!}
 			{!! Form::input("hidden",'view',($view)) !!}
 			<div class="views-icons">
@@ -28,7 +28,9 @@
 			</div>
 			<div class="filter-sections">
 				Search In
-				{!! Form::select('search_val', [null=>'Please Select',"cName"=>"Category Name","pName"=>"Professional Name","uwName"=>"User Work "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='cName'?'cName':($tmpQuery['search_val']=='pName'?'pName':'uwName')) :''), array("class"=>"custom-select")) !!}
+				{!! Form::select('search_val', [null=>'Please 
+					Select',"pName"=>"Professional 
+					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':'uwName') :''), array("class"=>"custom-select")) !!}
 				
 			</div>
 			<div  class="filter-sections">

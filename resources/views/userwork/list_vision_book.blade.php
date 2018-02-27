@@ -15,7 +15,9 @@
 					Add Vision Book
 				</div>
 			</div>
-			
+			<?php if(!empty($album)){ ?>
+				<a href="#" data-toggle="modal" data-target="#invitefrnd" class="btn btn-gray btn-block form-group" ><h4>Invite friend to view vision book</h4></a>
+			<?php }?>
 				<div class="masonry">
 
 					<?php $i = 0; ?>
@@ -49,5 +51,30 @@
 			</div>
 		</div>
 	
+	</div>
+	
+	<div class="modal fade" id="invitefrnd">
+	  <div class="modal-dialog signup-signin">
+		<div class="modal-content">
+		  <!-- Modal Header -->
+		  <div class="modal-header">
+			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i> Invite Friend</h4>
+			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
+		  </div>
+		  <!-- Modal body -->
+		  <div class="modal-body">
+		       {!! Form::open(['route' => 'userwork.work_invitation']) !!}
+			<div class="input-group form-group">
+			  <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+			 	{!! Form::input('email', 'email', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Email','required'=>'Please enter email' ]) !!}	
+			 	<input type="hidden" value="{{$vision_book_id}}" name="visionbook_id"></input>
+			 </div> 
+			  <div class="form-group text-center">
+			  {!! Form::submit('submit', ['class' => 'btn theme-btn-rct']) !!}
+			 </div>
+			{!! Form::close() !!}
+		  </div>
+		</div>
+	  </div>
 	</div>
 @endsection

@@ -27,6 +27,7 @@
 				<th>Title</th>
 				<th>Professional Name</th>
 				<th>status</th>
+				<th>Featured</th>
 				<th>Create</th>
 				<th class="actions"><?php echo 'Actions'; ?></th>
 		</tr>
@@ -43,6 +44,7 @@
 			<td>{{$professionalWorkLists->title}}</td>
 			<td>{{$professionalWorkLists->first_name}} {{$professionalWorkLists->last_name}}</td>
 			<td><?php echo (empty($professionalWorkLists->status)?'Inactive':'Active'); ?>&nbsp;</td>
+			<td><?php echo (empty($professionalWorkLists->is_featured)?'No':'Yes'); ?>&nbsp;</td>
 			<td>{{$professionalWorkLists->created_at}}</td>
 			<td class="actions">
 				<a href="view_professional_work_list/{{$professionalWorkLists->id}}" class="btn btn-submit add-btn"> view</a>

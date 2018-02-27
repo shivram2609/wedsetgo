@@ -46,6 +46,7 @@
 	Route::post('message_list/{id}', array('as' => 'message.message_list', 'uses' => 'MessageController@message_list'));
 	Route::post('rating', array('as' => 'message.rating', 'uses' => 'MessageController@rating'));
 	Route::get('st/{slug}', array('as' => 'news.static', 'uses' => 'UserController@static_page'));
+	Route::post('work_invitation', array('as' => 'userwork.work_invitation', 'uses' => 'UserworkController@work_invitation'));
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
@@ -109,6 +110,7 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	 Route::get('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
 	 Route::post('view_professional_work_list/{id}',array('as' => 'admin.viewProfessional_work_list', 'uses'=>'AdminController@viewProfessionalWorkList'));
 	 Route::get('professional_status/{id}/{status}', 'AdminController@update_user_status');
+	 Route::get('professional_is_featured/{id}/{is_featured}', 'AdminController@update_is_featured');
 	 
 	 Route::get('message',array('as' => 'admin.message', 'uses'=>'AdminController@admin_message'));
 	 Route::get('admin_message_list/{id}',array('as' => 'admin.message', 'uses'=>'AdminController@admin_message_list'));

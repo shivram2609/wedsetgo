@@ -74,7 +74,9 @@
 				$("#signup").on("click",function(e){
 					$("#signIn").modal("hide");
 				});
-				
+				$("#signUp").on("hidden.bs.modal",function(){
+					$("#u_type").val("1")
+				});
 				$("#signinmodal").on("click",function(e){
 					$("#signUp").modal("hide");
 				});
@@ -212,6 +214,15 @@
     </script>
  <script>
   $(document).ready(function() {
+	  
+	  $("#brideSignin").on("click",function(){
+		  $("#u_type").val("1");
+	  });
+	  
+	  $("#sellerSignin").on("click",function(){
+		  $("#u_type").val("2");
+	  });
+	  
       $("html").niceScroll({cursorborder:"",cursoropacitymax:0.7,boxzoom:true,scrollspeed:60,mousescrollstep:40,cursorwidth:6,cursorborder:0,cursorcolor:"#808080",autohidemode:!1,zindex:9999999,horizrailenabled:!1,cursorborderradius:0});
   });
   $(document).ready(function(){

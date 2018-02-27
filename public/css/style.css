@@ -716,6 +716,11 @@ ul, ol {
     box-sizing: border-box;
 
 }
-
 .contact-us{width: 65%;margin: 40px 0 0 25px;}
 .product-user{height: auto;width: 10%;border-radius: 10px;display: inline-block;}
+
+.homelist img {
+    border-style: none;
+    border-radius: 20px;
+}
+.seller-list-new { width:20% !important; }

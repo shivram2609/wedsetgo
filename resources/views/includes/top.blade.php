@@ -41,10 +41,10 @@
 	</div>		
 </div>
 <div class="user-nav">
-	<a href="{{ url('/p') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Your Profile">Your Profile</a>
+	
 	<?php if(\Auth::check()){ 
 		if (Auth::user()->id == $id){ ?>
-			
+			<a href="{{ url('/p') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Your Profile">Your Profile</a>
 			<?php if (Auth::user()->user_type_id == 2){ ?>
 				<a href="/my_work" title="My Work">My Work</a>
 			<?php }?>

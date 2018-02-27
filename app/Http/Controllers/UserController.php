@@ -85,10 +85,14 @@ class UserController extends Controller
 						'first_name' => $request->first_name, 
 						'last_name' => $request->last_name
 					));
-			Controller::getEmailData('SIGNUP');
-			$this->email_body = str_replace("{USER}",ucfirst($request->first_name),$this->email_body);
+			if($request->u_type == 1) { 
+				 Controller::getEmailData('SIGNUP');
+			 } else { 
+				 Controller::getEmailData('PROFESSIONAl');
+			 }
+			 $this->email_body = str_replace("{USER}",ucfirst($request->first_name),$this->email_body);
 			$link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
-			$this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
+			 $this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 			Controller::sendMail($request->email);
 			Session::flash('flash_message', 'User registration successfully, please check your email to comnfirm your account.');
 		} else {
@@ -352,7 +356,7 @@ class UserController extends Controller
 			$data['location_id'] = $request->location_id;
 			$token = str_random(100);
 			$file = $request->file('profile_image');
-			if($request->file('profile_image')){
+			if($request->file('profile_image')){	
 				$destination = "uploads/avatars";
 				$userId = Auth::user()->id;
 				$filename = $token."_".$userId."_".$file->getClientOriginalName();
@@ -479,7 +483,6 @@ class UserController extends Controller
 		$page = DB::table("cmspages")->where("seourl",$slug)->first();
 		return view('news.static',array("title"=>$page->metatitle,"page"=>$page));
 	}
-	
 	
 }
 	/* end of function */

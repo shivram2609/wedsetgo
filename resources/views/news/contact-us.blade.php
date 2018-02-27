@@ -13,7 +13,7 @@
 			<div class="col-sm-4 text-center form-group">
 			<i class="fa fa-map-marker" aria-hidden="true"></i>
 			<h2 class="heading" >Address</h2>
-			<p>Comming Soon</p>
+			<p>Coming Soon</p>
 			</div>
 			<div class="col-sm-4 text-center form-group address-sec">
 			<i class="fa fa-phone" aria-hidden="true"></i>

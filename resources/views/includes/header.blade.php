@@ -63,7 +63,7 @@
 		  <!-- Modal body -->
 		  <div class="modal-body">
 		 {!! Form::open(['route' => 'user.store']) !!}
-		 
+		 <input type="hidden" name="u_type" value="1" id="u_type"/>
 			<div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
 			  {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'First Name','required'=>'Please enter first name' ]) !!}
@@ -119,6 +119,7 @@
 		  <!-- Modal body -->
 		  <div class="modal-body">
 		      {!! Form::open(['route' => 'user.authenticate']) !!}
+		      
 			<div class="input-group form-group">
 			  <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
 			 	{!! Form::input('email', 'email', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Email', 'required'=>'Please enter email.']) !!}	

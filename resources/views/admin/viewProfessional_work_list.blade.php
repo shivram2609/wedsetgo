@@ -32,5 +32,7 @@
 	</tbody>
 	</table>
 		<a href="/professional_status/{{$viewprofessionalWorkList->id}}/{{$viewprofessionalWorkList->status}}/" onclick="return confirm('are you sure to <?php echo (empty($viewprofessionalWorkList->status)?"Make it active":"Make it inactive"); ?> request?');" class="btn btn-submit add-btn clear-category" id="professional_view"> <?php echo (empty($viewprofessionalWorkList->status)?'Make it active':'Make it Inactive'); ?>&nbsp;</a>
+		
+		<a href="/professional_is_featured/{{$viewprofessionalWorkList->id}}/{{$viewprofessionalWorkList->is_featured}}/" onclick="return confirm('are you sure to set on home page');" class="btn btn-submit add-btn clear-category" id="professional_view"> <?php echo (empty($viewprofessionalWorkList->is_featured)?'Use for home page':'Not use for home page'); ?></a>
 </div>
 @endsection

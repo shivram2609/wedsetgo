@@ -13,7 +13,7 @@
 		 *
 		 * @var array
 		 */
-		protected $fillable = ['user_id', 'catagory_id', 'description', 'title', 'tag','status'];
+		protected $fillable = ['user_id', 'catagory_id', 'description', 'title', 'tag','status','is_featured'];
 		
 		 public function userworkimage() {
 			return $this->hasOne(UserWorkImage::class);

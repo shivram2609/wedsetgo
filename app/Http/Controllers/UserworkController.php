@@ -11,6 +11,7 @@ use App\UserWorkImage;
 use App\VisionBook;
 use App\VisionBookCollection; 
 use App\Location; 
+use App\Invitation; 
 use Session;
 use Catagory;
 use Auth;
@@ -66,7 +67,8 @@ class UserworkController extends Controller{
 					'description' => $request->description,
 					'title' => $request->title,
 					'tag' => $request->tag,
-					'status' => 1
+					'status' => 1,
+					'is_featured' => 0
 					));
 					 if($userwork){
 					UserWorkImage::create(array(
@@ -240,7 +242,7 @@ class UserworkController extends Controller{
 		   }
 		  $location = DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
-		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->join('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2);
+		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.trade_description",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->join('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2);
 		  
 		   if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$templist->where('user_details.category_id','=', $tmpQuery['catagory_id']);
@@ -267,7 +269,7 @@ class UserworkController extends Controller{
 		$id = $id[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
 		$album= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.id as vbc','vision_book_collections.old_title','vision_book_collections.comments')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_book_collections.vision_book_id','=',$id)->get();
-		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album));
+		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album, 'vision_book_id'=>$id));
 	}
 	
 	public function delete_vision_book($id=NULL){
@@ -304,6 +306,24 @@ class UserworkController extends Controller{
 		return redirect('/vision_book');
 	}
 		
+	}
+	
+	public function work_invitation(Request $request){
+		$token = str_random(100);
+		if ($request->isMethod('post')){
+			Invitation::create(array(
+								'vision_book_id'=>$request->visionbook_id,
+								'email' => $request->email,
+								'token' => $token,
+								'status'=>1
+							));	
+		$this->email_body .= "Hello dear,<br>";
+		$this->email_body .= "We are inviting you to view vision book";
+		$this->email_subject = "Invitation for vision book";
+		Controller::sendMail($request->email);  
+		Session::flash('flash_message', 'Your Request has been sent.');
+		}
+		return redirect('/vision_book');
 	}
 		
 }

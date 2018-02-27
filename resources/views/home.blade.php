@@ -37,11 +37,12 @@
 	<div class="container">
 		<h1 class="main-heading">Design the wedding you’ve always wanted...</h1>
 		<div class="btn-outer">
-			<a href="#" title="Brides & Grooms Get Started" class="theme-btn btn" data-toggle="modal" data-target="#signUp">Brides & Grooms Get Started</a> <a href="#" title="Professionals Get Started " class="theme-btn btn" data-toggle="modal" data-target="#signUp">Professionals Get Started </a>
+			<a href="#" title="Brides & Grooms Get Started" class="theme-btn btn" id="brideSignin" data-toggle="modal" data-target="#signUp">Brides & Grooms Get Started</a> 
+			<a href="#" title="Professionals Get Started " class="theme-btn btn" id="sellerSignin" data-toggle="modal" data-target="#signUp">Professionals Get Started </a>
 		</div>
 		<div class="text-center links-icon">
 			 @foreach ($catgagory as $catgagories)
-				<a href="/photostream?catagory_id=<?php echo $catgagories->id; ?>" title="<?php echo $catgagories->name; ?>" class="icon-links">
+				<a href="/seller?catagory_id=<?php echo $catgagories->id; ?>" title="<?php echo $catgagories->name; ?>" class="icon-links">
 					<img src="categories/<?php echo $catgagories->image; ?>" alt="<?php echo $catgagories->name; ?>" class="img-reponsive" width="90" height="75">{{$catgagories->name}}
 				</a>
 			@endforeach
@@ -53,7 +54,7 @@
 	<div class="masonry">
 	@foreach ($userworks as $userwork)
 		<?php if(!empty($userwork->images)) { ?>
-		  <div class="img-item"><img src="/work_image/{{$userwork->images }}" alt="{{$userwork->images }}" class="img-reponsive" width="512" height="375"></div>
+		  <div class="img-item homelist"><img src="/work_image/{{$userwork->images }}" alt="{{$userwork->images }}" class="img-reponsive" width="512" height="375"></div>
 		<?php } ?>
 	@endforeach
 	   <!--div class="img-item"><img src="img/img004.jpg" alt="img004" class="img-reponsive" width="512" height="260"></div>

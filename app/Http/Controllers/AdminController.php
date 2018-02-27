@@ -201,6 +201,12 @@ class AdminController extends Controller
 		Session::flash('flash_message', 'Professional Work Status update successfully.');
 		return redirect()->route('admin.professionalwork');
 	}
+	public static function update_is_featured($id=NULL, $is_featured=NULL){
+		$is_featured = empty($is_featured)?1:0;
+		$result = DB::table('user_works')->where('id',$id)->update(['is_featured'=> $is_featured]);
+		Session::flash('flash_message', 'Professional work add to home page successfully.');
+		return redirect()->route('admin.professionalwork');
+	}
 	
 	  public function admin_message(){
 		  

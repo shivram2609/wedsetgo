@@ -1,10 +1,9 @@
 @extends('layouts.master')
 @section('content')
-
 <div class="filter-bar text-center">
 		{!! Form::open(["method"=>"get"]) !!}
 		<div class="container">
-			I am looking for 
+			Filter by Category
 			{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select")) !!}
 			
 			Search By Location
@@ -28,9 +27,9 @@
 <div class="container">	
 	@foreach($sellerList as $sellerLists)
 	<div class="product-list">
-	<div class="img-sec">
+	<div class="img-sec seller-list-new">
 			<?php if(!empty($sellerLists->profile_image)) { ?>
-						<img src="/uploads/avatars/{{$sellerLists->profile_image}}" alt="img012" class="img-reponsive" width="981" height="844">
+						<img src="/uploads/avatars/{{$sellerLists->profile_image}}" alt="img012" class="img-reponsive seller_profile" width="981" height="844">
 					<?php } else { ?>
 						<img src="{{URL::to('img/user-dummy.jpg')}}" alt="img012" class="img-reponsive" width="981" height="844">
 					<?php } ?>
@@ -41,7 +40,7 @@
 						<a href="{{ url('/p') }}/{{$sellerLists->id}}-{{$sellerLists->first_name}}-{{$sellerLists->last_name}}" >{{ucfirst($sellerLists->first_name)}} {{ucfirst($sellerLists->last_name)}}</a>
 					</div>
 					<b>Description:</b><br>
-						{{$sellerLists->detail}}
+						{{$sellerLists->trade_description}}
 						<br>
 					<b>Category:</b><br>
 						{{$sellerLists->name}}<br>
