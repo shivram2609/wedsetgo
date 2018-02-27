@@ -6,6 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Cmsemail;
 use App\Catagory;
 use Mail;
@@ -18,13 +20,15 @@ abstract class Controller extends BaseController
     public $email_body = '';
     public $email_from = 'ranjana@zestminds.com';
     public $email_subject = 'test';
-    //public $staticLink = "http://wedsetgo.zestminds.com:8000/";
-    public $staticLink = "http://35.154.146.218:8000/";
+    public $staticLink = "http://wedsetgo.zestminds.com:8000/";
+    //public $staticLink = "http://35.154.146.218:8000/";
     public $email_title = "WedSetGo";
     
-    function __construct() {
+    function __construct(Request $request) {
 		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
+		//dd($request->url());
 		View::share('headCategory', $headCategory);
+		View::share('url', $request->url());
 	}
     
     public function getEmailData( $slug = NULL ) {
