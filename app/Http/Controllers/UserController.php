@@ -134,7 +134,13 @@ class UserController extends Controller
 				if (Auth::user()->user_type_id == 1) {
 					return redirect()->route('admin.admindashboard');
 				} elseif (Auth::user()->user_type_id == 2 || Auth::user()->user_type_id == 3){
-					return redirect('/p/'.Auth::user()->id."-".$users->first_name."-".$users->last_name);
+					$url =$request->input();
+					$url = $url['url'];
+					if ( !empty($url) ) {
+						return redirect($url);
+					} else {
+						return redirect('/p/'.Auth::user()->id."-".$users->first_name."-".$users->last_name);
+					}
 					
 				} else {
 					return redirect()->route('user.index');
@@ -340,6 +346,7 @@ class UserController extends Controller
 			$socialArray['fb'] = $request->fb;
 			$socialArray['twitter'] = $request->twitter;
 			$socialArray['google'] = $request->google;
+			$socialArray['instagram'] = $request->instagram;
 			$socialVal = serialize($socialArray);
 			$data = array();
 			$data['first_name'] = $request->first;
@@ -354,6 +361,9 @@ class UserController extends Controller
 			$data['detail'] = $request->detail;
 			$data['social_media'] = $socialVal;
 			$data['location_id'] = $request->location_id;
+			$data['city'] = $request->city;
+			$data['other_category'] = $request->other_category;
+			$data['other_location'] = $request->other_location;
 			$token = str_random(100);
 			$file = $request->file('profile_image');
 			if($request->file('profile_image')){	
@@ -386,13 +396,15 @@ class UserController extends Controller
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}
-				return redirect('/p/'.Auth::user()->id);
+				return redirect('edit_profile');
 			}
 			
 		}
-		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');	
+		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
+		$catagory[0] = "Other";
 		$location= DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
-		
+		$location[0] = "Other";
+		//dd($location);
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 		
 		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
@@ -451,7 +463,7 @@ class UserController extends Controller
 		///dd($rating);
 		$followCount = Controller::followCount($id);
 		//if (Auth::check()){
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating, "follow"=>$follow));
 		//}
 		
 	}

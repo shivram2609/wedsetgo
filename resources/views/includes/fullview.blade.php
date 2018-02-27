@@ -16,7 +16,12 @@
 			<img src="img/img015.jpg" alt="img012" class="img-fluid form-group" width="981" height="844">
 		<?php } ?>
 		
-		<div class="text-center"><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+		<div class="text-center">
+			<?php if(Auth::check()){ ?>
+				<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+			<?php } else { ?>
+				<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="btn btn-bdrSml">Add to vision book</a>
+			<?php }?>
 	</div>
 	  </div>
 	  <div class="col-sm-4">

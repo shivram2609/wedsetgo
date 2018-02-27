@@ -18,6 +18,7 @@
 	Route::post('user/store', array('as' => 'user.store', 'uses' => 'UserController@store'));
 	Route::get('login', array('as' => 'news.login', 'uses' => 'UserController@login'));
 	Route::post('user/authenticate', array('as' => 'user.authenticate', 'uses' => 'UserController@authenticate'));
+	Route::post('user/authenticate', array('as' => 'user.authenticate', 'uses' => 'UserController@authenticate'));
 	Route::get('logout', array('as' => 'user.logout', 'uses' => 'UserController@logout'));
 	Route::get('news/account', array('as' => 'news.account', 'uses' => 'UserController@account'))->middleware('auth');
 

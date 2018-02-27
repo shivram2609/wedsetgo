@@ -80,9 +80,9 @@
 					</div>
 					<br>
 
-					<?php if($user->porfessional_request == 1 OR $user->user_type_id == 2) { ?>
+					<?php if($user->porfessional_request == 1 And $user->user_type_id == 3) { ?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you want to send request for professional please check for fill some  professional details. </input>
-					<?php } else {?>
+					<?php } else if($user->user_type_id == 3) {?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you want to send request for professional please check for fill some  professional details. </input>
 					<?php }?>
 					   
@@ -92,20 +92,25 @@
 					<?php } else {?>
 						<div class="professional_status hide">
 					<?php }?>
+						</div>
 						<div class="row">
-							<div class="col-sm-6 form-group">
-								{!! Form::label('location', 'Location', ['class' => 'control-label']) !!}
-								{!! Form::select('location_id', $location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select")) !!}
+							<div class="col-sm-12	 form-group">
+								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
+								{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6 form-group">
-								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
-								{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
-							</div>
-							<div class="col-sm-6 form-group">
 								<label>Business Category:</label>
-								{!! Form::select('category_id', $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select")) !!}
+								{!! Form::select('category_id',[null=>'Please Select Category']+ $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select", "id"=>"category_selected")) !!}
+							</div>
+							<?php if($user->category_id == 0){ ?>
+								<div class="col-sm-6 form-group" id="other_cate">
+							<?php } else { ?>
+								<div class="col-sm-6 form-group hide" id="other_cate">
+							<?php }?>
+								<label>Other Category:</label>
+								<input type="text" name="other_category" class="form-control" value="<?php echo isset($user->other_category)?$user->other_category:''?>"/>
 							</div>
 						</div>
 						<div class="row">
@@ -116,30 +121,59 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-6 form-group">
+								{!! Form::label('location', 'Location', ['class' => 'control-label']) !!}
+								{!! Form::select('location_id',[null=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select", 'id'=>"location_select")) !!}
+							</div>
+							<?php if($user->location_id == 0){ ?>
+								<div class="col-sm-6 form-group" id="other_loc">
+							<?php } else { ?>
+								<div class="col-sm-6 form-group hide" id="other_loc">
+							<?php }?>
+								<label>Other Location:</label>
+								<input type="text" name="other_location" class="form-control" value="<?php echo isset($user->other_location)?$user->other_location:''?>" />
+							</div>
+		
+						</div>
+						<div class="row">
+						<div class="col-sm-12 form-group">
+								<label>City</label>
+								<input type="text" name="city" class="form-control" value="<?php echo isset($user->city)?$user->city:''?>" />
+							</div>
+						</div>
+							
+						<div class="row">
+							<div class="col-sm-6 form-group">
 								<label>Trade Description:</label>
-								<textarea class="form-control" placeholder="Description" name="trade_description"><?php echo isset($user->trade_description)?$user->trade_description:''?></textarea>
+								<textarea class="form-control" placeholder="Tell us more about your products, services or business" name="trade_description"><?php echo isset($user->trade_description)?$user->trade_description:''?></textarea>
 							</div>
 							<div class="col-sm-6 form-group">
 								<label>Detail:</label>
-								<textarea class="form-control" placeholder="Detail" name="detail"><?php echo isset($user->detail)?$user->detail:''?></textarea>
+								<textarea class="form-control" placeholder="Tell us more about you as a person - what you’re like, what you love and what drives you" name="detail"><?php echo isset($user->detail)?$user->detail:''?></textarea>
 							</div>
 						</div>
 						<div class="row form-group">
 							<label class="col-sm-12">Social Media:</label>
-							<div class="col-sm-4 form-group">
+							<div class="col-sm-3 form-group">
 								
 								{!! Form::input('text','fb', (isset($socialVal['fb'])?$socialVal['fb']:''), ['class' => 'form-control facbook-icon', 'size' => 40,'placeholder' => 'Facebook' ]) !!}
 							</div>
-							<div class="col-sm-4 form-group">
+							<div class="col-sm-3 form-group">
 								{!! Form::input('text','google', (isset($socialVal['google'])?$socialVal['google']:''), ['class' => 'form-control googlePlus-icon', 'size' => 40,'placeholder' => 'Google' ]) !!}
 							</div>
-							<div class="col-sm-4 form-group">
+							<div class="col-sm-3 form-group">
 								{!! Form::input('text','twitter', (isset($socialVal['twitter'])?$socialVal['twitter']:''), ['class' => 'form-control twitter-icon', 'size' => 40,'placeholder' => 'Twitter' ]) !!}
+							</div>
+							<div class="col-sm-3 form-group">
+								{!! Form::input('text','instagram', (isset($socialVal['instagram'])?$socialVal['instagram']:''), ['class' => 'form-control instagram-icon', 'size' => 40,'placeholder' => 'Instagram' ]) !!}
 							</div>
 						</div>
 				</div>
 				<br>
+			<?php if($user->porfessional_request == 1 OR $user->user_type_id == 3) { ?>
+			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more confirm ', 'data-confirm' => 'Thank you for filling out the information! We will review your details and activate your profile as soon as possible']) !!}
+			<?php } else { ?>
 			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
+			<?php }?>
 				</div>
 		</div>
 		

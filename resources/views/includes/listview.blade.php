@@ -24,7 +24,11 @@
 					<b>Tags:</b><br>
 					{{$userphotogrids->tag}}
 					<br>
-					<b><a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a></b>
+					<b><?php if(Auth::check()){ ?>
+							<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+						<?php } else { ?>
+							<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="btn btn-bdrSml">Add to vision book</a>
+						<?php }?></b>
 					<div class="share-links">
 					like the idea and the concept :
 						<div class="social-links">

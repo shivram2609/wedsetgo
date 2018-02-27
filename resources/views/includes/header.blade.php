@@ -118,8 +118,8 @@
 
 		  <!-- Modal body -->
 		  <div class="modal-body">
-		      {!! Form::open(['route' => 'user.authenticate']) !!}
-		      
+		     {!! Form::open(['route' => 'user.authenticate']) !!}
+		    <input type="hidden" value="{{$url}}" name="url" />
 			<div class="input-group form-group">
 			  <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
 			 	{!! Form::input('email', 'email', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Email', 'required'=>'Please enter email.']) !!}	
@@ -141,7 +141,8 @@
 				  <a href="socialAuth/google" title="Google+" class="gplus"><i class="fa fa-google-plus" aria-hidden="true"></i> Google+</a>
 				   <a href="socialAuth/twitter" title="Twitter" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
 			 </div>
-			{!! Form::close() !!}
+			 </form>
+			<!--{!! Form::close() !!}-->
 		  </div>
 		</div>
 	  </div>

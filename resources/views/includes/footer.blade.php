@@ -203,14 +203,34 @@
 				});
 			});
 			
-		$("#checkbox_professional").click(function() {
+		 $("#checkbox_professional").click(function() {
 			if($(this).is(":checked")) {
 				$('.professional_status').removeClass("hide");
 				}
 			});
-		
-            
-        });
+	    $('.confirm').on('click', function (e) {
+		 return !!confirm($(this).data('confirm'));
+		 });
+		 
+		 $('#location_select').on('change', function () {
+			var optionSelected = $(this).val();
+			if(optionSelected =='0'){
+				$('#other_loc').removeClass('hide');
+			} else {
+				$('#other_loc').addClass('hide');
+			}
+		});
+		 $('#category_selected').on('change', function () {
+			var optionSelected = $(this).val();
+			if(optionSelected =='0'){
+				$('#other_cate').removeClass('hide');
+			} else {
+				$('#other_cate').addClass('hide');
+			}
+		});
+
+  });
+
     </script>
  <script>
   $(document).ready(function() {

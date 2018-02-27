@@ -34,7 +34,11 @@
 						<a href="#" title="Send Message" class="pull-right btn btn-white" data-toggle="modal" data-target="#sendmessage">Send Message</a>
 						<a href="#" title="Rate Me" class="pull-right btn btn-white" data-toggle="modal" data-target="#rating">Rate Me</a>
 					{!! Form::close() !!}
-				<?php }} ?>
+				<?php }} else { ?>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Follow</a>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Send Message</a>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Rate Me</a>
+				<?php }?>
 				<?php echo ucfirst($user->first_name);?><br/>
 				Wedding Planning Website
 			</div>

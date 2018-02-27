@@ -19,7 +19,11 @@
 						<div class="text">
 							<b>{{$userphotogrids->title}}</b>
 								<p>{{ str_limit($userphotogrids->description, 30) }}</p>
-							<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+								<?php if(Auth::check()){ ?>
+								<a href="{{ url('/v') }}/{{$userphotogrids->id}}-{{$userphotogrids->title}}" class="btn btn-bdrSml"> Add to vision book</a>
+								<?php } else { ?>
+									<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="btn btn-bdrSml">Add to vision book</a>
+								<?php }?>
 						</div>
 					</div>
 				</div>
