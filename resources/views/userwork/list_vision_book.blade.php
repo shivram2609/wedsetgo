@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<?php if(!empty($album)){ ?>
-				<a href="#" data-toggle="modal" data-target="#invitefrnd" class="btn btn-gray btn-block form-group" ><h4>Invite friend to view vision book</h4></a>
+				<!--a href="#" data-toggle="modal" data-target="#invitefrnd" class="btn btn-gray btn-block form-group" ><h4>Invite friend to view vision book</h4></a-->
 			<?php }?>
 				<div class="masonry">
 
