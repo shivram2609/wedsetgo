@@ -30,7 +30,7 @@
 				Search In
 				{!! Form::select('search_val', [null=>'Please 
 					Select',"pName"=>"Professional 
-					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':'uwName') :''), array("class"=>"custom-select")) !!}
+					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':($tmpQuery['search_val']=='uwName'?'uwName':'')) :''), array("class"=>"custom-select")) !!}
 				
 			</div>
 			<div  class="filter-sections">
