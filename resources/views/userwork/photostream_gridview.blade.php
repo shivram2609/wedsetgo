@@ -23,14 +23,14 @@
 				
 			</div>
 			<div class="filter-sections">
-				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
+				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "Search using a professional’s name" ]) !!}
 				
 			</div>
 			<div class="filter-sections">
 				Search In
 				{!! Form::select('search_val', [null=>'Please 
 					Select',"pName"=>"Professional 
-					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':($tmpQuery['search_val']=='uwName'?'uwName':'')) :''), array("class"=>"custom-select")) !!}
+					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':($tmpQuery['search_val']=='uwName'?'uwName':'pName')) :''), array("class"=>"custom-select")) !!}
 				
 			</div>
 			<div  class="filter-sections">
@@ -43,6 +43,19 @@
 	 <!-- filter bar end-->
 	 <!-- list container start -->
 	<div class="container">	
+		<?php $message = "Search result "; if (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key']) ) { 
+			$message .= 'for "'.$tmpQuery['search_key'].'"';
+		 } if ( isset($tmpQuery['search_val']) && !empty($tmpQuery['search_val']) ) { 
+			 $message .= ' of "'.($tmpQuery['search_val']=='pName'?'Professional Name':'Title/Description').'"'; 
+		 } else {
+			 $message .= ' of "Profesionals Name"'; 
+		 }
+		 if ( isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id']) ) { 
+			 $message .= ' in Category "'.$catagory[$tmpQuery['catagory_id']].'"'; 
+		 }  ?>
+		<p class="photostream"><?php echo $message; ?></p>
+		
+		
 		<?php if (!empty($count)) {  ?>
 			<?php if ($view == 'grid') {  ?>	
 			<div class="product-grid-list">

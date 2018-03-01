@@ -32,6 +32,23 @@
 			<td>Business Category</td>
 			<td>{{$viewProfessionals->name}}</td>
 		</tr>
+		<?php if (!empty($viewProfessionals->other_category)) { ?>
+		<tr>
+			<td>Other Category</td>
+			<td>{{$viewProfessionals->other_category}} <a href="/catagory" >Add in category</a></td>
+			
+		</tr>
+		<?php }?>
+		<tr>
+			<td>Location</td>
+			<td>{{$viewProfessionals->location_name}}</td>
+		</tr>
+		<?php if (!empty($viewProfessionals->other_location)) { ?>
+		<tr>
+			<td>Other Location</td>
+			<td>{{$viewProfessionals->other_location}} <a href="/location" >Add in locations</a></td>
+		</tr>
+		<?php }?>
 		<tr>
 			<td>Dob</td>
 			<td>{{$viewProfessionals->dob}}</td>

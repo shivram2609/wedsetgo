@@ -14,6 +14,7 @@ use App\Location;
 use App\Invitation; 
 use Session;
 use Catagory;
+use Response;
 use Auth;
 use Config;
 use DB;
@@ -147,11 +148,12 @@ class UserworkController extends Controller{
 			  $searchEntity->where(function($q) use ($keyword){
 					$q->orWhere('user_details.first_name', 'LIKE', '%'.$keyword.'%');
 					$q->orWhere('user_details.last_name', 'LIKE', '%'.$keyword.'%');
-					$q->orWhere('user_works.description', 'LIKE', '%'.$keyword.'%');
-					$q->orWhere('user_works.title', 'LIKE', '%'.$keyword.'%');
-					$q->orWhere('catagories.name', 'LIKE', '%'.$keyword.'%');
-					$q->orWhere('user_works.tag', 'LIKE', '%'.$keyword.'%');
+					//$q->orWhere('user_works.description', 'LIKE', '%'.$keyword.'%');
+					//$q->orWhere('user_works.title', 'LIKE', '%'.$keyword.'%');
+					//$q->orWhere('catagories.name', 'LIKE', '%'.$keyword.'%');
+					//$q->orWhere('user_works.tag', 'LIKE', '%'.$keyword.'%');
 				});
+				//$tmpQuery['search_val'] == 'pName';
 		  }
 		  
 		  /*
@@ -165,6 +167,7 @@ class UserworkController extends Controller{
 		)*/
 		$userphotogrid = $searchEntity->paginate($pageCount);
 		$count = $userphotogrid->count();
+		
 		//echo $count;
 		return view('userwork.photostream_gridview', array('tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString,'view'=>$view,'request'=>$request,'title' => 'Photo Stream', 'userphotogrid'=>$userphotogrid, 'catagory'=>$catagory,"count"=>$count)); 
 	 }

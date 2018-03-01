@@ -121,7 +121,7 @@ class AdminController extends Controller
 	}
 	
 	public function viewProfessionalList(Request $request, $id){
-		$viewProfessionals = DB::table('users')->select('user_details.*','users.*', 'catagories.name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id','=','user_details.category_id')->where('users.id', $id)->first();
+		$viewProfessionals = DB::table('users')->select('user_details.*','users.*', 'catagories.name', 'location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id','=','user_details.category_id')->leftJoin('locations','locations.id','=','user_details.location_id')->where('users.id', $id)->first();
 		$socialVal = unserialize($viewProfessionals->social_media);
 		return view('admin.view_professional', array('title' => 'Professional List', 'viewProfessionals'=>$viewProfessionals, 'socialVal'=>$socialVal ));
 	}

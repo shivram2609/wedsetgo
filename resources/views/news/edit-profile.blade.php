@@ -81,9 +81,9 @@
 					<br>
 
 					<?php if($user->porfessional_request == 1 And $user->user_type_id == 3) { ?>
-						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you want to send request for professional please check for fill some  professional details. </input>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request. </input>
 					<?php } else if($user->user_type_id == 3) {?>
-						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you want to send request for professional please check for fill some  professional details. </input>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request. </input>
 					<?php }?>
 					   
 					

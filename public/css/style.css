@@ -725,3 +725,14 @@ ul, ol {
     border-radius: 20px;
 }
 .seller-list-new { width:20% !important; }
+.photostream{color: #761b31;font-size: 25px;margin: 20px 0 0 13px;}
+.auto_helper{float: left;
+position: absolute;
+margin: 38px 0 0 11px;
+background-color: #761b31;
+z-index: 9999999999;
+width: 63%;
+border-radius: 0 0px 25px 25px;
+list-style: none;
+opacity: 0.9;
+border: whitesmoke;}

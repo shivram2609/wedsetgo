@@ -228,7 +228,7 @@
 				$('#other_cate').addClass('hide');
 			}
 		});
-
+		 
   });
 
     </script>
@@ -242,12 +242,40 @@
 	  $("#sellerSignin").on("click",function(){
 		  $("#u_type").val("2");
 	  });
-	  
+	var keyFlag = false;
+	$("#search_text").on("keyup",function(){
+		if ( $(this).val().length <= 0 ) {
+			$(".auto_helper").hide();
+		} else {
+			$(".auto_helper").show();
+		}
+		$("#txt1").html("Search <b>"+$(this).val()+"</b> in Professional.");
+		$("#txt2").html("Search <b>"+$(this).val()+"</b> in Categories.");
+		$("#txt3").html("Search <b>"+$(this).val()+"</b> in Professional names.");
+		$(".auto_helper").removeClass("hide");
+	});
+	
+	
+	
+	$("body").on("click",function(){
+		$(".auto_helper").hide();;
+	});
+	
+	$(".select_text").on("click",function(){
+		$("#optsearch").val($(this).attr("val"));
+		$("#keysearch").val($("#search_text").val());
+		
+		var str = $(this).html().replace("<b>","");
+		var str = str.replace("</b>","");
+		$("#search_text").val(str);
+	});
+	
+	
       $("html").niceScroll({cursorborder:"",cursoropacitymax:0.7,boxzoom:true,scrollspeed:60,mousescrollstep:40,cursorwidth:6,cursorborder:0,cursorcolor:"#808080",autohidemode:!1,zindex:9999999,horizrailenabled:!1,cursorborderradius:0});
   });
   $(document).ready(function(){
 			//alert("here");
-			$(".st-last").removeAttr("style");
-		});
+		$(".st-last").removeAttr("style");
+	});
   
 </script>
