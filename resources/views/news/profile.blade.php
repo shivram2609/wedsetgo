@@ -79,10 +79,10 @@
 						<span>{{$sellerProfile->location_name}}</span>
 					</div>
 					<div class="right-row">
-						<b><i class="fa fa-map-marker" aria-hidden="true"></i> Website:</b> 
+						<b><i class="fa fa-globe" aria-hidden="true"></i> Website:</b> 
 						<span>{{$sellerProfile->website}}</span>
 					</div>
-					<b><i class="fa fa-map-marker" aria-hidden="true"></i> Get in touch with</b>
+					<b><i class="fa fa-handshake-o" aria-hidden="true"></i> Get in touch with</b>
 					<div class="right-row social-links"> 
 						
 						<?php if(!empty($socialVal['fb'])) { ?>
