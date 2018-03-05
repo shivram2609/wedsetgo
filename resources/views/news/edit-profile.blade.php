@@ -27,19 +27,18 @@
 				</div>
 		</div>		
 		</div>
-		
 		<div class="user-nav user-nav-ext">
 			<label class="btn btn-default btn-file hover-color" style="background-color:#f7f7f7; paddding:20px; margin-top:10px;margin-right:10px; padding:10px;"> 
 				<i class="fa fa-pencil" aria-hidden="true"></i>	 
-					Change Profile Image <input type="file" style="display:none;" name="profile_image">
+					Change Profile Image <input type="file" style="display:none;" name="profile_image" class="">
 				</label>
-					 <a href="{{ url('/p') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Your Profile">Your Profile</a>
+					 <a href="{{ url('/p') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Your Profile" class="">Your Profile</a>
 							<a href="/vision_book" class="" title="My Vision Books">My Vision Books</a> 
 						 <?php if (Auth::user()->user_type_id == 2){ ?> 
-							<a href="/my_work" title="My Work">My Work</a>	 
+							<a href="/my_work" title="My Work" class="">My Work</a>	 
 							<?php }?>
-					 <a href="/message/{{$user->id}}" title="Messages">Messages</a>
-					 <a href="/review/{{$user->id}}" title="Reviews">Reviews</a>
+					 <a href="/message/{{$user->id}}" title="Messages" class="">Messages</a>
+					 <a href="/review/{{$user->id}}" title="Reviews" class="">Reviews</a>
 		</div>
 		<div class="dashboard-wrapper">
 			
@@ -115,13 +114,13 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12 form-group">
-								<label>Address:</label>
-								<textarea class="form-control" placeholder="Address" name="address"> <?php echo isset($user->address)?$user->address:''?></textarea>
+								<label>Street Address:</label>
+								<textarea class="form-control" placeholder="Street and number, P.O. box, c/o." name="address"> <?php echo isset($user->address)?$user->address:''?></textarea>
 							</div>						
 						</div>
 						<div class="row">
 							<div class="col-sm-6 form-group">
-								{!! Form::label('location', 'Location', ['class' => 'control-label']) !!}
+								{!! Form::label('location', 'City', ['class' => 'control-label']) !!}
 								{!! Form::select('location_id',[null=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select", 'id'=>"location_select")) !!}
 							</div>
 							<?php if($user->location_id == 0){ ?>
@@ -135,11 +134,13 @@
 		
 						</div>
 						<div class="row">
+<!--
 						<div class="col-sm-12 form-group">
 								<label>City</label>
 								<input type="text" name="city" class="form-control" value="<?php echo isset($user->city)?$user->city:''?>" />
 							</div>
 						</div>
+-->
 							
 						<div class="row">
 							<div class="col-sm-6 form-group">

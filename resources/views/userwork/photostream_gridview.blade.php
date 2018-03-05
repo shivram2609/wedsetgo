@@ -48,7 +48,7 @@
 		 } if ( isset($tmpQuery['search_val']) && !empty($tmpQuery['search_val']) ) { 
 			 $message .= ' of "'.($tmpQuery['search_val']=='pName'?'Professional Name':'Title/Description').'"'; 
 		 } else {
-			 $message .= ' of "Profesionals Name"'; 
+			 $message .= ' of "Professionals Name"'; 
 		 }
 		 if ( isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id']) ) { 
 			 $message .= ' in Category "'.$catagory[$tmpQuery['catagory_id']].'"'; 

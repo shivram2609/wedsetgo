@@ -433,7 +433,8 @@ class UserController extends Controller
 		$keyword = explode("-",$keyword);
 		$id = $keyword[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $id)->first();
-		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description","user_details.address",'catagories.name', 'locations.location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id');
+		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description", "user_details.website", "user_details.social_media","user_details.address",'catagories.name', 'locations.location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id');
+		
 		$sellerwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id');
 		if(Auth::check()){
 			if (Auth::user()->id == $id){
@@ -454,6 +455,7 @@ class UserController extends Controller
 			$count = DB::table('user_works')->where('user_works.user_id','=', $id)->where('user_works.status', 1)->count();
 		}
 		$sellerProfile = $sellerProfile->where('users.id','=',$id)->first();
+		$socialVal = unserialize($sellerProfile->social_media);
 		$sellerwork= $sellerwork->where('user_works.user_id','=', $id)->get();
 		if (Auth::check()){
 			$follow = DB::table('followers')->select('followers.*')->where('professional_id', "=", $id)->where('buyer_id', "=", Auth::user()->id)->first();
@@ -463,9 +465,9 @@ class UserController extends Controller
 		///dd($rating);
 		$followCount = Controller::followCount($id);
 		if (Auth::check()){
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating, "follow"=>$follow));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating, "follow"=>$follow, "socialVal"=>$socialVal));
 		} else {
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating,"socialVal"=>$socialVal));
 		}
 		
 	}

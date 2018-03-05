@@ -228,6 +228,7 @@
 				$('#other_cate').addClass('hide');
 			}
 		});
+		
 		 
   });
 
@@ -248,15 +249,26 @@
 			$(".auto_helper").hide();
 		} else {
 			$(".auto_helper").show();
-		}
-		$("#txt1").html("Search <b>"+$(this).val()+"</b> in Professional.");
-		$("#txt2").html("Search <b>"+$(this).val()+"</b> in Categories.");
-		$("#txt3").html("Search <b>"+$(this).val()+"</b> in Professional names.");
+		}	
+		$("#txt1").html("<b>"+$(this).val()+"</b> in Photos.");
+		$("#txt2").html("<b>"+$(this).val()+"</b> in Professionals.");
+		$("#txt3").html("<b>"+$(this).val()+"</b> in Products/Services.");
 		$(".auto_helper").removeClass("hide");
+		
 	});
 	
-	
-	
+	$("#search_text").on("focus",function(){	
+		if ($("#keysearch").val().length > 0) {
+			$("#search_text").val($("#keysearch").val());
+			
+			$("#txt1").html("<b>"+$(this).val()+"</b> in Photos.");
+			$("#txt2").html("<b>"+$(this).val()+"</b> in Professionals.");
+			$("#txt3").html("<b>"+$(this).val()+"</b> in Products/Services.");
+			$(".auto_helper").removeClass("hide");
+			$("#keysearch").val('');
+			
+		}
+	});
 	$("body").on("click",function(){
 		$(".auto_helper").hide();;
 	});
@@ -264,10 +276,10 @@
 	$(".select_text").on("click",function(){
 		$("#optsearch").val($(this).attr("val"));
 		$("#keysearch").val($("#search_text").val());
-		
 		var str = $(this).html().replace("<b>","");
 		var str = str.replace("</b>","");
 		$("#search_text").val(str);
+		$('#photostream_form').submit();
 	});
 	
 	

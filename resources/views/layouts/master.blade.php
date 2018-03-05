@@ -30,6 +30,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{ asset('css/star-rating.css') }}" rel="stylesheet" type="text/css" >
+    <link href="http://demo.expertphp.in/css/jquery.ui.autocomplete.css" rel="stylesheet">
     
 	<!-- Custom styles -->
 	 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >

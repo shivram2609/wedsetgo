@@ -736,3 +736,16 @@ border-radius: 0 0px 25px 25px;
 list-style: none;
 opacity: 0.9;
 border: whitesmoke;}
+
+
+.new_menu a{color:#761b31 !important;}
+.new_menu {overflow:hidden !important;}
+.header_right {float: right;
+width: 25%;
+position: relative;
+background-color: #761b31;
+padding: 9px 0 0 14px;
+border-radius: 26px;
+margin: 0 0 0 10px;
+font-size: 14px;}
+.header_right a{color:#ffffff; margin-left:10px;}

@@ -4,30 +4,60 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-		
         <div class="collapse navbar-collapse" id="navbarResponsive">
 <div class="header-rt-top">
 			<div class="search-box">
-				{!! Form::open(["method"=>"get","url"=>"photostream"]) !!}
-					<input type="text" name="search_key" placeholder="Search Professional, Products, Services And More..."> <button class="search-btn" type="submit">Search</button>
+				{!! Form::open(["method"=>"get","url"=>"photostream", 'id'=>"photostream_form"]) !!}
+					<input type="text" name="search_key" placeholder="Search Professional, Products, Services And More..." id="search_text" autocomplete="off"> 
+					<input type="hidden" name="option" id="optsearch" value="" />
+					<input type="hidden" name="keysearch" id="keysearch" value="" />
+					<button class="search-btn" type="submit" >Search</button>
+					<ul class="auto_helper hide">
+						<li class='select_text' id="txt1" val='1'></li>
+						<li class='select_text' id="txt2" val='2'></li>
+						<li class='select_text' id="txt3" val='3'></li>
+					</ul>	
+					
 				{!! Form::close() !!}
 			</div>
+			
 			<?php if (Auth::check()) { ?>
-			<div class="login-signup">
-				<?php if(!empty(Session::get("users"))) { ?>
-					<a href="/edit_profile" title="Edit Profile">Welcome  {{Session::get("users")->first_name}}</a>/ 
-				<?php } ?>
-					<a href="/logout" title="Login">Logout</a></div>
-			<?php }else{ ?>
+	
+			
+				<div class="header_right">
+					
+					<?php if(!empty(Session::get("users"))) { ?>
+						<?php if(!empty(Session::get("users")->profile_image)) { ?>
+						<span class="profile-img"><img class="img-fluid rounded-circle" src="/uploads/avatars/{{ Session::get('users')->profile_image }}" alt='{{Session::get("users")->first_name}} {{Session::get("users")->last_name}}' style="height:auto;width:23%;" >
+					<?php } else { ?>
+						<span class="profile-img"><img class="img-fluid rounded-circle" src="{{URL::to('img/user-dummy.jpg')}}" alt='{{Session::get("users")->first_name}} {{Session::get("users")->last_name}}' width="25" height="25">
+					<?php }?>
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" title="Edit Profile">{{Session::get("users")->first_name}} {{Session::get("users")->last_name}}<b class="caret"></b></a>
+					<?php } ?>
+					
+					<div class="dropdown-menu new_menu">
+					  <a class="dropdown-item" href="{{ url('/p') }}/{{Auth::user()->id}}-{{Session::get('users')->first_name}}-{{Session::get('users')->last_name}}">Profile</a>
+					  <a class="dropdown-item" href="/edit_profile">Edit Profile</a>
+					  <a class="dropdown-item" href="/my_work">My Work</a>
+					  <a class="dropdown-item" href="/message/{{Auth::user()->id}}">Messages</a>
+					  <a class="dropdown-item" href="/review/{{Auth::user()->id}}">Reviews</a>
+					  <a class="dropdown-item" href="/vision_book">My Vision Books</a>
+					  <div class="dropdown-divider"></div>
+					  <a class="dropdown-item" href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Log Out</a>
+					</div>
+					</span>
+				
+			</div>
+		<?php }else{ ?>
 			<div class="login-signup"><a href="#" title="Login" data-toggle="modal" data-target="#signIn">Login</a> / <a href="#" title="Login" data-toggle="modal" data-target="#signUp">Signup</a></div>
-			<?php } ?>
+		<?php } ?>
 		</div>		
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/" title="HOME">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/photostream" title="PHOTO STREAM">PHOTO STREAM</a>
+              <a class="nav-link" href="/photostream" title="PHOTO STREAM" class="">PHOTO STREAM</a>
             </li>
             <li class="nav-item">
               <a class="nav-link dropdown-toggle" href="#" title="FIND PROFESSIONALS" data-toggle="dropdown">FIND PROFESSIONALS <b class="caret"></b></a>

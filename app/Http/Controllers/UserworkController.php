@@ -98,6 +98,17 @@ class UserworkController extends Controller{
   
 	  public function photostream_gridview(Request $request){
 		  $view = $tmpQuery = $request->query();
+		//  dd($view);
+		  if ( isset($view['option']) && ($view['option'] == 2)) {
+			return redirect("/seller?catagory_id=&location_id=&record_per_page=&search_key=".$view['keysearch']);
+		  } elseif (isset($view['option']) && ($view['option'] == 1)) {
+			  $view['search_key']= $tmpQuery['search_key']= $view['keysearch'];
+			  $view['search_val']=$tmpQuery['search_val']='uwName';
+		  } elseif (isset($view['option']) && ($view['option'] == 3)) {
+			  return redirect("/seller?catagory_id=&location_id=&record_per_page=&search_key=".$view['keysearch']);
+		  }
+		  
+		  
 		  $view = isset($view['view'])?$view['view']:'grid';
 		  if ( isset($tmpQuery['view']) ) {
 			  unset($tmpQuery['view']);
@@ -259,7 +270,7 @@ class UserworkController extends Controller{
 			  $templist->where(function($q) use ($keyword){
 					$q->orWhere('user_details.first_name', 'LIKE', '%'.$keyword.'%');
 					$q->orWhere('user_details.last_name', 'LIKE', '%'.$keyword.'%');
-					$q->orWhere('user_details.detail', 'LIKE', '%'.$keyword.'%');
+					$q->orWhere('user_details.trade_description', 'LIKE', '%'.$keyword.'%');
 				});
 		  }
 			$sellerList = $templist->paginate($pageCount);
