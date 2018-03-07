@@ -56,8 +56,7 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.pt-BR.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/bootstrap-star-rating.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/nicescroll.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/nicescroll.min.js') }}" async='async'></script>
 	<?php if (Auth::check()) { ?>
 	<?php } else { ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -283,12 +282,16 @@
 		$('#photostream_form').submit();
 	});
 	
-	
-      $("html").niceScroll({cursorborder:"",cursoropacitymax:0.7,boxzoom:true,scrollspeed:60,mousescrollstep:40,cursorwidth:6,cursorborder:0,cursorcolor:"#808080",autohidemode:!1,zindex:9999999,horizrailenabled:!1,cursorborderradius:0});
-  });
+});
+      
   $(document).ready(function(){
 			//alert("here");
 		$(".st-last").removeAttr("style");
 	});
   
+</script>
+<script async='async'>
+	$(document).ready(function(){
+		$("html").niceScroll({cursorborder:"",cursoropacitymax:0.7,boxzoom:true,scrollspeed:60,mousescrollstep:40,cursorwidth:6,cursorborder:0,cursorcolor:"#808080",autohidemode:!1,zindex:9999999,horizrailenabled:!1,cursorborderradius:0});
+  });
 </script>

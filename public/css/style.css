@@ -749,3 +749,10 @@ border-radius: 26px;
 margin: 0 0 0 10px;
 font-size: 14px;}
 .header_right a{color:#ffffff;}
+.head_image{height: 25px;
+width: 25px;
+float: left;
+background-size: cover !important;
+background-position: center !important;
+border-radius: 12px;
+margin: 0 5px 0 0;}
