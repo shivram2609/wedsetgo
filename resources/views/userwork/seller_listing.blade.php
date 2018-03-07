@@ -25,6 +25,7 @@
 	 <!-- filter bar end-->
 	 <!-- list container start -->
 <div class="container">	
+	<?php if (!empty($count)) {  ?>
 	@foreach($sellerList as $sellerLists)
 	<div class="product-list">
 	<div class="img-sec seller-list-new">
@@ -58,6 +59,9 @@
 				</div>
 				</div>
 				 @endforeach
+			<?php } else { ?>
+				<div class="empty">Sorry, No record found.</div>
+			<?php } ?>
 	<nav>
 		@include('includes.pagination', ['paginator' => $sellerList->appends(request()->query())])
 	</nav>

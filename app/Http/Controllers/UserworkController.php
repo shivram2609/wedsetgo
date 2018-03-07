@@ -258,6 +258,7 @@ class UserworkController extends Controller{
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
 		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.trade_description",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->join('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2);
 		  
+		  
 		   if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$templist->where('user_details.category_id','=', $tmpQuery['catagory_id']);
 		  }
@@ -274,7 +275,8 @@ class UserworkController extends Controller{
 				});
 		  }
 			$sellerList = $templist->paginate($pageCount);
-		 return view('userwork.seller_listing', array('title' =>'Seller', 'tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString, "catagory"=>$catagory,'view'=>$view, 'sellerList'=>$sellerList,"location"=>$location));
+			$count = $sellerList->count();
+		 return view('userwork.seller_listing', array('title' =>'Seller', 'tmpQuery'=>$tmpQuery,'tmpQString'=>$tmpQString, "catagory"=>$catagory,'view'=>$view, 'sellerList'=>$sellerList,"location"=>$location, 'count'=>$count));
 		
 	}
 	

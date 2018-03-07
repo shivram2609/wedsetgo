@@ -31,15 +31,26 @@ class MessageController extends Controller {
 		return view('message.message', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'message'=>$message));
     }
     public function message_list($mid = NULL, Request $request){
-		
 		if ($request->isMethod('post')) {
-			       $result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
-					MessageConversation::create(array(
-					'sender_id' => Auth::user()->id,
-					'message_id' => $mid,
-					'message' => $request->message
-					));	
-				}
+			$lastMessage = DB::Table('messages')->select('messages.*')->where('messages.id', $mid)->first();
+			$receiver_id = ($lastMessage->sender_id == Auth::user()->id)?$lastMessage->receiver_id:$lastMessage->sender_id;
+			$result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
+			MessageConversation::create(array(
+			'sender_id' => Auth::user()->id,
+			'message_id' => $mid,
+			'message' => $request->message
+			));	
+			$getUSer = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('users.id',$receiver_id)->first();
+			$this->email_body .= "Hello".$getUSer->first_name."<br/><br/> ";
+			$this->email_body .= "Message: " .$request->message. "<br/><br/> ";
+			$this->email_body .= "<a href='".$this->staticLink."message_list/".$mid."'>Click Here to reply</a>";
+			$this->email_subject = "Wedsetgo: New Message Recived";
+			Controller::sendMail($getUSer->email); 
+			Session::flash('flash_message', 'Your message has been send.');
+		}
+		 
+		
+		
 		$user = Controller::getUser(Auth::user()->id);
 		$followCount = Controller::followCount(Auth::user()->id);
 		$id= Auth::user()->id;

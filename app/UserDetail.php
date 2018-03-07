@@ -14,7 +14,7 @@ class UserDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'first_name', 'last_name', 'gender', 'profile_image', 'detail', 'phone_no','website', 'category_id','location_id', 'dob', 'address', 'trade_description', 'social_media','other_category','other_location','city'];
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'gender', 'profile_image', 'detail', 'phone_no','website', 'category_id','location_id', 'dob', 'address', 'trade_description', 'social_media','other_category','other_location','city','country','state', 'zipcode'];
 
 
 	public function user() {

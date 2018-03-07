@@ -194,7 +194,7 @@ class UserController extends Controller
 		}
 } 
 
-	public function adminchangepassword(Request $request) {
+	public function changepassword(Request $request) {
 		if ($request->isMethod('post')) {
 			$this->validate($request, array(
 									'currentpassword' => 'required',
@@ -208,7 +208,7 @@ class UserController extends Controller
 			    Session::flash('flash_message', 'Password not change, Please try again');
 		   }
 		} 
-		return view('admin.adminchangepassword', array('title' => 'Change Password')); 		 
+		return redirect()->route('home_path');		 
 		
 	}
 	
@@ -335,14 +335,14 @@ class UserController extends Controller
 		}
 	}
 	
-	public function editprofile(Request $request, $id=Null){
+	public function editprofile(Request $request, $id=Null){	
 		if ($request->isMethod('post')){
 			 $this->validate($request, array(
                                 'first' => 'required|max:255',
                                 'lastname' => 'required|max:255',
                                 'email' => 'required|email|max:255',
-                            ));
-                            
+                                ));
+        
 			$socialArray['fb'] = $request->fb;
 			$socialArray['twitter'] = $request->twitter;
 			$socialArray['google'] = $request->google;
@@ -362,8 +362,19 @@ class UserController extends Controller
 			$data['social_media'] = $socialVal;
 			$data['location_id'] = $request->location_id;
 			$data['city'] = $request->city;
-			$data['other_category'] = $request->other_category;
-			$data['other_location'] = $request->other_location;
+			$data['country'] = $request->country;
+			$data['state'] = $request->state;
+			$data['zipcode'] = $request->zipcode;
+			if($request->category_id == 0){
+				$data['other_category'] = $request->other_category;
+			}else{
+				$data['other_category'] = NULL;
+			}
+			if($request->location_id == 0){
+				$data['other_location'] = $request->other_location;
+			}else{
+				$data['other_location'] = NULL;
+			}
 			$token = str_random(100);
 			$file = $request->file('profile_image');
 			if($request->file('profile_image')){	
@@ -381,18 +392,40 @@ class UserController extends Controller
 				$request->file('background_image')->move($destination,$filename);
 				$data['background_image'] = $filename;
 			}
-			if(!empty($request)){
+			if(!empty($request)){	
+				if($request->category_id == 0 || $request->location_id == 0){
+					$result = DB::table('users')->select("users.*")->where('id',Auth::user()->id)->first();
+						if($result->user_type_id == 2){
+								$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email, 'user_type_id'=>3, 'porfessional_request'=> 1]);
+								$this->email_body .= "Message: Hello Dear Admin,";
+								$this->email_subject = "Reqeust to change";
+								$flag = false;
+								if ($request->category_id == 0) {
+									$this->email_body .= "<br/><br/> I am changing the Category";
+									 $this->email_subject .= "Category";
+								} 
+								if ($request->location_id == 0) {
+									$this->email_body .= "<br/><br/> I am changing the Location";
+									$this->email_subject .= ($flag)?" and ":"";
+									$this->email_subject .= " Location ";
+								} 
+								
+								Controller::sendMail('ranjuzestmind@gmail.com');  
+								Session::flash('flash_message', 'Your Request has been sent.');
+					}
+			    }else{
 				$result = DB::table('users')->where('id',Auth::user()->id)->update(['email'=> $request->email]);
+				}
 				$result = DB::table('user_details')->where('user_id',Auth::user()->id)->update($data);
 				$user = DB::table('users')->select("porfessional_request", "user_type_id")->where('id',Auth::user()->id)->first();
 				if($request->agree == 1){
 					$users = DB::table('users')->select('users.porfessional_request','users.user_type_id')->where('id', Auth::user()->id)->first();
 					if($user->user_type_id == 3 AND $user->porfessional_request == 0){
 						$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
-									$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
+						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('contactwedsetgo@gmail.com');  
+						Controller::sendMail('ranjuzestmind@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}
@@ -406,7 +439,6 @@ class UserController extends Controller
 		$location[0] = "Other";
 		//dd($location);
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
-		
 		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
 		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
 		$socialVal = unserialize($user->social_media);

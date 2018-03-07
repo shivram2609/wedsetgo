@@ -91,7 +91,7 @@
 					<?php } else {?>
 						<div class="professional_status hide">
 					<?php }?>
-						</div>
+						
 						<div class="row">
 							<div class="col-sm-12	 form-group">
 								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
@@ -119,6 +119,20 @@
 							</div>						
 						</div>
 						<div class="row">
+							<div class="col-sm-4 form-group">
+								<label>Country:</label>
+								<input type="text" name="country" class="form-control" value="<?php echo isset($user->country)?$user->country:''?>"/>
+							</div>
+							<div class="col-sm-4 form-group">
+								<label>State:</label>
+								<input type="text" name="state" class="form-control" value="<?php echo isset($user->state)?$user->state:''?>"/>
+							</div>
+							<div class="col-sm-4 form-group">
+								<label>Zipcode:</label>
+								<input type="text" name="zipcode" class="form-control" value="<?php echo isset($user->zipcode)?$user->zipcode:''?>"/>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-sm-6 form-group">
 								{!! Form::label('location', 'City', ['class' => 'control-label']) !!}
 								{!! Form::select('location_id',[null=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select", 'id'=>"location_select")) !!}
@@ -128,12 +142,12 @@
 							<?php } else { ?>
 								<div class="col-sm-6 form-group hide" id="other_loc">
 							<?php }?>
-								<label>Other Location:</label>
+								<label>Other City:</label>
 								<input type="text" name="other_location" class="form-control" value="<?php echo isset($user->other_location)?$user->other_location:''?>" />
 							</div>
 		
 						</div>
-						<div class="row">
+						
 <!--
 						<div class="col-sm-12 form-group">
 								<label>City</label>
@@ -176,7 +190,9 @@
 			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
 			<?php }?>
 				</div>
+		
 		</div>
+		
 		
 		{!! Form::close() !!}
 	</div>

@@ -29,6 +29,10 @@ abstract class Controller extends BaseController
 		//dd($request->url());
 		View::share('headCategory', $headCategory);
 		View::share('url', $request->url());
+		if ( Auth::check()) {
+			$user = $this->getUser(Auth::user()->id);
+			View::share('user', $user);
+		}
 	}
     
     public function getEmailData( $slug = NULL ) {

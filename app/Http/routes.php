@@ -51,8 +51,8 @@
 
 Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('admin',array('as' => 'admin.admindashboard', 'uses'=>'AdminController@admindashboard'));
-	Route::get('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'UserController@adminchangepassword'));
-	Route::post('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'UserController@adminchangepassword'));
+	Route::get('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'AdminController@adminchangepassword'));
+	Route::post('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'AdminController@adminchangepassword'));
 	
 	Route::get('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
 	Route::post('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
@@ -136,6 +136,8 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
+	Route::get('changepassword', array('as' => 'news.changepassword', 'uses' => 'UserController@changepassword'));
+	Route::post('changepassword', array('as' => 'news.changepassword', 'uses' => 'UserController@changepassword'));
 	
 	
 	

@@ -217,16 +217,41 @@ class AdminController extends Controller
 	  public function admin_message_list($mid = NULL, Request $request){
 		
 		if ($request->isMethod('post')) {
-			       $result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
-					MessageConversation::create(array(
-					'sender_id' => Auth::user()->id,
-					'message_id' => $mid,
-					'message' => $request->message
-					));	
-				}
-		
+			$lastMessage = DB::Table('messages')->select('messages.*')->where('messages.id', $mid)->first();
+			$receiver_id = ($lastMessage->sender_id == Auth::user()->id)?$lastMessage->receiver_id:$lastMessage->sender_id;
+			$result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
+			MessageConversation::create(array(
+			'sender_id' => Auth::user()->id,
+			'message_id' => $mid,
+			'message' => $request->message
+			));
+			$getUSer = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('users.id',$receiver_id)->first();
+			$this->email_body .= "Hello".$getUSer->first_name."<br/><br/> ";
+			$this->email_body .= "Message: " .$request->message. "<br/><br/> ";
+			$this->email_body .= "<a href='".$this->staticLink."message_list/".$mid."'>Click Here to reply</a>";
+			$this->email_subject = "Wedsetgo: New Message Recived";
+			Controller::sendMail($getUSer->email);  	
+			}	
 		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->get();
 		
 		return view('admin.admin_message_list', array('title' => 'Message', 'listMessage'=>$listMessage));
+	}
+	
+	public function adminchangepassword(Request $request) {
+		if ($request->isMethod('post')) {
+			$this->validate($request, array(
+									'currentpassword' => 'required',
+									'password' => 'required|min:6|confirmed',
+                            ));
+		   $user = Auth::user()->id;
+		   $currentPassword=bcrypt($request->input('currentpassword'));
+			if ( $res = DB::table('users')->where(['users.id'=>Auth::user()->id],["password"=>$currentPassword])->update(['users.password' => bcrypt($request->input('password'))]) ) {
+				Session::flash('flash_message', 'Password change successfully');   
+		   } else {
+			    Session::flash('flash_message', 'Password not change, Please try again');
+		   }
+		} 
+		return view('admin.adminchangepassword', array('title' => 'Change Password')); 		 
+		
 	}
 }

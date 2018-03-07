@@ -26,10 +26,11 @@
 		<div class="col-sm-3">
 			<h3 class="footer-heading">Follow Us On :</h3>
 			<div class="social-links"> 
-			 <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
-			 <a class="nav-link" href="#" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
-			 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
-			 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
+			 <a class="nav-link" href="https://www.facebook.com/WedSetGoOfficial/?ref=br_rs" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+			 <a class="nav-link" href="https://twitter.com/Wed_Set_Go" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
+			 <a class="nav-link" href="https://plus.google.com/u/0/114969599777634821732" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
+			 <a class="nav-link" href="https://www.linkedin.com/company/wed-set-go/" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
+			 <a class="nav-link" href="https://www.instagram.com/wedsetgo/" title="Instagram"><img src="{{URL::to('img/instagram-icon.png')}}" alt="Linkedin"></a>
 			 </div>
 		</div>		
 	  </div>
