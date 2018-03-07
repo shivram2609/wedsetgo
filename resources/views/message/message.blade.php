@@ -9,7 +9,7 @@
 						<div class="col-md-12 table-responsive">
 					<h2>Messages</h2>
 					
-					<?php if(!(empty($message))){ ?>
+					<?php if (!empty($count)) {  ?>
 						<ul class="rating-list">
 						@foreach($message as $messages)
 						
@@ -33,9 +33,9 @@
 							</li>
 						@endforeach
 						</ul>
-						<?php } else {?>
-							<p>There is no conversation</p>
-							<?php }?>
+					<?php } else { ?>
+						<div class="empty">Sorry, No record found.</div>
+				<?php } ?>
 						
 				</div>
 				<nav>

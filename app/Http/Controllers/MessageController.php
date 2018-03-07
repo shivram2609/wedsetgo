@@ -27,8 +27,9 @@ class MessageController extends Controller {
 		$user = Controller::getUser(Auth::user()->id);
 		$message= DB::Table('messages')->select('messages.*','udSender.first_name as senderfname','udSender.last_name as senderlname','udReciver.first_name as reciverfname','udReciver.last_name as reciverlname','udSender.profile_image as senderimage','udReciver.profile_image as reciverimage')->join('user_details as udSender', 'udSender.user_id','=','messages.sender_id')->join('user_details as udReciver', 'udReciver.user_id','=','messages.receiver_id')->where("messages.sender_id","=",Auth::user()->id)->orWhere("messages.receiver_id","=",Auth::user()->id)->orderBy("messages.updated_at","desc")->paginate(10);
 		//dd($message);
+		$count = $message->count();
 		$followCount = Controller::followCount(Auth::user()->id);
-		return view('message.message', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'message'=>$message));
+		return view('message.message', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'message'=>$message, 'count'=>$count));
     }
     public function message_list($mid = NULL, Request $request){
 		if ($request->isMethod('post')) {

@@ -211,7 +211,7 @@
 	    $('.confirm').on('click', function (e) {
 		 return !!confirm($(this).data('confirm'));
 		 });
-		 
+
 		 $('#location_select').on('change', function () {
 			var optionSelected = $(this).val();
 			if(optionSelected =='0'){
@@ -228,8 +228,6 @@
 				$('#other_cate').addClass('hide');
 			}
 		});
-		
-		 
   });
 
     </script>

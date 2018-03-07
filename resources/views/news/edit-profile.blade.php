@@ -93,7 +93,7 @@
 					<?php }?>
 						
 						<div class="row">
-							<div class="col-sm-12	 form-group">
+							<div class="col-sm-12 form-group">
 								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
 								{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
 							</div>
@@ -101,13 +101,13 @@
 						<div class="row">
 							<div class="col-sm-6 form-group">
 								<label>Business Category:</label>
-								{!! Form::select('category_id',[null=>'Please Select Category']+ $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select", "id"=>"category_selected")) !!}
+								{!! Form::select('category_id',[-1=>'Please Select Category']+ $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control custom-select", "id"=>"category_selected")) !!}
 							</div>
-							<?php if($user->category_id == 0){ ?>
-								<div class="col-sm-6 form-group" id="other_cate">
-							<?php } else { ?>
-								<div class="col-sm-6 form-group hide" id="other_cate">
-							<?php }?>
+								<?php if(!empty($user->other_category)) { ?>
+									<div class="col-sm-6 form-group" id="other_cate">
+								<?php } else { ?>
+									<div class="col-sm-6 form-group hide" id="other_cate">
+								<?php } ?>
 								<label>Other Category:</label>
 								<input type="text" name="other_category" class="form-control" value="<?php echo isset($user->other_category)?$user->other_category:''?>"/>
 							</div>
@@ -135,9 +135,9 @@
 						<div class="row">
 							<div class="col-sm-6 form-group">
 								{!! Form::label('location', 'City', ['class' => 'control-label']) !!}
-								{!! Form::select('location_id',[null=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select", 'id'=>"location_select")) !!}
+								{!! Form::select('location_id',[-1=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control custom-select", 'id'=>"location_select")) !!}
 							</div>
-							<?php if($user->location_id == 0){ ?>
+							<?php if(!empty($user->other_location)){ ?>
 								<div class="col-sm-6 form-group" id="other_loc">
 							<?php } else { ?>
 								<div class="col-sm-6 form-group hide" id="other_loc">

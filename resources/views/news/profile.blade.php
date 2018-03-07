@@ -62,7 +62,7 @@
 
 					<?php } ?>
 					</div>
-				</div>	
+					
 				
 				<div class="col-md-3 form-group">
 					<div class="right-row">
@@ -74,20 +74,29 @@
 							<span class="gold-rating" style="width:<?php echo $rate; ?>px;"></span>
 						</span>
 					</div><br>
+					
 					<div class="right-row">
 						<b><i class="fa fa-map-marker" aria-hidden="true"></i> Location:</b> 
-						<span>{{$sellerProfile->location_name}}, {{$sellerProfile->state}}, {{$sellerProfile->country}} </span>
+						<?php if((!empty($sellerProfile->location_name)) || (!empty($sellerProfile->state)) || (!empty($sellerProfile->country))) { ?>
+							<span>{{$sellerProfile->location_name}}  {{$sellerProfile->state}} {{$sellerProfile->country}} </span>
+						<?php } else { ?>
+							<span> N/A </span>
+						<?php }?>
 					</div>
 					<div class="right-row">
 						<b><i class="fa fa-globe" aria-hidden="true"></i> Website:</b> 
-						<span>{{$sellerProfile->website}}</span>
+						<?php if(!empty($sellerProfile->website)) { ?>
+							<span>{{$sellerProfile->website}}</span>
+						<?php } else { ?>
+							<span>N/A</span>
+						<?php } ?>
 					</div>
 					<b><i class="fa fa-handshake-o" aria-hidden="true"></i> Get in touch with</b>
 					<div class="right-row social-links"> 
 						
 						<?php if(!empty($socialVal['fb'])) { ?>
 							<a class="nav-link" href="//<?php echo $socialVal['fb']?>" title="Facebook" target="_blank"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
-						 <?php } ?>
+						<?php }?>
 						 <?php if(!empty($socialVal['twitter'])) { ?>
 							<a class="nav-link" href="//<?php echo $socialVal['twitter']?>" title="Twitter" target="_blank"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
 						 <?php } ?>
@@ -98,6 +107,7 @@
 							<a class="nav-link" href="//<?php echo $socialVal['instagram']?>" title="Instagram" target="_blank"><img src="{{URL::to('img/instagram-icon.png')}}" alt="Instagram"></a>
 						  <?php } ?>
 				</div>
+				
 				</div>
 			</div>
 			<?php if (isset($j) && $j >3) {  ?>
