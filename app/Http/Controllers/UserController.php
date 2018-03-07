@@ -411,7 +411,7 @@ class UserController extends Controller
 									$this->email_subject .= " Location ";
 								} 
 								
-								Controller::sendMail('ranjuzestmind@gmail.com');  
+								Controller::sendMail('contactwedsetgo@gmail.com');  
 								Session::flash('flash_message', 'Your Request has been sent.');
 					}
 			    }else{
@@ -426,7 +426,7 @@ class UserController extends Controller
 						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('ranjuzestmind@gmail.com');  
+						Controller::sendMail('contactwedsetgo@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}
@@ -453,7 +453,7 @@ class UserController extends Controller
 						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('ranjuzestmind@gmail.com');  
+						Controller::sendMail('contactwedsetgo@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 		} else {
 			Session::flash('error_message', 'Request pending Please wait some time');
@@ -466,7 +466,7 @@ class UserController extends Controller
 		$keyword = explode("-",$keyword);
 		$id = $keyword[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $id)->first();
-		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description", "user_details.website", "user_details.social_media","user_details.address",'catagories.name', 'locations.location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id');
+		$sellerProfile = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.detail","user_details.trade_description", "user_details.website", "user_details.social_media","user_details.address","user_details.country","user_details.state",'catagories.name', 'locations.location_name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id');
 		
 		$sellerwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id');
 		if(Auth::check()){
