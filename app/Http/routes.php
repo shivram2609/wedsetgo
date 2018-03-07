@@ -136,13 +136,8 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
 	Route::get('review/{id}',array('as' => 'review.review', 'uses'=>'MessageController@review'));
-	Route::get('changepassword', array('as' => 'news.changepassword', 'uses' => 'UserController@changepassword'));
-	Route::post('changepassword', array('as' => 'news.changepassword', 'uses' => 'UserController@changepassword'));
-	
-	
-	
-	
-	
+	Route::get('changepassword', array('as' => 'user.changepassword', 'uses' => 'UserController@changepassword'));
+	Route::post('changepassword', array('as' => 'user.changepassword', 'uses' => 'UserController@changepassword'));
 	
 	Route::get('socialAuth/{provider}', array("as" => "socialAuth", 'uses'=>'UserController@getSocialLogin'));
 	

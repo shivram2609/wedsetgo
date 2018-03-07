@@ -214,7 +214,7 @@
 		  </div>
 		  <!-- Modal body -->
 		  <div class="modal-body">
-		       {!! Form::open(['route' => 'news.changepassword']) !!}
+		       {!! Form::open(['route' => 'user.changepassword']) !!}
 			<div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
 			  {!! Form::input('password', 'currentpassword', null, ['class' => 'form-control', 'placeholder' => 'Current password','required'=>'Please enter password' ]) !!}
