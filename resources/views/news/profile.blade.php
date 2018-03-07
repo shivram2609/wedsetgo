@@ -76,7 +76,7 @@
 					</div><br>
 					<div class="right-row">
 						<b><i class="fa fa-map-marker" aria-hidden="true"></i> Location:</b> 
-						<span>{{$sellerProfile->location_name}}, {{$sellerProfile->state}}, {{$sellerProfile->location_name}} </span>
+						<span>{{$sellerProfile->location_name}}, {{$sellerProfile->state}}, {{$sellerProfile->country}} </span>
 					</div>
 					<div class="right-row">
 						<b><i class="fa fa-globe" aria-hidden="true"></i> Website:</b> 
