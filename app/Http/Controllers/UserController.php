@@ -208,7 +208,8 @@ class UserController extends Controller
 			    Session::flash('flash_message', 'Password not change, Please try again');
 		   }
 		} 
-		return redirect()->route('home_path');		 
+		return redirect()->route('home_path');		
+		return view('news.changepassword', array('title' => 'Change Password')); 
 		
 	}
 	
