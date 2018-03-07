@@ -58,14 +58,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-		//$request->merge(['captcha' => $this->captchaCheck()]);
+		$request->merge(['captcha' => $this->captchaCheck()]);
 		$this->validate($request, array(
                                 'first_name' => 'required|max:255',
                                 'last_name' => 'required|max:255',
                                 'email' => 'required|email|max:255|unique:users',
                                 'password' => 'required|min:6|confirmed'
-                               // 'g-recaptcha-response'  => 'required',
-								//'captcha'               => 'required|min:1'
+                                'g-recaptcha-response'  => 'required',
+								'captcha'               => 'required|min:1'
                             )
                         );
         
