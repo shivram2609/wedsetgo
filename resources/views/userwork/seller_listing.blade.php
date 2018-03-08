@@ -28,17 +28,20 @@
 	<?php if (!empty($count)) {  ?>
 	@foreach($sellerList as $sellerLists)
 	<div class="product-list">
-	<div class="img-sec seller-list-new">
-			<?php if(!empty($sellerLists->profile_image)) { ?>
-				<span class="profile_image" style="background:url(/uploads/avatars/{{ $sellerLists->profile_image }});" ></span>
+				<div class="img-sec seller-list-new">
+					<?php if(!empty($sellerLists->profile_image)) { /* ?>
+						<img src="/uploads/avatars/{{$sellerLists->profile_image}}" alt="img012" class="img-reponsive seller_profile" width="981" height="844">
+						*/ ?>
+						<div class="profile_image img-responsive" style="background:url(/uploads/avatars/{{$sellerLists->profile_image}})" ></div>
 					<?php } else { ?>
-						<img src="{{URL::to('img/user-dummy.jpg')}}" alt="img012" class="profile_image" width="981" height="844">
+						<div class="profile_image" style="background:url({{URL::to('img/user-dummy.jpg')}})" ></div>
+						
 					<?php } ?>
 				</div>
 				<div class="text-sec">
 					<div class="heading">
 						
-						<a href="{{ url('/p') }}/{{$sellerLists->id}}-{{$sellerLists->first_name}}-{{$sellerLists->last_name}}" >{{ucfirst($sellerLists->first_name)}} {{ucfirst($sellerLists->last_name)}}</a>
+						<a href="{{ url('/p') }}/{{$sellerLists->id}}-{{$sellerLists->first_name}}-{{$sellerLists->last_name}}" title="{{ucfirst($sellerLists->first_name)}} {{ucfirst($sellerLists->last_name)}}" >{{ucfirst($sellerLists->first_name)}} {{ucfirst($sellerLists->last_name)}}</a>
 					</div>
 					<b>Description:</b><br>
 						{{$sellerLists->trade_description}}

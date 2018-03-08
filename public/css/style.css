@@ -757,13 +757,13 @@ background-position: center !important;
 border-radius: 12px;
 margin: 0 5px 0 0;}
 
-.profile_image{height: 209px;
+.profile_image{height: 200px;
 width: 200px;
-float: left;
-background-size: cover !important;
 background-position: center !important;
-border-radius: 12px;
-margin: 0 5px 0 0;}
+background-size: contain !important;
+background-repeat: no-repeat !important;
+display: inline-block;
+float: left;}
 
 
 
