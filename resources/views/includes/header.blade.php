@@ -26,16 +26,15 @@
 			
 				<div class="header_right">
 					<span class="profile-img">
-					<?php if(!empty(Session::get("users"))) { ?>
-						<?php if(!empty(Session::get("users")->profile_image)) { ?>
-							<span class="head_image" style="background:url(/uploads/avatars/{{ $user->profile_image }});" ></span>
-						<!--img class="img-fluid rounded-circle" src="/uploads/avatars/{{ $user->profile_image }}" alt='{{$user->first_name}} {{$user->last_name}}' style="height:auto;width:23%;" -->
+						<?php if(!empty($userDetail->profile_image)) { ?>
+							<span class="head_image" style="background:url(/uploads/avatars/{{ $userDetail->profile_image }});" ></span>
+						
 					<?php } 	else { ?>
-						<img class="img-fluid rounded-circle" src="{{URL::to('img/user-dummy.jpg')}}" alt='{{$user->first_name}} {{$user->last_name}}' width="25" height="25">
+						<img class="img-fluid rounded-circle" src="{{URL::to('img/user-dummy.jpg')}}" alt='{{$userDetail->first_name}} {{$userDetail->last_name}}' width="25" height="25">
 					<?php }?>
-						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" title="Edit Profile">{{$user->first_name}} {{$user->last_name}}<b class="caret"></b></a>
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" title="Edit Profile">{{$userDetail->first_name}} {{$userDetail->last_name}}<b class="caret"></b></a>
 					<div class="dropdown-menu new_menu">
-					  <a class="dropdown-item" href="{{ url('/p') }}/{{Auth::user()->id}}-{{$user->first_name}}-{{$user->last_name}}">Profile</a>
+					  <a class="dropdown-item" href="{{ url('/p') }}/{{Auth::user()->id}}-{{$userDetail->first_name}}-{{$userDetail->last_name}}">Profile</a>
 					  <a class="dropdown-item" href="/edit_profile">Edit Profile</a>
 					  <a class="dropdown-item" href="/my_work">My Work</a>
 					  <a class="dropdown-item" href="/message/{{Auth::user()->id}}">Messages</a>
@@ -45,9 +44,7 @@
 					  <div class="dropdown-divider"></div>
 					  <a class="dropdown-item" href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Log Out</a>
 					</div>
-					</span>
-					<?php } ?>
-					
+					</span>					
 					
 				
 			</div>

@@ -39,8 +39,7 @@
 					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Send Message</a>
 					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Rate Me</a>
 				<?php }?>
-				<?php echo ucfirst($user->first_name);?><br/>
-				Wedding Planning Website
+				<?php echo ucfirst($user->first_name);?> <?php echo ucfirst($user->last_name);?><br/>
 			</div>
 	</div>		
 </div>

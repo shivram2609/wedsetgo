@@ -30,9 +30,9 @@
 	<div class="product-list">
 	<div class="img-sec seller-list-new">
 			<?php if(!empty($sellerLists->profile_image)) { ?>
-						<img src="/uploads/avatars/{{$sellerLists->profile_image}}" alt="img012" class="img-reponsive seller_profile" width="981" height="844">
+				<span class="profile_image" style="background:url(/uploads/avatars/{{ $sellerLists->profile_image }});" ></span>
 					<?php } else { ?>
-						<img src="{{URL::to('img/user-dummy.jpg')}}" alt="img012" class="img-reponsive" width="981" height="844">
+						<img src="{{URL::to('img/user-dummy.jpg')}}" alt="img012" class="profile_image" width="981" height="844">
 					<?php } ?>
 				</div>
 				<div class="text-sec">

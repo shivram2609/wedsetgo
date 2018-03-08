@@ -30,8 +30,9 @@ abstract class Controller extends BaseController
 		View::share('headCategory', $headCategory);
 		View::share('url', $request->url());
 		if ( Auth::check()) {
-			$user = $this->getUser(Auth::user()->id);
-			View::share('user', $user);
+			//echo Auth::user()->id;
+			$userDetail = $this->getUser(Auth::user()->id);
+			View::share('userDetail', $userDetail);
 		}
 	}
     

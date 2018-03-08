@@ -16,7 +16,10 @@
 					<?php if(!empty($sellerProfile->trade_description)){ ?>
 						<p class="short_desc">{{ str_limit($sellerProfile->trade_description, 70) }}</p>
 						<p class="long_desc hide">{{ $sellerProfile->trade_description }}</p>
+					<?php if(strlen($sellerProfile->trade_description) > 70) { ?>
 					<a href="javascript:void(0);" title="Read more" class="btn read-more" id="read-more">Read more <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+					<?php } ?>
+					
 					<?php } else {?>
 						No Services Found
 					<?php }?>
@@ -62,7 +65,7 @@
 
 					<?php } ?>
 					</div>
-					
+					</div>
 				
 				<div class="col-md-3 form-group">
 					<div class="right-row">
