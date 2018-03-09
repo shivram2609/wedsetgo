@@ -33,7 +33,8 @@ class UserworkController extends Controller{
 		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->where('user_works.catagory_id',$request->catagory_id )->get();
 		}
 		$followCount = Controller::followCount(Auth::user()->id);
-        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList']));   
+		$followlist = Controller::followlist(Auth::user()->id);
+        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List']));   
     }
    
     public function add(Request $request,$id = NULL)

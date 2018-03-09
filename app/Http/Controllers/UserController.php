@@ -443,8 +443,10 @@ class UserController extends Controller
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
 		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
+		$followlist = Controller::followlist(Auth::user()->id);
+		
 		$socialVal = unserialize($user->social_media);
-		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'location'=>$location));
+		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'location'=>$location,'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List']));
 	}
 	
 	public function sendRquestProfessional(){
@@ -462,7 +464,7 @@ class UserController extends Controller
 		return redirect()->route('news.edit-profile');
 	}
 	
-	public function profile($keyword = 	NULL){
+	public function profile(Request $request, $keyword = NULL){
 		
 		$keyword = explode("-",$keyword);
 		$id = $keyword[0];
@@ -498,10 +500,12 @@ class UserController extends Controller
 		$rating = Controller::getRatings($id);
 		///dd($rating);
 		$followCount = Controller::followCount($id);
+		$followlist = Controller::followlist($id);
+		
 		if (Auth::check()){
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating, "follow"=>$follow, "socialVal"=>$socialVal));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating, "follow"=>$follow, "socialVal"=>$socialVal, "profile_url"=>$request->fullUrl()));
 		} else {
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],"rating"=>$rating,"socialVal"=>$socialVal));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating,"socialVal"=>$socialVal, "profile_url"=>$request->fullUrl()));
 		}
 		
 	}

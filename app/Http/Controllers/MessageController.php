@@ -29,7 +29,8 @@ class MessageController extends Controller {
 		//dd($message);
 		$count = $message->count();
 		$followCount = Controller::followCount(Auth::user()->id);
-		return view('message.message', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'message'=>$message, 'count'=>$count));
+		$followlist = Controller::followlist(Auth::user()->id);
+		return view('message.message', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'message'=>$message, 'count'=>$count,'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List']));
     }
     public function message_list($mid = NULL, Request $request){
 		if ($request->isMethod('post')) {

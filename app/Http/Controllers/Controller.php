@@ -29,6 +29,16 @@ abstract class Controller extends BaseController
 		//dd($request->url());
 		View::share('headCategory', $headCategory);
 		View::share('url', $request->url());
+		
+		if ( Auth::check()) {
+			//echo Auth::user()->id;
+			$userfile= $this->getUser(Auth::user()->id);
+			$userProfile= url("/p/$userfile->user_id-$userfile->first_name-$userfile->last_name");
+			View::share('userProfile', $userProfile);
+		}else{
+			View::share('userProfile', $request->url());
+		}
+		
 		if ( Auth::check()) {
 			//echo Auth::user()->id;
 			$userDetail = $this->getUser(Auth::user()->id);
@@ -76,6 +86,13 @@ abstract class Controller extends BaseController
 		$array['followingList']=DB::table('followers')->where('buyer_id',$uId)->where('status',1)->count();
 		return $array;
 	}
+	function followlist($uId = NULL) {
+		//dd("here");
+		$array['follower_List'] =DB::table('followers')->join("user_details","followers.buyer_id","=","user_details.user_id")->where('professional_id',$uId)->where('status',1)->get();
+		$array['following_List']=DB::table('followers')->join("user_details","followers.professional_id","=","user_details.user_id")->where('buyer_id',$uId)->where('status',1)->get();
+		return $array;
+		
+	}
 	
 	function getUser($uid = NULL){
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $uid)->first();
@@ -89,5 +106,7 @@ abstract class Controller extends BaseController
 		$array['aggregateRating'] = DB::Table('ratings')->where('ratings.professional_id','=',$professional_id)->where('ratings.status','=',1)->avg("rating_points");
 		return $array;
 	}
+	
+	
 	
 }

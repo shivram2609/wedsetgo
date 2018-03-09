@@ -2,7 +2,9 @@ $(document).ready(function() {
 
 	
 	$("#loadmore").on("click",function(){
+		//console.log("here");
 		var i = 0;
+		var flag = false;
 		$(".img-item").each(function(){
 			
 			if ($(this).hasClass("hide")) {
@@ -10,16 +12,21 @@ $(document).ready(function() {
 					$(this).removeClass("hide");
 					$(this).show();
 					++i;
+				} else {
+					flag = true;
 				}
 			}
 		});
-		if($(".hide").length <= 0) {
+		//console.log($(".hide").length);
+		if(flag) {
 			$("#loadmore").hide();
 		}
 	});
 	
 	$("#load_more").on("click",function(){
+		console.log("here");
 		var i = 0;
+		var flag = true;
 		$(".list-box").each(function(){
 			
 			if ($(this).hasClass("hide")) {
@@ -27,11 +34,12 @@ $(document).ready(function() {
 					$(this).removeClass("hide");
 					$(this).show();
 					++i;
+				} else {
+					flag = false;
 				}
 			}
 		});
-		console.log($(".hide").length);
-		if($(".hide").length <= 1) {
+		if(flag) {
 			$("#load_more").hide();
 		}
 	});

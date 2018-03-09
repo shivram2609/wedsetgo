@@ -470,6 +470,8 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
  .photo-stream .img-item .img-box{position:relative;}
  .photo-stream .img-item .img-box .overlay{position:absolute; height:100%; width:100%; left:0px; top:0px; background:rgba(0,0,0,0.8); opacity:0; transition:all 0.5s ease 0s; text-align:center; vertical-align:middle;}
  .photo-stream .img-item .img-box:hover .overlay{ opacity:1;}
+ .img-boxes .overlay{position:absolute; height:100%; width:100%; left:0px; top:0px; background:rgba(0,0,0,0.8); opacity:0; transition:all 0.5s ease 0s; text-align:center; vertical-align:middle;}
+ .img-boxes:hover .overlay{ opacity:1;}
  .btn-border{background: #fff; border:3px solid #761b31; border-radius: 30px; color: #761b31; padding: 10px 30px; margin: 0 10px 10px; cursor: pointer;}
  .btn-bdrSml{background: #fff; border:1px solid #761b31; font-size:12px; border-radius: 10px; color: #761b31; margin: 0px; cursor: pointer;}
  .btn-edit{background: transparent; border:2px solid #fff; border-radius: 8px; color: #fff !important; text-decoration:none !important; padding: 5px 30px; cursor: pointer; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%)}
@@ -765,5 +767,12 @@ background-repeat: no-repeat !important;
 display: inline-block;
 float: left;}
 
+.empty_follower {
+    min-height: 72px;
+    text-align: center;
+    margin: 50px 0 0 0;
+    font-size: 29px;
+    color: #761b31;
+}
 
 
