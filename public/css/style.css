@@ -368,7 +368,7 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
 .filter-bar{background:#e5e5e5; padding:5px 0; font-size:12px;}
 .filter-sections{display:inline-block; vertical-align:top; margin:0 10px 0 0;}
 .filter-sections label{display:block;  margin:0px;}
-.filter-sections input.search{font-size:12px; height: 38px; text-overflow: ellipsis; width: 220px;}
+.filter-sections input.search{font-size:12px; height: 38px; text-overflow: ellipsis; }
 .filter-sections:last-child{/*max-width: 275px; width: 100%;*/ margin:0px;}
 .views-icons{display:inline-block; border:1px solid #ccc; vertical-align:middle; margin:0 0px;}
 .views-icons a{float:left; border:1px solid #ccc; padding:4px 10px; color:#ccc;}

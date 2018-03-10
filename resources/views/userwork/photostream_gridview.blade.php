@@ -29,14 +29,13 @@
 			</div>
 			<div class="filter-sections">
 				<label>&nbsp;</label>
-				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control search','placeholder' => "Search using a professional’s name" ]) !!}
+				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control search','placeholder' => "Search by keyword" ]) !!}
 				
 			</div>
 			<div class="filter-sections">
 				<label>Search In</label>
 				{!! Form::select('search_val', [null=>'Please 
-					Select',"pName"=>"Professional 
-					Name","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':($tmpQuery['search_val']=='uwName'?'uwName':'pName')) :''), array("class"=>"custom-select")) !!}
+					Select',"pName"=>"Professional who uploaded","uwName"=>"Description/Title/Tag "],(isset($tmpQuery['search_val'])? ($tmpQuery['search_val']=='pName'?'pName':($tmpQuery['search_val']=='uwName'?'uwName':'pName')) :''), array("class"=>"custom-select")) !!}
 				
 			</div>
 			<div  class="filter-sections">
