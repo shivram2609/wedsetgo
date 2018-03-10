@@ -27,17 +27,17 @@
 					if (Auth::user()->id != $id){ ?>
 					{!! Form::open(array('novalidate'=>true)) !!}
 					<?php if(!empty($follow) AND  $follow->professional_id == $id AND  $follow->status == 1){?>
-						<a href="{{ url('/f') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Unfollow" class="pull-right btn btn-white">Unfollow</a>
+						<a href="{{ url('/f') }}/{{$user->id}}-{{$user->first_name}}-{{$user->last_name}}" title="Unfollow" class="pull-right btn btn-bdrSml">Unfollow</a>
 						<?php } else {?>
-						<a href="{{ url('/f') }}/{{$id}}" title="Follow" class="pull-right btn btn-white">Follow</a>
+						<a href="{{ url('/f') }}/{{$id}}" title="Follow" class="pull-right btn btn-bdrSml">Follow</a>
 						<?php }?>
-						<a href="#" title="Send Message" class="pull-right btn btn-white" data-toggle="modal" data-target="#sendmessage">Send Message</a>
-						<a href="#" title="Rate Me" class="pull-right btn btn-white" data-toggle="modal" data-target="#rating">Rate Me</a>
+						<a href="#" title="Send Message" class="pull-right btn btn-bdrSml" data-toggle="modal" data-target="#sendmessage">Send Message</a>
+						<a href="#" title="Rate Me" class="pull-right btn btn-bdrSml" data-toggle="modal" data-target="#rating">Rate Me</a>
 					{!! Form::close() !!}
 				<?php }} else { ?>
-					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Follow</a>
-					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Send Message</a>
-					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-white">Rate Me</a>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-bdrSml">Follow</a>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-bdrSml">Send Message</a>
+					<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="pull-right btn btn-bdrSml">Rate Me</a>
 				<?php }?>
 				<?php echo ucfirst($user->first_name);?> <?php echo ucfirst($user->last_name);?><br/>
 			</div>

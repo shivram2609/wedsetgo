@@ -32,7 +32,7 @@
 					<?php } 	else { ?>
 						<img class="img-fluid rounded-circle" src="{{URL::to('img/user-dummy.jpg')}}" alt='{{$userDetail->first_name}} {{$userDetail->last_name}}' width="25" height="25">
 					<?php }?>
-						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" title="Edit Profile">{{$userDetail->first_name}} {{$userDetail->last_name}}<b class="caret"></b></a>
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" title="Edit Profile"><span class="user-name">{{$userDetail->first_name}} {{$userDetail->last_name}}</span><b class="caret"></b></a>
 					<div class="dropdown-menu new_menu">
 					  <a class="dropdown-item" href="{{ url('/p') }}/{{Auth::user()->id}}-{{$userDetail->first_name}}-{{$userDetail->last_name}}">Profile</a>
 					  <a class="dropdown-item" href="/edit_profile">Edit Profile</a>
@@ -71,11 +71,11 @@
               <a class="nav-link" href="/st/about-us" title="ABOUT">ABOUT</a>
             </li>
 			<li class="nav-item social-links">
-             <a class="nav-link" href="https://www.facebook.com/WedSetGoOfficial/?ref=br_rs" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook" target="_blank"></a>
-			 <a class="nav-link" href="https://twitter.com/Wed_Set_Go" title="Twitter"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter" target="_blank"></a>
-			 <a class="nav-link" href="https://plus.google.com/u/0/114969599777634821732" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus" target="_blank"></a>
-			 <a class="nav-link" href="https://www.linkedin.com/company/wed-set-go/" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin" target="_blank"></a>
-			 <a class="nav-link" href="https://www.instagram.com/wedsetgo/" title="Instagram"><img src="{{URL::to('img/instagram-icon.png')}}" alt="Instagram" target="_blank"></a>
+             <a class="nav-link" href="https://www.facebook.com/WedSetGoOfficial/?ref=br_rs" title="Facebook" target="_blank"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+			 <a class="nav-link" href="https://twitter.com/Wed_Set_Go" title="Twitter" target="_blank"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
+			 <a class="nav-link" href="https://plus.google.com/u/0/114969599777634821732" title="Google Plus" target="_blank"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
+			 <a class="nav-link" href="https://www.linkedin.com/company/wed-set-go/" title="Linkedin" target="_blank"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
+			 <a class="nav-link" href="https://www.instagram.com/wedsetgo/" title="Instagram" target="_blank"><img src="{{URL::to('img/instagram-icon.png')}}" alt="Instagram"></a>
             </li>
           </ul>
         </div>

@@ -1,24 +1,30 @@
 @extends('layouts.master')
 @section('content')
-<div class="filter-bar text-center">
+<div class="filter-bar ">
 		{!! Form::open(["method"=>"get"]) !!}
 		<div class="container">
-			Filter by Category
-			{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select")) !!}
-			
-			Search By Location
-			{!! Form::select('location_id', [null=>'Please Select'] +$location,(isset($tmpQuery['location_id'])?$tmpQuery['location_id']:''), array("class"=>"custom-select")) !!} 
-			
 			<div class="filter-sections">
-				Show Per Page
+			<label>Filter by Category</label>
+			{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select")) !!}
+			</div>
+			<div class="filter-sections">
+			<label>Search By Location</label>
+			{!! Form::select('location_id', [null=>'Please Select'] +$location,(isset($tmpQuery['location_id'])?$tmpQuery['location_id']:''), array("class"=>"custom-select")) !!} 
+			</div>
+			<div class="filter-sections">
+				<label>Show Per Page</label>
 				{!! Form::select('record_per_page', ["5"=>"5","10"=>"10","15"=>"15"],(isset($tmpQuery['record_per_page'])? ($tmpQuery['record_per_page']=='5'?'5':($tmpQuery['record_per_page']=='10'?'10':'15')) :''), array("class"=>"custom-select")) !!}			
 			</div>
 			<div class="filter-sections">
-				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
+				<label>&nbsp;</label>
+				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control search','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
 				
 			</div>
+			<div class="filter-sections">
+				<label>&nbsp;</label>
 			{!! Form::submit('Submit', ['class' => 'btn btn-submit clear-grid']) !!}
 			<a href="{{ url('/seller') }}" class="btn btn-submit clear-grid"> Clear</a>
+			</div>
 		</div>
 		{!! Form::close() !!}
 	</div>

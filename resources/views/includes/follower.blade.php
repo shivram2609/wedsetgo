@@ -24,7 +24,7 @@
 		<div class="modal-content">
 		  <!-- Modal Header -->
 		  <div class="modal-header">
-			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i> List of Follower</h4>
+			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i>Followers</h4>
 			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
 		  </div>
 		  <!-- Modal body -->
@@ -55,7 +55,7 @@
 		<div class="modal-content">
 		  <!-- Modal Header -->
 		  <div class="modal-header">
-			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i> List of Following</h4>
+			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i>Following</h4>
 			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
 		  </div>
 		  <!-- Modal body -->

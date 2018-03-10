@@ -6,8 +6,9 @@
 		
 		<div class="contactUs-top">
 			<h1 class="heading">Contact Us</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin, tellus 
-			vitae condimentum egestas, libero dolor auctor tellus</p>
+			<p>We’d love to hear your feedback! <br>
+Wed·Set·Go has been built to open up relationships between you, it’s users. But we don’t want to stop there! We want you to be able to collaborate with us just as easily as you can collaborate with each other.</p>
+<p>If you want to get in touch, please fill in the form below, send us an email or give us a call. We don’t have a fixed address just yet but we will try and get back to you as soon as possible. </p>
 		</div>
 		<div class="row contact-address">
 			<div class="col-sm-4 text-center form-group">
@@ -48,7 +49,7 @@
 							{!! Form::input('text','lastname', null, ['class' => 'form-control', 'size' => 40, 'placeholder'=>'Last Name' ]) !!}	
 						</div>
 					</div>
-					<div class="row mr-0 mr-0">
+					<div class="row mr-0 ml-0">
 						<div class="col-sm-6 form-group">
 							{!! Form::input('email', 'email', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Email' ]) !!}	
 						</div>
@@ -56,13 +57,17 @@
 							{!! Form::input('text','phone', null, ['class' => 'form-control', 'size' => 40,'placeholder' => 'Phone Number' ]) !!}	
 						</div>
 					</div>
-					<div class="row mr-0 mr-0">
-						<div class="col-sm-12 form-group">
+					<div class="row mr-0 ml-0">
+						<div class="col-sm-12">
 							<textarea class="form-control" placeholder="Your Message" name="message"></textarea>
 						</div>
 						
 					</div>
-					{!! Form::submit('Send Message', ['class' => 'btn theme-btn-rct']) !!}
+					<div class="row mr-0 ml-0">
+						<div class="col-sm-12">
+						{!! Form::submit('Send Message', ['class' => 'btn theme-btn-rct']) !!}
+						</div>
+					</div>
 				{!! Form::close() !!}
 			</div>
 		</div>
