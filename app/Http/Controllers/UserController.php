@@ -59,14 +59,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
 		//dd($request->all());
-		$request->merge(['captcha' => $this->captchaCheck()]);
+		//$request->merge(['captcha' => $this->captchaCheck()]);
 		$this->validate($request, array(
                                 'first_name' => 'required|max:255',
                                 'last_name' => 'required|max:255',
                                 'email' => 'required|email|max:255|unique:users',
                                 'password' => 'required|min:6|confirmed',
-                                'g-recaptcha-response'  => 'required',
-								'captcha'               => 'required|min:1',
+                               // 'g-recaptcha-response'  => 'required',
+								//'captcha'               => 'required|min:1',
                             )
                         );
         
@@ -444,9 +444,9 @@ class UserController extends Controller
 		$followerList=DB::table('followers')->where('professional_id',Auth::user()->id)->where('status',1)->count();
 		$followingList=DB::table('followers')->where('buyer_id',Auth::user()->id)->where('status',1)->count();	
 		$followlist = Controller::followlist(Auth::user()->id);
-		
+		$messageCount = Controller::messageCount(Auth::user()->id);
 		$socialVal = unserialize($user->social_media);
-		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'location'=>$location,'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List']));
+		return view('news.edit-profile', array('title' => 'edit-profile', 'catagory'=>$catagory, 'user'=>$user, 'socialVal'=>$socialVal, 'id'=>$id, 'followerList'=>$followerList, 'followingList'=>$followingList, 'location'=>$location,'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'], 'messageCount'=>$messageCount));
 	}
 	
 	public function sendRquestProfessional(){
@@ -495,17 +495,22 @@ class UserController extends Controller
 		$sellerwork= $sellerwork->where('user_works.user_id','=', $id)->get();
 		if (Auth::check()){
 			$follow = DB::table('followers')->select('followers.*')->where('professional_id', "=", $id)->where('buyer_id', "=", Auth::user()->id)->first();
+			$messageCount = Controller::messageCount(Auth::user()->id);
 			
 		}
 		$rating = Controller::getRatings($id);
 		///dd($rating);
 		$followCount = Controller::followCount($id);
 		$followlist = Controller::followlist($id);
+		Controller::getEmailData('INVITEFRIEND');
+		$profile_url = $request->fullUrl();
+		$profile_url = strip_tags(str_replace("{LINK}",$profile_url,$this->email_body));
+		
 		
 		if (Auth::check()){
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating, "follow"=>$follow, "socialVal"=>$socialVal, "profile_url"=>$request->fullUrl()));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating, "follow"=>$follow, "socialVal"=>$socialVal, "profile_url"=>$profile_url, 'messageCount'=>$messageCount));
 		} else {
-			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating,"socialVal"=>$socialVal, "profile_url"=>$request->fullUrl()));
+			return view('news.profile', array("title"=>ucwords($user->first_name.' '.$user->last_name),'user'=>$user, 'sellerProfile'=>$sellerProfile, 'sellerwork'=>$sellerwork, 'count'=>$count, 'id'=>$id, 'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'],"rating"=>$rating,"socialVal"=>$socialVal, "profile_url"=>$profile_url));
 		}
 		
 	}
@@ -531,11 +536,20 @@ class UserController extends Controller
 		}
 		return redirect('/p/'.$id."-".$users->first_name."-".$users->last_name);
 		
-	}
+	}	
 	
-	public function static_page($slug=NULL){
-		$page = DB::table("cmspages")->where("seourl",$slug)->first();
-		return view('news.static',array("title"=>$page->metatitle,"page"=>$page));
+	public function static_page(Request $request,$slug=NULL){
+		$page = $this->get_static_page($slug);
+		if (isset($page['term-conditions']) || !empty($page['term-conditions'])){
+			//dd($page['term-conditions']);
+			//die("here");
+			$pageTerm = $page['term-conditions'];
+		} else {
+			$pageTerm = [];
+		}
+		//dd($page['term-conditions']);
+		return view('news.pagecontent',array("title"=>$page[$slug]->metatitle,"page"=>$page[$slug],"pageTerm"=>$pageTerm));
+		
 	}
 	
 }

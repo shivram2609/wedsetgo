@@ -23,20 +23,30 @@ abstract class Controller extends BaseController
     public $staticLink = "http://wedsetgo.zestminds.com:8000/";
     //public $staticLink = "http://35.154.146.218:8000/";
     public $email_title = "WedSetGo";
-    
+    public $terms = false;
     function __construct(Request $request) {
 		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
 		//dd($request->url());
 		View::share('headCategory', $headCategory);
 		View::share('url', $request->url());
-		
+		$url = $request->url();
+		$url = explode("/",$url);
+		if ( $url[count($url)-2] != 'st' && $request->isMethod('get') ) {
+			$page= $this->get_static_page("term-conditions");
+			View::share('pageTerm', $page["term-conditions"]);
+		} else {
+			$this->terms = true;
+		}
+		Controller::getEmailData('INVITEFRIEND');	
 		if ( Auth::check()) {
-			//echo Auth::user()->id;
 			$userfile= $this->getUser(Auth::user()->id);
 			$userProfile= url("/p/$userfile->user_id-$userfile->first_name-$userfile->last_name");
+			$userProfile = strip_tags(str_replace("{LINK}",$userProfile,$this->email_body));
 			View::share('userProfile', $userProfile);
 		}else{
-			View::share('userProfile', $request->url());
+			$userProfile = $request->url();
+			$userProfile = strip_tags(str_replace("{LINK}",$userProfile,$this->email_body));
+			View::share('userProfile', $userProfile);
 		}
 		
 		if ( Auth::check()) {
@@ -49,6 +59,7 @@ abstract class Controller extends BaseController
     public function getEmailData( $slug = NULL ) {
 		
 		$data = DB::table('cmsemails')->select('cmsemails.*')->where(['cmsemails.slug'=>$slug])->first();
+		$this->email_body = '';
 		$this->email_body = $data->content;
 		$this->email_from = $data->emailfrom;
 		$this->email_subject = $data->subject;
@@ -106,7 +117,24 @@ abstract class Controller extends BaseController
 		$array['aggregateRating'] = DB::Table('ratings')->where('ratings.professional_id','=',$professional_id)->where('ratings.status','=',1)->avg("rating_points");
 		return $array;
 	}
+	public function get_static_page($slug=NULL){
+		if ( $this->terms ) {
+			$slug = [$slug,"term-conditions"];
+		} else {
+			$slug = [$slug];
+		}
+		//dd($slug);
+		$page = DB::table("cmspages")->whereIn("seourl",$slug)->get();
+		$content = [];
+		foreach ( $page as $key=>$val ) {
+			$content[$val->seourl] = $val;
+		}
+		return $content;
+	}
 	
-	
+	function messageCount($id=NULL){
+		$messageCount = DB::table('message_conversations')->select('is_new')->where('receiver_id',$id)->where('is_new',1)->count();
+		return $messageCount;
+	}
 	
 }

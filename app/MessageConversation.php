@@ -13,5 +13,5 @@ class MessageConversation extends Model
      *
      * @var array
      */
-    protected $fillable = ['sender_id','message_id', 'message', 'is_new'];
+    protected $fillable = ['sender_id','message_id', 'message', 'is_new', 'receiver_id'];
 }

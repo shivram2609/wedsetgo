@@ -109,4 +109,5 @@ class HomeController extends Controller
 		 } 
 	  return view('news.contact-us', array('title' => 'Contact-us' ));
 	}
+	
 }

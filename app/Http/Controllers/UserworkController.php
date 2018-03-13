@@ -34,7 +34,8 @@ class UserworkController extends Controller{
 		}
 		$followCount = Controller::followCount(Auth::user()->id);
 		$followlist = Controller::followlist(Auth::user()->id);
-        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List']));   
+		$messageCount = Controller::messageCount(Auth::user()->id);
+        return view('userwork.user_work', array('user'=>$user, 'userwork'=>$userwork, 'catagory'=>$catagory, 'title' => 'User Works', "id"=>Auth::user()->id ,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'],'follower_List'=>$followlist['follower_List'], 'following_List'=>$followlist['following_List'], 'messageCount' => $messageCount));   
     }
    
     public function add(Request $request,$id = NULL)
@@ -238,7 +239,8 @@ class UserworkController extends Controller{
 		
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
 		$myVisionBook= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.old_title','vision_book_collections.comments')->leftjoin('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_books.user_id','=', Auth::user()->id)->groupBy('vision_books.id')->get();
-		 return view('userwork.my_vision_book', array('title' =>'MY Vision Book', 'user'=>$user, 'myVisionBook'=>$myVisionBook, "id"=>Auth::user()->id));
+		$messageCount = Controller::messageCount(Auth::user()->id);
+		 return view('userwork.my_vision_book', array('title' =>'MY Vision Book', 'user'=>$user, 'myVisionBook'=>$myVisionBook, "id"=>Auth::user()->id, 'messageCount'=>$messageCount));
 	}
 	
 	public function seller_listing(Request $request){

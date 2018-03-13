@@ -130,15 +130,14 @@ class AdminController extends Controller
 		$result = DB::table('users')->where('id',$id)->update(['porfessional_request'=> 0,'user_type_id'=>$type]);
 		if(!empty($result)){
 			$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', $id)->first();
-			$this->email_body .= "Dear " .ucwords($users->first_name.' '.$users->last_name).",<br/><br/>";
+			//$this->email_body .= "Dear " .ucwords($users->first_name.' '.$users->last_name).",<br/><br/>";
 			if (empty($is_approve)) { 
-				$this->email_body .= " Your Request can not be approved at the momment. try again in future. ";
-				$this->email_subject = "Professional Request Rejected";
+				 Controller::getEmailData('PRO_REQUEST_REJECT');
+				 $this->email_body = str_replace("{USER}",ucfirst($users->first_name),$this->email_body);
 			} else {
-				$this->email_body .= " Your Request has been approved for professional account. Now you can continue your job. ";
-				$this->email_subject = "Professional Request Approved";
-			}
-			
+				 Controller::getEmailData('PRO_REQUEST_APPROVED');
+				 $this->email_body = str_replace("{USER}",ucfirst($users->first_name),$this->email_body);
+			}	
 			Controller::sendMail($users->email);  
 			Session::flash('flash_message', 'Your Request has been sent.');
 		} else {
@@ -165,9 +164,10 @@ class AdminController extends Controller
 						'message' => $request->information,
 						'is_new'=>1
 				   ));
-				$this->email_body .= "Dear " .ucwords($users->first_name.' '.$users->last_name).",<br/><br/>"; 
-				$this->email_body .= "We have reviewed your application, we need more information about yourself as below:<br/><br/>" .$request->information;
-				$this->email_subject = "More Information Request for Professional";
+				 Controller::getEmailData('MORE_INFO_REQUEST');
+				$this->email_body = str_replace("{USER}",ucwords($users->first_name.' '.$users->last_name),$this->email_body);
+				$infoMesage = $request->information;
+				$this->email_body = str_replace("{INFO_MESSAGE}",$infoMesage,$this->email_body);
 				Controller::sendMail($users->email);  
 				Session::flash('flash_message', 'Your Request has been sent.');
 				return redirect()->route('admin.admin_userlist');
@@ -226,11 +226,13 @@ class AdminController extends Controller
 			'message' => $request->message
 			));
 			$getUSer = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('users.id',$receiver_id)->first();
-			$this->email_body .= "Hello".$getUSer->first_name."<br/><br/> ";
-			$this->email_body .= "Message: " .$request->message. "<br/><br/> ";
-			$this->email_body .= "<a href='".$this->staticLink."message_list/".$mid."'>Click Here to reply</a>";
-			$this->email_subject = "Wedsetgo: New Message Recived";
-			Controller::sendMail($getUSer->email);  	
+			Controller::getEmailData('MESSAGE');
+			$this->email_body = str_replace("{USER}",ucfirst($getUSer->first_name),$this->email_body);
+			$message = $request->message;
+			$this->email_body = str_replace("{MESSAGE}",$message,$this->email_body);
+			$link = "<a href='".$this->staticLink."message_list/".$mid."'>Click Here to reply</a>";
+			$this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
+			Controller::sendMail($getUSer->email);	
 			}	
 		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->get();
 		
