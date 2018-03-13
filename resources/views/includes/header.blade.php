@@ -81,6 +81,8 @@
         </div>
       </div>
     </nav>
+    <?php if (Auth::check()) { ?>
+	<?php } else { ?>
     <!--SignUp Modal -->
 	<div class="modal fade" id="signUp">
 	  <div class="modal-dialog signup-signin">
@@ -93,7 +95,7 @@
 
 		  <!-- Modal body -->
 		  <div class="modal-body">
-		 {!! Form::open(['route' => 'user.store']) !!}
+		 {!! Form::open(['route' => 'user.store', 'id'=>'signup_from']) !!}
 		 <input type="hidden" name="u_type" value="1" id="u_type"/>
 			<div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
@@ -119,9 +121,10 @@
 				<div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"></div>
 			  
 			 </div>
+			 <p><input name="term" type="checkbox" value="1" id ="term_condition">By clicking Sign up  you agree to our <a href="/st/term-condtions" title="Terms of Use" data-toggle="modal" data-target="#term_and_conditions">Terms of Use</a></p>
 			  <div class="form-group text-center">
 			  {!! Form::submit('Signup', ['class' => 'theme-btn-rct']) !!} <a href="/login" title="Already have an account?" class="already-account" data-toggle="modal" id="signinmodal" data-target="#signIn">Already have an account?</a>
-			  <p>By clicking Sign up  you agree to our <a href="javascript:void(0);" title="Terms of Use">Terms of Use</a></p>	
+			  
 			 </div>
 			 <div class="text-center form-group">
 				<span class="signin-with"> Sign In With </span>
@@ -234,4 +237,26 @@
 		</div>
 	  </div>
 	</div>
-
+	<?php if (isset($pageTerm->name)) { ?>
+	<div class="modal fade" id="term_and_conditions">
+	  <div class="modal-dialog signup-signin">
+		<div class="modal-content">
+		  <!-- Modal Header -->
+		  <div class="modal-header">
+			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i>Term and Conditions</h4>
+			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
+		  </div>
+		  <!-- Modal body -->
+		  <div class="modal-body">
+			 <div class="contactUs-top">
+				<h1 class="heading"><?php echo $pageTerm->name; ?></h1>
+			</div>
+			<div class="row contact-address">
+				<?php echo nl2br($pageTerm->content); ?>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<?php } ?>
+<?php } ?>
