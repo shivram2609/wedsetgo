@@ -19,8 +19,8 @@ Wed·Set·Go has been built to open up relationships between you, it’s users. 
 			<div class="col-sm-4 text-center form-group address-sec">
 			<i class="fa fa-phone" aria-hidden="true"></i>
 			<h2 class="heading">Phone</h2>
-			<p>+9034 949-08-83 <br>
-			+90 239 505-58-01</p>
+			<p>+447570422465<br>
+			</p>
 			</div>
 			<div class="col-sm-4 text-center form-group">
 			<i class="fa fa-envelope-o" aria-hidden="true"></i>

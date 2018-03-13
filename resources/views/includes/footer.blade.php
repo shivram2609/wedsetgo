@@ -12,7 +12,7 @@
 				<li><a href="/st/about-us" title="About">About</a></li>
 				<li><a href="/contact_us" title="Contact Us">Contact Us</a></li>
 				<li><a href="/photostream" title="Photo Stream">Photo Stream</a></li>
-				<li><a href="#" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>
+				<li><a href="{{ url('register') }}" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>
 				<li><a href="/seller" title="Find professionals">Find professionals</a></li>
 			</ul>
 		</div>
@@ -170,6 +170,7 @@
 	<script type="text/javascript" src="{{ asset('js/loadmore.js') }}"></script>
 	 <script>
         $(document).ready(function () {
+			$('#checkbox_professional').prop('checked', false);
             $(".rate").on("click",function(){
 				var index = $(this).attr("val");
 				$(".rate").each(function(obj){
@@ -205,9 +206,27 @@
 			
 		 $("#checkbox_professional").click(function() {
 			if($(this).is(":checked")) {
+				
 				$('.professional_status').removeClass("hide");
+				
 				}
+				else{
+					$('.professional_status').addClass("hide");
+					
+					}
 			});
+			
+			//~ $('#checkbox_professional').click(function(){
+				//~ if($(this).is(":checked")){
+				//~ $('#website').val('');
+			//~ }
+    //~ });
+			//~ $('#checkbox_professional').click(function(){
+				//~ if($(this).is(":checked")){
+				//~ $('#street').val('');
+			//~ }
+    //~ });
+			
 	    $('.confirm').on('click', function (e) {
 		 return !!confirm($(this).data('confirm'));
 		 });
@@ -220,6 +239,10 @@
 				$('#other_loc').addClass('hide');
 			}
 		});
+		
+		$(document).ready(function(){
+      //  $('#category_selected').attr('disabled','disabled');
+	});
 		 $('#category_selected').on('change', function () {
 			var optionSelected = $(this).val();
 			if(optionSelected =='0'){
