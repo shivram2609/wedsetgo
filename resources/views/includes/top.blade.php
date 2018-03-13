@@ -52,7 +52,8 @@
 				<a href="/my_work" title="My Work">My Work</a>
 			<?php }?>
 			<a href="/vision_book" class="" title="My Vision Books">My Vision Books</a> 
-			<a href="/message/{{$user->id}}" title="Messages">Messages</a>
+			<a href="/message/{{$user->id}}" title="Messages" >Messages<?php if($messageCount != 0) {?> <i class="badge">{{$messageCount}}</i><?php }?></a>
+
 	<?php }}?>	
 	
 		<a href="/review/{{$user->id}}	" title="Reviews">Reviews</a>

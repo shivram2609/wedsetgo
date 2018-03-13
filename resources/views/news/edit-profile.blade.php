@@ -37,7 +37,9 @@
 						 <?php if (Auth::user()->user_type_id == 2){ ?> 
 							<a href="/my_work" title="My Work" class="">My Work</a>	 
 							<?php }?>
-					 <a href="/message/{{$user->id}}" title="Messages" class="">Messages</a>
+					
+					  <a href="/message/{{$user->id}}" title="Messages" >Messages<?php if($messageCount != 0) {?> <i class="badge">{{$messageCount}}</i><?php }?></a>
+					
 					 <a href="/review/{{$user->id}}" title="Reviews" class="">Reviews</a>
 		</div>
 		<div class="dashboard-wrapper">
