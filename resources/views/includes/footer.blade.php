@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-sm-3">
 			<h3 class="footer-heading">Get in touch</h3>
-			<p><i class="fa fa-phone" aria-hidden="true"></i> +1 123 457 653<br>
+			<p><i class="fa fa-phone" aria-hidden="true"></i> +447570422465<br>
 			<i class="fa fa-fax"></i> +1 496 457 654<br>
 			<i class="fa fa-envelope-o" aria-hidden="true"></i> contactwedsetgo@gmail.com<br>
 			<i class="fa fa-map-marker" aria-hidden="true"></i> Coming Soon </p>
