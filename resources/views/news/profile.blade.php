@@ -74,7 +74,7 @@
 				<div class="col-md-3 form-group">
 					<div class="right-row">
 							
-						<b><i class="fa fa-user" aria-hidden="true"></i> Contact:</b> 
+						<b><i class="fa fa-user" aria-hidden="true"></i> </b> 
 						<span>{{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</span>
 <!--
 					</div>
@@ -96,7 +96,7 @@
 					</div>
 -->
 					<div class="right-row">
-						<b><i class="fa fa-envelope" aria-hidden="true"></i> Email:</b> 
+						<b><i class="fa fa-envelope" aria-hidden="true"></i> </b> 
 						<?php if(!empty($user->email)) { ?>
 							<span>{{$user->email}}</span>
 						<?php } else { ?>
@@ -105,7 +105,7 @@
 					</div>
 					
 					<div class="right-row">
-						<b><i class="fa fa-calendar" aria-hidden="true"></i> D.O.B:</b> 
+						<b><i class="fa fa-calendar" aria-hidden="true"></i> </b> 
 						<?php if(!empty($user->dob)) { ?>
 							<span>{{$user->dob}}</span>
 						<?php } else { ?>
@@ -114,7 +114,7 @@
 					</div>
 					
 					<div class="right-row">
-						<b><i class="fa fa-venus-mars" aria-hidden="true"></i> Gender:</b> 
+						<b><i class="fa fa-venus-mars" aria-hidden="true"></i> </b> 
 						<?php if(!empty($user->gender)) { ?>
 							<span>{{$user->gender}}</span>
 						<?php } else { ?>
