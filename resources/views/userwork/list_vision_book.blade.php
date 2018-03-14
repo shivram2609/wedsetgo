@@ -15,9 +15,9 @@
 			<div class="added-thumb">
 				<div class="img-boxes">
 					<?php if(!empty($albums->images)) { ?>
-					<img src="/visionbook_images/{{$albums->images }}" alt="img001" class="img-reponsive" width="512" height="375">
+					<img src="/visionbook_images/{{$albums->images }}" alt="{{$albums->old_title}}" class="img-reponsive" width="512" height="375">
 					<?php } else { ?>
-					<img src="" alt="" class="img-reponsive" width="512" height="375">
+					<img src="" alt="$albums->old_title" class="img-reponsive" width="512" height="375">
 					<?php } ?>
 				</div>
 				<div class="text-box">

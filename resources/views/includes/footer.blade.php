@@ -6,7 +6,7 @@
 			 <a class="navbar-brand" href="/"><img src="{{URL::to('img/logo.png')}}" alt="wedding" width="75" height="79"></a>
 		</div>
 		<div class="col-sm-3">
-			<h3 class="footer-heading">About wed.Set.Go</h3>
+			<h3 class="footer-heading">About Wed.Set.Go</h3>
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="/st/about-us" title="About">About</a></li>
@@ -19,7 +19,9 @@
 		<div class="col-sm-3">
 			<h3 class="footer-heading">Get in touch</h3>
 			<p><i class="fa fa-phone" aria-hidden="true"></i> +447570422465<br>
+<!--
 			<i class="fa fa-fax"></i> +1 496 457 654<br>
+-->
 			<i class="fa fa-envelope-o" aria-hidden="true"></i> contactwedsetgo@gmail.com<br>
 			<i class="fa fa-map-marker" aria-hidden="true"></i> Coming Soon </p>
 		</div>
@@ -170,7 +172,25 @@
 	<script type="text/javascript" src="{{ asset('js/loadmore.js') }}"></script>
 	 <script>
         $(document).ready(function () {
-			$('#checkbox_professional').prop('checked', false);
+			
+			//~ $("#checkbox_professional").click(function() {
+			//~ if($(this).is(":checked")) {
+			//~ $('#checkbox_professional').prop('checked', true);
+			//~ }
+			//~ else{
+			//~ $('#checkbox_professional').prop('checked', false);	
+				//~ }
+			//~ });
+			
+			//~ $("#website").on("keyup", function(){
+				//~ if(this.value!=""){
+				//~ $('#checkbox_professional').prop("checked", "checked");
+					//~ }else{
+				//~ $('#checkbox_professional').prop('checked', ""); 
+				//~ }
+			//~ });
+			
+			
             $(".rate").on("click",function(){
 				var index = $(this).attr("val");
 				$(".rate").each(function(obj){
