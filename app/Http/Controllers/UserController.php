@@ -97,7 +97,7 @@ class UserController extends Controller
 			Controller::sendMail($request->email);
 			Session::flash('flash_message', 'User registration successfully, please check your email to comnfirm your account.');
 		} else {
-			Session::flash('flash_message', 'User registration can not be done, Please try again.');
+			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
 			
         //return redirect()->back();
@@ -147,11 +147,11 @@ class UserController extends Controller
 					return redirect()->route('user.index');
 				}
 			} else {
-					Session::flash('flash_message', 'Your account is not active.');
+					Session::flash('error', 'Your account is not active.');
 					return redirect()->route('home_path');
 			}
         } else {
-			Session::flash('flash_message', 'Incorrect username or password.');
+			Session::flash('error', 'Incorrect username or password.');
 			return redirect()->route('home_path');
         }        
     }
@@ -206,7 +206,7 @@ class UserController extends Controller
 			if ( $res = DB::table('users')->where(['users.id'=>Auth::user()->id],["password"=>$currentPassword])->update(['users.password' => bcrypt($request->input('password'))]) ) {
 				Session::flash('flash_message', 'Password change successfully');   
 		   } else {
-			    Session::flash('flash_message', 'Password not change, Please try again');
+			    Session::flash('error', 'Password not change, Please try again');
 		   }
 		} 
 		return redirect()->route('home_path');		
@@ -252,14 +252,14 @@ class UserController extends Controller
 				Session::flash('flash_message', 'Password reset successfully.');
 				return redirect()->route('home_path');
 			} else {
-				Session::flash('flash_message', 'Password could not be reset successfully.');
+				Session::flash('error', 'Password could not be reset successfully.');
 			}
 			
 		} elseif ( $request->isMethod('get') && !empty($token) && $users = DB::table('users')->select('users.email')->where(['users.forgot_password_token'=>$token],['users.is_active'=>1])->first()) {
 			
 			
 		} else {
-			Session::flash('flash_message', 'Invalid Request.');
+			Session::flash('error', 'Invalid Request.');
 			return redirect()->route('news.login');
 		}
 		return view('news.resetpassword', array('title' => 'Reset Password'));
@@ -272,7 +272,7 @@ class UserController extends Controller
 				Session::flash('flash_message', 'Account confirmed successfully.');
 				return redirect($this->staticLink);
 			} else {
-				Session::flash('flash_message', 'Invalid request.');
+				Session::flash('error', 'Invalid request.');
 				return redirect($this->staticLink);
 			}
 		}
@@ -331,7 +331,7 @@ class UserController extends Controller
 				Session::put("users",$users);
 				return redirect()->route('news.edit-profile');
 			} else {
-				Session::flash('flash_message', 'Your account is not active.');
+				Session::flash('error', 'Your account is not active.');
 				return redirect()->route('logout');
 			}
 		}
@@ -459,7 +459,7 @@ class UserController extends Controller
 						Controller::sendMail('contactwedsetgo@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 		} else {
-			Session::flash('error_message', 'Request pending Please wait some time');
+			Session::flash('error', 'Request pending Please wait some time');
 		}
 		return redirect()->route('news.edit-profile');
 	}

@@ -43,13 +43,13 @@
             </div>
         @endif
 		@if(Session::has('error'))
-            <div class="error_message">
+            <div class="error">
                 {{ Session::get('flash_message') }}
             </div>
         @endif
 			@include('includes.header')			
 			@if($errors->any())
-				<div class="error_message">
+				<div class="error">
 					@foreach($errors->all() as $error)
 						<p>{{ $error }}</p>
 					@endforeach

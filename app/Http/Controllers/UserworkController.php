@@ -223,7 +223,7 @@ class UserworkController extends Controller{
 						Session::flash('flash_message', 'Add in vision book successfuly');
 						return redirect()->route('userwork.photostream_gridview');
 					} else {
-						Session::flash('flash_message', ' Not add in vision book');
+						Session::flash('error', ' Not add in vision book');
 					}
 				}
 			}
