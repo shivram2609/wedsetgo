@@ -6,20 +6,22 @@
 			 <a class="navbar-brand" href="/"><img src="{{URL::to('img/logo.png')}}" alt="wedding" width="75" height="79"></a>
 		</div>
 		<div class="col-sm-3">
-			<h3 class="footer-heading">About wed.Set.Go</h3>
+			<h3 class="footer-heading">About Wed.Set.Go</h3>
 			<ul class="footer-links">
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="/st/about-us" title="About">About</a></li>
 				<li><a href="/contact_us" title="Contact Us">Contact Us</a></li>
 				<li><a href="/photostream" title="Photo Stream">Photo Stream</a></li>
-				<li><a href="#" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>
+				<li><a href="{{ url('register') }}" title="Create a free account" data-toggle="modal" data-target="#signUp">Create a free account</a></li>
 				<li><a href="/seller" title="Find professionals">Find professionals</a></li>
 			</ul>
 		</div>
 		<div class="col-sm-3">
 			<h3 class="footer-heading">Get in touch</h3>
-			<p><i class="fa fa-phone" aria-hidden="true"></i> +1 123 457 653<br>
+			<p><i class="fa fa-phone" aria-hidden="true"></i> +447570422465<br>
+<!--
 			<i class="fa fa-fax"></i> +1 496 457 654<br>
+-->
 			<i class="fa fa-envelope-o" aria-hidden="true"></i> contactwedsetgo@gmail.com<br>
 			<i class="fa fa-map-marker" aria-hidden="true"></i> Coming Soon </p>
 		</div>
@@ -170,6 +172,25 @@
 	<script type="text/javascript" src="{{ asset('js/loadmore.js') }}"></script>
 	 <script>
         $(document).ready(function () {
+			
+			//~ $("#checkbox_professional").click(function() {
+			//~ if($(this).is(":checked")) {
+			//~ $('#checkbox_professional').prop('checked', true);
+			//~ }
+			//~ else{
+			//~ $('#checkbox_professional').prop('checked', false);	
+				//~ }
+			//~ });
+			
+			//~ $("#website").on("keyup", function(){
+				//~ if(this.value!=""){
+				//~ $('#checkbox_professional').prop("checked", "checked");
+					//~ }else{
+				//~ $('#checkbox_professional').prop('checked', ""); 
+				//~ }
+			//~ });
+			
+			
             $(".rate").on("click",function(){
 				var index = $(this).attr("val");
 				$(".rate").each(function(obj){
@@ -205,9 +226,27 @@
 			
 		 $("#checkbox_professional").click(function() {
 			if($(this).is(":checked")) {
+				
 				$('.professional_status').removeClass("hide");
+				
 				}
+				else{
+					$('.professional_status').addClass("hide");
+					
+					}
 			});
+			
+			//~ $('#checkbox_professional').click(function(){
+				//~ if($(this).is(":checked")){
+				//~ $('#website').val('');
+			//~ }
+    //~ });
+			//~ $('#checkbox_professional').click(function(){
+				//~ if($(this).is(":checked")){
+				//~ $('#street').val('');
+			//~ }
+    //~ });
+			
 	    $('.confirm').on('click', function (e) {
 		 return !!confirm($(this).data('confirm'));
 		 });
@@ -220,6 +259,10 @@
 				$('#other_loc').addClass('hide');
 			}
 		});
+		
+		$(document).ready(function(){
+      //  $('#category_selected').attr('disabled','disabled');
+	});
 		 $('#category_selected').on('change', function () {
 			var optionSelected = $(this).val();
 			if(optionSelected =='0'){

@@ -15,9 +15,9 @@
 				<div class="img-boxes">
 					<div class="overlay"><a href="/v_list/{{$myVisionBooks->id}}-{{$myVisionBooks->vision_title}}" class="btn-edit" title="View Album">View Album</a></div>
 					<?php if(!empty($myVisionBooks->images)) { ?>
-					<img src="/visionbook_images/{{$myVisionBooks->images}}" alt="" class="img-fluid" width="200" height="200">
+					<img src="/visionbook_images/{{$myVisionBooks->images}}" alt="{{$myVisionBooks->vision_title}}" class="img-fluid" width="200" height="200">
 					<?php } else { ?>
-					<img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-fluid" width="200" height="200">
+					<img src="{{URL::to('img/user-dummy.jpg')}}" alt="{{$myVisionBooks->vision_title}}" class="img-fluid" width="200" height="200">
 					<?php } ?>
 				</div>
 				
