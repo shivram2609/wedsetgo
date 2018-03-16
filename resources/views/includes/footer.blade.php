@@ -70,6 +70,7 @@
 				setTimeout(function() {
 					$('.flash_message').fadeOut('fast');
 					$('.error_message').fadeOut('fast');
+					$('.error').fadeOut('fast');
 					$('.success_message').fadeOut('fast');
 				}, 3000);
 				

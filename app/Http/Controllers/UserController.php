@@ -123,6 +123,7 @@ class UserController extends Controller
      */
     public function authenticate(Request $request, $identifier =NULL)
     {
+		
 		if ( empty($identifier) ) {
 			$loginCredetials = array('email' => $request->email, 'password' => $request->password ); 
 		} else {
@@ -147,11 +148,11 @@ class UserController extends Controller
 					return redirect()->route('user.index');
 				}
 			} else {
-					Session::flash('error', 'Your account is not active.');
+					Session::flash('flash_message', 'Your account is not active.');
 					return redirect()->route('home_path');
 			}
         } else {
-			Session::flash('error', 'Incorrect username or password.');
+			Session::flash('flash_message', 'Incorrect username or password.');
 			return redirect()->route('home_path');
         }        
     }
