@@ -37,17 +37,17 @@ return [
     'twitter' => [
 		'client_id'=>'8BjjqUkMrb6n5GWNBOJLSPPm3',
 		'client_secret'=>'TtrEJCa8dWrZHkLKCU6NLUpY8wc4OEsipEDRfgAxAKcLLYNwWf',
-		'redirect' => 'http://wedsetgo.zestminds.com:8000/twitterCallBack'
+		'redirect' => 'http://wed-set-go.com/twitterCallBack'
     ],
     'facebook' => [
 		'client_id'=>'498803233853354',
 		'client_secret'=>'1ca8732555d066fcfa7d269e15b70558',
-		'redirect' => 'http://wedsetgo.zestminds.com:8000/facebookCallBack'
+		'redirect' => 'http://wed-set-go.com/facebookCallBack'
     ],
     'google' => [
 		'client_id'=>'942571363480-aeh2p4ts11lgjhfuo6i2gv342t4qdrmt.apps.googleusercontent.com',
 		'client_secret'=>'QFTM5dxJbifZDL9RxOsxNQAI',
-		'redirect' => 'http://wedsetgo.zestminds.com:8000/googleCallBack'
+		'redirect' => 'http://wed-set-go.com/googleCallBack'
     ]
 
 ];
