@@ -285,6 +285,17 @@
   $(document).ready(function(){
 			//alert("here");
 		$(".st-last").removeAttr("style");
+		
+		$("#signup_from").submit(function(){
+			var term = $("#term_condition").prop('checked')==true;
+			if(term == true){
+				
+			} else {
+				alert("Please check the box for term and conditons.")
+				return false;
+			}
+			
+			});
 	});
   
 </script>
