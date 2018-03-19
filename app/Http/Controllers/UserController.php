@@ -425,10 +425,10 @@ class UserController extends Controller
 					$users = DB::table('users')->select('users.porfessional_request','users.user_type_id')->where('id', Auth::user()->id)->first();
 					if($user->user_type_id == 3 AND $user->porfessional_request == 0){
 						$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
-						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
+						$this->email_body = "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('contactwedsetgo@gmail.com');  
+						Controller::sendMail('ranjuzestmind@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}
@@ -454,7 +454,7 @@ class UserController extends Controller
 		$users = DB::table('users')->select('users.porfessional_request')->where('id', Auth::user()->id)->first();
 		if($users->porfessional_request==0){
 			$result = DB::table('users')->where('id',Auth::user()->id)->update(['porfessional_request'=> 1]);
-						$this->email_body .= "Sender Email: " .Auth::user()->email. "<br/><br/>";
+						$this->email_body = "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
 						Controller::sendMail('contactwedsetgo@gmail.com');  
