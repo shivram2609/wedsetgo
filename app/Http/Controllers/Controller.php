@@ -75,8 +75,8 @@ abstract class Controller extends BaseController
 		try {
 			$flag = Mail::send($template,$data, function($message) use ($data)
 			{
-				$message->from($this->email_from, $this->email_title);
-				$message->subject($this->email_subject);
+				$message->from($this->email_from, 'WedSetGo');
+			    $message->subject($this->email_subject);
 				$message->to($data['email']);
 			});
 			if ( $flag ) {
