@@ -96,8 +96,12 @@
 			 if ( $('.input-group.date') ) { 
 				$('.input-group.date').datepicker({
 					format: 'yyyy-mm-dd',
-					language: 'pt-BR',
-					weekStart: 0,
+					showButtonPanel: true,
+					changeMonth: true,
+					changeYear: true,
+					yearRange: '1999:2012',
+				    minDate: new Date(1999, 10 - 1, 25),
+					maxDate: '+30Y',
 					todayHighlight: true
 				});
 			}

@@ -59,7 +59,7 @@ abstract class Controller extends BaseController
     public function getEmailData( $slug = NULL ) {
 		
 		$data = DB::table('cmsemails')->select('cmsemails.*')->where(['cmsemails.slug'=>$slug])->first();
-		$this->email_body = '';
+		$this->email_body = $this->email_from = $this->email_subject = $this->email_title = '';
 		$this->email_body = $data->content;
 		$this->email_from = $data->emailfrom;
 		$this->email_subject = $data->subject;
@@ -75,8 +75,8 @@ abstract class Controller extends BaseController
 		try {
 			$flag = Mail::send($template,$data, function($message) use ($data)
 			{
-				$message->from($this->email_from, $this->email_title);
-				$message->subject($this->email_subject);
+				$message->from($this->email_from, 'WedSetGo');
+			    $message->subject($this->email_subject);
 				$message->to($data['email']);
 			});
 			if ( $flag ) {
