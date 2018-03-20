@@ -797,5 +797,10 @@ color: #fff;
 font-size: 11px;
 border-radius: 15px;
 }
+.required:after {
+        content: '*';
+        color: red;
+        padding-left: 5px;
+    }
 
 

@@ -6,15 +6,15 @@
 			{!! Form::open(array("files"=>true)) !!}
 			<fieldset>
 				<legend><?php echo $title; ?></legend>
-					{!! Form::label('title', 'Title', ['class' => 'control-label']) !!}
+					{!! Form::label('title', 'Title', ['class' => 'control-label required']) !!}
 					{!! Form::text('title', (isset($user_work->title)?$user_work->title:''), ['class' => 'form-control']) !!}
-					{!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
+					{!! Form::label('description', 'Description', ['class' => 'control-label required']) !!}
 					{!! Form::textarea('description', (isset($user_work->description)?$user_work->description:''), ['class' => 'form-control']) !!}
-					{!! Form::label('tag', 'Tag', ['class' => 'control-label']) !!}
+					{!! Form::label('tag', 'Tag', ['class' => 'control-label required']) !!}
 					{!! Form::text('tag', (isset($user_work->tag)?$user_work->tag:''), ['class' => 'form-control']) !!}
-					{!! Form::label('catagory_id', 'Business Category', ['class' => 'control-label']) !!}
+					{!! Form::label('catagory_id', 'Business Category', ['class' => 'control-label required']) !!}
 					{!! Form::select('catagory_id', $catagory,(isset($user_work->catagory_id)?$user_work->catagory_id:''), array("class"=>"form-control custom-select form-group")) !!}
-					{!! Form::label('image_file', 'Work Image', ['class' => 'control-label']) !!}
+					{!! Form::label('image_file', 'Work Image', ['class' => 'control-label required']) !!}
 					<?php if(isset($user_work->images)) { ?>
 					<img class="admin_category form-group" src="<?php echo asset("/work_image/$user_work->images")?>" >
 					<?php } else { ?>

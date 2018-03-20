@@ -340,11 +340,32 @@ class UserController extends Controller
 	
 	public function editprofile(Request $request, $id=Null){	
 		if ($request->isMethod('post')){
-			 $this->validate($request, array(
-                                'first' => 'required|max:255',
+			$input = $request->all();
+			$validateArray = array(
+                                'firstname' => 'required|max:255',
+                                'lastname' => 'required|max:255',
+                                'email' => 'required|max:255|unique:users,email,'.$id,
+                                'gender' => 'required',
+                                'dob' => 'required',
+                                );
+             if ( !isset($input["agree"]) || $input["agree"] ) {
+				 $validateArray = array(
+                                'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',
                                 'email' => 'required|email|max:255',
-                                ));
+                                'gender' => 'required',
+                                'dob' => 'required',
+                                'website' => 'required',
+                                'address' => 'required',
+                                'country' => 'required',
+                                'state' => 'required',
+                                'zipcode' => 'required',
+                                'location_id' => 'required',
+                                'trade_description' => 'required',
+                                'detail' => 'required',
+                                );
+			 }                    
+			 $this->validate($request, $validateArray);
         
 			$socialArray['fb'] = $request->fb;
 			$socialArray['twitter'] = $request->twitter;
@@ -352,7 +373,7 @@ class UserController extends Controller
 			$socialArray['instagram'] = $request->instagram;
 			$socialVal = serialize($socialArray);
 			$data = array();
-			$data['first_name'] = $request->first;
+			$data['first_name'] = $request->firstname;
 			$data['last_name'] = $request->lastname;
 			$data['phone_no'] = $request->phone;
 			$data['category_id'] = $request->category_id;
@@ -429,7 +450,7 @@ class UserController extends Controller
 						$this->email_body = "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('contactwedsetgo@gmail.com');  
+						Controller::sendMail('ranjuzestmind@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}

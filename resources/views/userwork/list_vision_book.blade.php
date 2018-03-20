@@ -3,13 +3,13 @@
 @include('includes.top')
 
 <div class="dashboard-wrapper">
-		<h1 class="form-group heading">Vision Book List <a href="javascript:void(0)" title="Edit" class="btn btn-white"></i> 
+		<h1 class="form-group heading">{{$vision_title->vision_title}}<a href="javascript:void(0)" title="Edit" class="btn btn-white"></i> 
 			</a> </h1>
-			<h2 class="heading-sub"><span><i class="fa fa-home" aria-hidden="true"></i> Add new photo's in vision book</h2>
+			<h2 class="heading-sub"><span><i class="fa fa-home" aria-hidden="true"></i> Add new photo in vision book</h2>
 				<div class="file-loading">
 					<a href="/photostream"><span class="add-icon"></span></a>
 					<br>
-					 Add new photo's in vision book
+					 Add new photo in vision book
 				</div>
 			@foreach($album as $albums)
 			<div class="added-thumb">
