@@ -17,7 +17,7 @@
 			</div>
 			<div class="filter-sections">
 				<label>&nbsp;</label>
-				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control search','placeholder' => "What's on your mind? eg. lehenga" ]) !!}
+				{!! Form::input('text','search_key',isset($tmpQuery['search_key'])?$tmpQuery['search_key']:'', ['class' => 'form-control search','placeholder' => "Search by keyword" ]) !!}
 				
 			</div>
 			<div class="filter-sections">
