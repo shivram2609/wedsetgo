@@ -110,7 +110,7 @@ class MessageController extends Controller {
      */
     public function user_message(Request $request)
     {
-		dd($request->hidden_user_id);
+		//dd($request->hidden_user_id);
 		if(!empty($request)){
 			$this->validate($request, array(
                                 'user_message' => 'required',
