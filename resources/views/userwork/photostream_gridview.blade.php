@@ -49,15 +49,11 @@
 	 <!-- filter bar end-->
 	 <!-- list container start -->
 	<div class="container">	
-		<?php $message = "Search result "; if (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key']) ) { 
-			$message .= 'for "'.$tmpQuery['search_key'].'"';
-		 } if ( isset($tmpQuery['search_val']) && !empty($tmpQuery['search_val']) ) { 
-			 $message .= ' of "'.($tmpQuery['search_val']=='pName'?'Professional Name':'Title/Description').'"'; 
-		 } else {
-			 $message .= ' of "Professionals Name"'; 
-		 }
+		<?php $message = " "; if (isset($tmpQuery['search_key']) && !empty($tmpQuery['search_key']) ) { 
+			$message .= 'Search result for "'.$tmpQuery['search_key'].'"';
+		 } 
 		 if ( isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id']) ) { 
-			 $message .= ' in Category "'.$catagory[$tmpQuery['catagory_id']].'"'; 
+			 $message .= 'Search result in Category "'.$catagory[$tmpQuery['catagory_id']].'"'; 
 		 }  ?>
 		<p class="photostream"><?php echo $message; ?></p>
 		

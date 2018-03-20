@@ -95,7 +95,7 @@ class UserController extends Controller
 			$link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
 			 $this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 			Controller::sendMail($request->email);
-			Session::flash('flash_message', 'User registration successfully, please check your email to comnfirm your account.');
+			Session::flash('flash_message', 'User registration successfully, please check your email to confirm your account.');
 		} else {
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
@@ -450,7 +450,7 @@ class UserController extends Controller
 						$this->email_body = "Sender Email: " .Auth::user()->email. "<br/><br/>";
 						$this->email_body .= "Message: Hello Dear Admin, <br/><br/> You have a request for professsional account. ";
 						$this->email_subject = "Professional Request";
-						Controller::sendMail('ranjuzestmind@gmail.com');  
+						Controller::sendMail('contactwedsetgo@gmail.com');  
 						Session::flash('flash_message', 'Your Request has been sent to site admin.');
 					}
 				}
