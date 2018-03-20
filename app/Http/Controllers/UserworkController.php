@@ -47,12 +47,22 @@ class UserworkController extends Controller{
 		$user_work = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image", 'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.id',$id)->first();
 
 		if ($request->isMethod('post')){
+			if(empty($id)){
 			$this->validate($request, array(
                                 'description' => 'required',
                                 'catagory_id' => 'required',
                                 'title' => 'required',
                                 'tag' => 'required',
+                               'image_file' => 'required | mimes:jpeg,jpg,png',
                             ));
+			} else {
+			$this->validate($request, array(
+							'description' => 'required',
+							'catagory_id' => 'required',
+							'title' => 'required',
+							'tag' => 'required',
+						));
+			}
                             
             $file = $request->file('image_file');
 			if($request->file('image_file')){
@@ -287,8 +297,9 @@ class UserworkController extends Controller{
 		$id = explode("-",$id);
 		$id = $id[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
+		$vision_title =  DB::table('vision_books')->select('vision_books.vision_title')->where('vision_books.id', '=', $id)->first();
 		$album= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.id as vbc','vision_book_collections.old_title','vision_book_collections.comments')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_book_collections.vision_book_id','=',$id)->get();
-		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album, 'vision_book_id'=>$id));
+		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album, 'vision_book_id'=>$id, 'vision_title'=>$vision_title));
 	}
 	
 	public function delete_vision_book($id=NULL){
@@ -336,7 +347,7 @@ class UserworkController extends Controller{
 								'token' => $token,
 								'status'=>1
 							));	
-		$this->email_body .= "Hello dear,<br>";
+		$this->email_body = "Hello dear,<br>";
 		$this->email_body .= "We are inviting you to view vision book";
 		$this->email_subject = "Invitation for vision book";
 		Controller::sendMail($request->email);  

@@ -1,8 +1,8 @@
 <div class="dashboard-left">
 			<?php if(isset($profile_url) && !empty($profile_url)){ ?>
-					<a href="mailto:?subject=Wedsetgo:Invite friend&body= Hello Dear,  I am sharing professional profile page link {{$profile_url}} I am encouraging you to view this link." title="Invite Friends"  class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Invite Friends</a>
+					<a href="mailto:?subject=Wedsetgo:Invite friend&body={{$profile_url}}" title="Invite Friends"  class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Invite Friends</a>
 					<?php } else { ?>
-					<a href="mailto:?subject=Wedsetgo:Invite friend&body=Hello Dear,  I am sharing professional profile page link {{$userProfile}} I am encouraging you to view this link." title="Invite Friends"  class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Invite Friends</a>
+					<a href="mailto:?subject=Wedsetgo:Invite friend&body={{$userProfile}}" title="Invite Friends"  class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Invite Friends</a>
 					<?php } ?>
 					 <div class="btn-group">
 					<?php if(!empty($followerList)){ ?>

@@ -109,8 +109,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-		DB::table('user_details')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $id)->delete();
 		DB::table('users')->where('id', $id)->delete();
+		DB::table('user_details')->where('user_id', $id)->delete();
 		Session::flash('flash_message', 'Record has been delete successfully.');
 		return redirect()->route('admin.admin_userlist');	
     }
@@ -162,12 +162,13 @@ class AdminController extends Controller
 						'sender_id' => Auth::user()->id,
 						'message_id' => $message->id,
 						'message' => $request->information,
+						'receiver_id'=>$id,
 						'is_new'=>1
 				   ));
-				 Controller::getEmailData('MORE_INFO_REQUEST');
-				$this->email_body = str_replace("{USER}",ucwords($users->first_name.' '.$users->last_name),$this->email_body);
-				$infoMesage = $request->information;
-				$this->email_body = str_replace("{INFO_MESSAGE}",$infoMesage,$this->email_body);
+				 //Controller::getEmailData('MORE_INFO_REQUEST');
+				//$this->email_body = str_replace("{USER}",ucwords($users->first_name.' '.$users->last_name),$this->email_body);
+				$this->email_body = $request->information;
+				$this->email_subject = "Request for professional more Information";
 				Controller::sendMail($users->email);  
 				Session::flash('flash_message', 'Your Request has been sent.');
 				return redirect()->route('admin.admin_userlist');
@@ -215,15 +216,22 @@ class AdminController extends Controller
 	  }
 	  
 	  public function admin_message_list($mid = NULL, Request $request){
-		
+		if(!empty($mid)){
+			$result = DB::table('message_conversations')->where('message_id',$mid)->update(['is_new'=>0]);
+		}
 		if ($request->isMethod('post')) {
+			$this->validate($request, array(
+                                'message' => 'required',
+							));
 			$lastMessage = DB::Table('messages')->select('messages.*')->where('messages.id', $mid)->first();
 			$receiver_id = ($lastMessage->sender_id == Auth::user()->id)?$lastMessage->receiver_id:$lastMessage->sender_id;
 			$result = DB::table('messages')->where('id',$mid)->update(['last_message'=> $request->message]);
 			MessageConversation::create(array(
 			'sender_id' => Auth::user()->id,
 			'message_id' => $mid,
-			'message' => $request->message
+			'message' => $request->message,
+			'receiver_id'=>$receiver_id,
+			 'is_new'=>1
 			));
 			$getUSer = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('users.id',$receiver_id)->first();
 			Controller::getEmailData('MESSAGE');
@@ -234,7 +242,7 @@ class AdminController extends Controller
 			$this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 			Controller::sendMail($getUSer->email);	
 			}	
-		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->get();
+		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->orderBy('message_conversations.id', 'ASC')->get();
 		
 		return view('admin.admin_message_list', array('title' => 'Message', 'listMessage'=>$listMessage));
 	}

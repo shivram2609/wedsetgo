@@ -38,6 +38,9 @@ class MessageController extends Controller {
 			$result = DB::table('message_conversations')->where('message_id',$mid)->update(['is_new'=>0]);
 		}
 		if ($request->isMethod('post')) {
+			$this->validate($request, array(
+                                'message' => 'required',
+							));
 			
 			$lastMessage = DB::Table('messages')->select('messages.*')->where('messages.id', $mid)->first();
 			$receiver_id = ($lastMessage->sender_id == Auth::user()->id)?$lastMessage->receiver_id:$lastMessage->sender_id;
@@ -69,7 +72,7 @@ class MessageController extends Controller {
 		$followCount = Controller::followCount(Auth::user()->id);
 		$id= Auth::user()->id;
 		$messageCount = Controller::messageCount(Auth::user()->id);
-		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->get();
+		$listMessage = DB::Table('message_conversations')->select('message_conversations.*','user_details.first_name','user_details.last_name' ,'user_details.profile_image')->join('user_details', 'user_details.user_id', '=', 'message_conversations.sender_id')->where('message_conversations.message_id', $mid)->orderBy('message_conversations.id', 'ASC')->get();
 		
 		return view('message.message_list', array('title' => 'Message', 'user'=>$user, "id"=>$id,'followerList'=>$followCount['followerList'], 'followingList'=>$followCount['followingList'], "id"=>$id, 'listMessage'=>$listMessage,'messageCount'=>$messageCount));
 	}
@@ -107,6 +110,7 @@ class MessageController extends Controller {
      */
     public function user_message(Request $request)
     {
+		//dd($request->hidden_user_id);
 		if(!empty($request)){
 			$this->validate($request, array(
                                 'user_message' => 'required',

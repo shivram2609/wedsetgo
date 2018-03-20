@@ -95,7 +95,7 @@ class UserController extends Controller
 			$link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
 			 $this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 			Controller::sendMail($request->email);
-			Session::flash('flash_message', 'User registration successfully, please check your email to comnfirm your account.');
+			Session::flash('flash_message', 'User registration successfully, please check your email to confirm your account.');
 		} else {
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
@@ -340,11 +340,32 @@ class UserController extends Controller
 	
 	public function editprofile(Request $request, $id=Null){	
 		if ($request->isMethod('post')){
-			 $this->validate($request, array(
-                                'first' => 'required|max:255',
+			$input = $request->all();
+			$validateArray = array(
+                                'firstname' => 'required|max:255',
+                                'lastname' => 'required|max:255',
+                                'email' => 'required|max:255|unique:users,email,'.$id,
+                                'gender' => 'required',
+                                'dob' => 'required',
+                                );
+             if ( !isset($input["agree"]) || $input["agree"] ) {
+				 $validateArray = array(
+                                'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',
                                 'email' => 'required|email|max:255',
-                                ));
+                                'gender' => 'required',
+                                'dob' => 'required',
+                                'website' => 'required',
+                                'address' => 'required',
+                                'country' => 'required',
+                                'state' => 'required',
+                                'zipcode' => 'required',
+                                'location_id' => 'required',
+                                'trade_description' => 'required',
+                                'detail' => 'required',
+                                );
+			 }                    
+			 $this->validate($request, $validateArray);
         
 			$socialArray['fb'] = $request->fb;
 			$socialArray['twitter'] = $request->twitter;
@@ -352,7 +373,7 @@ class UserController extends Controller
 			$socialArray['instagram'] = $request->instagram;
 			$socialVal = serialize($socialArray);
 			$data = array();
-			$data['first_name'] = $request->first;
+			$data['first_name'] = $request->firstname;
 			$data['last_name'] = $request->lastname;
 			$data['phone_no'] = $request->phone;
 			$data['category_id'] = $request->category_id;
@@ -504,7 +525,7 @@ class UserController extends Controller
 		///dd($rating);
 		$followCount = Controller::followCount($id);
 		$followlist = Controller::followlist($id);
-		Controller::getEmailData('INVITEFRIEND');
+		 Controller::getEmailData('INVITEFRIEND');
 		$profile_url = $request->fullUrl();
 		$profile_url = strip_tags(str_replace("{LINK}",$profile_url,$this->email_body));
 		
