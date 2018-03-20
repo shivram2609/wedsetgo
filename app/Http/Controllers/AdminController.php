@@ -109,8 +109,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-		DB::table('user_details')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $id)->delete();
 		DB::table('users')->where('id', $id)->delete();
+		DB::table('user_details')->where('user_id', $id)->delete();
 		Session::flash('flash_message', 'Record has been delete successfully.');
 		return redirect()->route('admin.admin_userlist');	
     }
