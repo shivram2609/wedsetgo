@@ -47,6 +47,7 @@ class UserworkController extends Controller{
 		$user_work = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image", 'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.id',$id)->first();
 
 		if ($request->isMethod('post')){
+			if(empty($id)){
 			$this->validate($request, array(
                                 'description' => 'required',
                                 'catagory_id' => 'required',
@@ -54,6 +55,14 @@ class UserworkController extends Controller{
                                 'tag' => 'required',
                                'image_file' => 'required | mimes:jpeg,jpg,png',
                             ));
+			} else {
+			$this->validate($request, array(
+							'description' => 'required',
+							'catagory_id' => 'required',
+							'title' => 'required',
+							'tag' => 'required',
+						));
+			}
                             
             $file = $request->file('image_file');
 			if($request->file('image_file')){
