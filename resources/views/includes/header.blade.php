@@ -36,7 +36,9 @@
 					<div class="dropdown-menu new_menu">
 					  <a class="dropdown-item" href="{{ url('/p') }}/{{Auth::user()->id}}-{{$userDetail->first_name}}-{{$userDetail->last_name}}">Profile</a>
 					  <a class="dropdown-item" href="/edit_profile">Edit Profile</a>
+					  <?php if (Auth::user()->user_type_id == 2){ ?>
 					  <a class="dropdown-item" href="/my_work">My Work</a>
+					 <?php }?>
 					  <a class="dropdown-item" href="/message/{{Auth::user()->id}}">Messages</a>
 					  <a class="dropdown-item" href="/review/{{Auth::user()->id}}">Reviews</a>
 					  <a class="dropdown-item" href="/vision_book">My Vision Books</a>

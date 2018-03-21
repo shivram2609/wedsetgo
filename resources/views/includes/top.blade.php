@@ -109,6 +109,7 @@
 					<li val="4" class="rate grey-star">&nbsp;</li>
 					<li val="5" class="rate grey-star">&nbsp;</li>
 				  </ul>
+				  <b>Review:</b>
 				  <textarea class="form-control" placeholder="Enter Review" name="review" value=""></textarea><br>
 			 <?php } else { ?>
 				 <input type="hidden" id="rate_val" name="rate_val" value="<?php echo $rating['getProfessionalRate']->rating_points; ?>" />

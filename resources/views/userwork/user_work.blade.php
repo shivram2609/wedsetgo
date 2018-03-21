@@ -22,7 +22,7 @@
 			 <form method="get" action="" name="select_category">
 				 <div class="form-group col-sm-12">
 					Select Category
-					{!! Form::select('catagory_id', $catagory,(isset($user_work->category_id)?$user_work->category_id:''), array("class"=>"custom-select", "id"=>"my_work_select")) !!}
+					{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select", "id"=>"my_work_select")) !!}
 				</div>
 				</form>
 				<div class="masonry">
