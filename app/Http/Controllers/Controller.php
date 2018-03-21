@@ -41,11 +41,15 @@ abstract class Controller extends BaseController
 		if ( Auth::check()) {
 			$userfile= $this->getUser(Auth::user()->id);
 			$userProfile= url("/p/$userfile->user_id-$userfile->first_name-$userfile->last_name");
-			$userProfile = strip_tags(str_replace("{LINK}",$userProfile,$this->email_body));
+			$userProfile = str_replace("{LINK}",$userProfile,$this->email_body);
+			$userProfile = str_replace("</p>","%0A%0A",$userProfile);
+			$userProfile = strip_tags($userProfile);
 			View::share('userProfile', $userProfile);
 		}else{
 			$userProfile = $request->url();
-			$userProfile = strip_tags(str_replace("{LINK}",$userProfile,$this->email_body));
+			$userProfile = str_replace("{LINK}",$userProfile,$this->email_body);
+			$userProfile = str_replace("</p>","%0A%0A",$userProfile);
+			$userProfile = strip_tags($userProfile);
 			View::share('userProfile', $userProfile);
 		}
 		
@@ -134,6 +138,7 @@ abstract class Controller extends BaseController
 	
 	function messageCount($id=NULL){
 		$messageCount = DB::table('message_conversations')->select('is_new')->where('receiver_id',$id)->where('is_new',1)->count();
+		//dd($messageCount);
 		return $messageCount;
 	}
 	

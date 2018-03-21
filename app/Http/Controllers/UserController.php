@@ -355,7 +355,6 @@ class UserController extends Controller
                                 'email' => 'required|email|max:255',
                                 'gender' => 'required',
                                 'dob' => 'required',
-                                'website' => 'required',
                                 'address' => 'required',
                                 'country' => 'required',
                                 'state' => 'required',

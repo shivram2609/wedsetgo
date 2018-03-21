@@ -96,7 +96,7 @@
 						
 						<div class="row">
 							<div class="col-sm-12 form-group">
-								{!! Form::label('website', 'Website', ['class' => 'control-label required']) !!}
+								{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
 								{!! Form::email('website', (isset($user->website)?$user->website:''), ['class' => 'form-control']) !!}
 							</div>
 						</div>
