@@ -23,7 +23,6 @@
 					<?php }?>
 				<div class="user-text">
 					<?php echo ucfirst($user->first_name);?><br/>
-					Wedding Planning Website
 				</div>
 		</div>		
 		</div>
