@@ -344,11 +344,11 @@ class UserController extends Controller
 			$validateArray = array(
                                 'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',
-                                'email' => 'required|max:255|unique:users,email,'.$id,
+                                'email' => 'required|max:255|email',
                                 'gender' => 'required',
                                 'dob' => 'required',
                                 );
-             if ( !isset($input["agree"]) || $input["agree"] ) {
+             if ( isset($input["agree"]) && !empty($input["agree"]) ) {
 				 $validateArray = array(
                                 'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',

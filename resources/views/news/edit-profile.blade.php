@@ -82,10 +82,12 @@
 					<br>
 
 					<?php if($user->porfessional_request == 1 And $user->user_type_id == 3) { ?>
-						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked>If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request. </input>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked />If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request.
 					<?php } else if($user->user_type_id == 3) {?>
-						<input name="agree" type="checkbox" value="1" id="checkbox_professional">If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request. </input>
-					<?php }?>
+						<input name="agree" type="checkbox" value="1" id="checkbox_professional" />If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request.
+					<?php } elseif($user->user_type_id == 2 ) { ?>
+						<input type="hidden" name="agree" value="1" />
+					<?php } ?>
 					   
 					
 					<?php if($user->porfessional_request == 1 OR $user->user_type_id == 2){ ?>
