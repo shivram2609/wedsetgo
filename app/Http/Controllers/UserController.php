@@ -526,7 +526,9 @@ class UserController extends Controller
 		$followlist = Controller::followlist($id);
 		 Controller::getEmailData('INVITEFRIEND');
 		$profile_url = $request->fullUrl();
-		$profile_url = strip_tags(str_replace("{LINK}",$profile_url,$this->email_body));
+		$profile_url = str_replace("{LINK}",$profile_url,$this->email_body);
+		$profile_url = str_replace("</p>","%0A%0A",$profile_url);
+		$profile_url = strip_tags($profile_url);
 		
 		
 		if (Auth::check()){
