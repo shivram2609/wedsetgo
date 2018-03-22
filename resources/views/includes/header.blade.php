@@ -42,7 +42,7 @@
 					  <a class="dropdown-item" href="/message/{{Auth::user()->id}}">Messages</a>
 					  <a class="dropdown-item" href="/review/{{Auth::user()->id}}">Reviews</a>
 					  <a class="dropdown-item" href="/vision_book">My Vision Books</a>
-					  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changepassword">Change Password</a>
+					  <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#changepassword">Change Password</a>
 					  <div class="dropdown-divider"></div>
 					  <a class="dropdown-item" href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Log Out</a>
 					</div>
@@ -84,6 +84,37 @@
       </div>
     </nav>
     <?php if (Auth::check()) { ?>
+		<div class="modal fade" id="changepassword">
+	  <div class="modal-dialog signup-signin">
+		<div class="modal-content">
+		  <!-- Modal Header -->
+		  <div class="modal-header">
+			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i>Change Password</h4>
+			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
+		  </div>
+		  <!-- Modal body -->
+		  <div class="modal-body">
+		       {!! Form::open(['route' => 'news.changepassword']) !!}
+			<div class="input-group form-group">
+			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+			  {!! Form::input('password', 'currentpassword', null, ['class' => 'form-control', 'placeholder' => 'Current password','required'=>'Please enter password' ]) !!}
+			 </div>
+			 <div class="input-group form-group">
+			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+			  {!! Form::input('password','password', null, ['class' => 'form-control','placeholder' => 'Password']) !!}
+			 </div>
+			 <div class="input-group form-group">
+			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+			  {!! Form::input('password','password_confirmation', null, ['class' => 'form-control','placeholder' => 'Confirm Password']) !!}
+			 </div> 
+			  <div class="form-group text-center">
+			  {!! Form::submit('Change Password', ['class' => 'theme-btn-rct']) !!} 
+			  </div>
+			{!! Form::close() !!}
+		  </div>
+		</div>
+	  </div>
+	</div>
 	<?php } else { ?>
     <!--SignUp Modal -->
 	<div class="modal fade" id="signUp">
@@ -208,37 +239,7 @@
 	  </div>
 	</div>
 	
-	<div class="modal fade" id="changepassword">
-	  <div class="modal-dialog signup-signin">
-		<div class="modal-content">
-		  <!-- Modal Header -->
-		  <div class="modal-header">
-			<h4 class="modal-title"><i class="fa fa-user" aria-hidden="true"></i>Change Password</h4>
-			<button type="button" class="close" data-dismiss="modal" id="">&times;</button>
-		  </div>
-		  <!-- Modal body -->
-		  <div class="modal-body">
-		       {!! Form::open(['route' => 'news.changepassword']) !!}
-			<div class="input-group form-group">
-			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-			  {!! Form::input('password', 'currentpassword', null, ['class' => 'form-control', 'placeholder' => 'Current password','required'=>'Please enter password' ]) !!}
-			 </div>
-			 <div class="input-group form-group">
-			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-			  {!! Form::input('password','password', null, ['class' => 'form-control','placeholder' => 'Password']) !!}
-			 </div>
-			 <div class="input-group form-group">
-			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-			  {!! Form::input('password','password_confirmation', null, ['class' => 'form-control','placeholder' => 'Confirm Password']) !!}
-			 </div> 
-			  <div class="form-group text-center">
-			  {!! Form::submit('Change Password', ['class' => 'theme-btn-rct']) !!} 
-			  </div>
-			{!! Form::close() !!}
-		  </div>
-		</div>
-	  </div>
-	</div>
+	
 	<?php if (isset($pageTerm->name)) { ?>
 	<div class="modal fade" id="term_and_conditions">
 	  <div class="modal-dialog signup-signin">
