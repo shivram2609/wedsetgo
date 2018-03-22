@@ -180,16 +180,16 @@
 								<div class="inner-box ">
 									<div class="img-box">
 										<?php if(!empty($sellerworks->images)) { ?>
-											<img src="/work_image/{{ $sellerworks->images }}" alt="img001" class="img-reponsive" width="493" height="437">
+											<img src="/work_image/{{ $sellerworks->images }}" alt="{{ $sellerworks->title }}" class="img-reponsive" width="493" height="437">
 										<?php } else { ?>
-											<img src="img/img013.jpg" class="img-reponsive" alt="img013" width="493" height="437">
+											<img src="img/img013.jpg" class="img-reponsive" alt="" width="493" height="437">
 										<?php }?>
 									</div>
 									<div class="text-box">
 										<?php if(!empty($sellerworks->profile_image)) { ?>
-												<div class="img"><img src="/uploads/avatars/{{ $sellerworks->profile_image }}" alt="user" class="img-reponsive" width="35" height="51"></div>
+												<div class="img"><img src="/uploads/avatars/{{ $sellerworks->profile_image }}" alt="{{ $sellerworks->title }}" class="img-reponsive" width="35" height="51"></div>
 											<?php } else { ?>
-												<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="user" class="img-reponsive" width="35" height="51"></div>
+												<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive" width="35" height="51"></div>
 										<?php }?>
 									
 										<div class="text">

@@ -11,9 +11,9 @@
 	
 	  <div class="holder col-sm-8">
 		  <?php if(!empty($userphotogrids->images)) { ?>
-			<img src="/work_image/{{$userphotogrids->images}}" alt="img012" class="img-fluid form-group" width="981" height="844">
+			<img src="/work_image/{{$userphotogrids->images}}" alt="{{$userphotogrids->first_name}}" class="img-fluid form-group" width="981" height="844">
 		 <?php } else { ?>
-			<img src="img/img015.jpg" alt="img012" class="img-fluid form-group" width="981" height="844">
+			<img src="img/img015.jpg" alt="" class="img-fluid form-group" width="981" height="844">
 		<?php } ?>
 		
 		<div class="text-center">
@@ -28,9 +28,9 @@
 		<div class="carousel-caption">
 			<div class="heading">
 				<?php if(!empty($userphotogrids->profile_image)) { ?>
-					<img src="/uploads/avatars/{{$userphotogrids->profile_image}}" alt="user" class="img-reponsive" width="47" height="51">
+					<img src="/uploads/avatars/{{$userphotogrids->profile_image}}" alt="{{$userphotogrids->first_name}}" class="img-reponsive" width="47" height="51">
 				<?php } else { ?>
-					<img src="images/dummy-user.jpg" alt="user" class="img-reponsive" width="47" height="51">
+					<img src="images/dummy-user.jpg" alt="" class="img-reponsive" width="47" height="51">
 				<?php } ?>
 					{{$userphotogrids->title}}
 				</div>

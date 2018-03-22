@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
 @include('includes.top')
+
 		<div class="dashboard-wrapper">
-			
 				@include('includes.follower')
 				<div class="dashboard-form text-center">
 				<div class="dashboard-form">
@@ -33,16 +33,16 @@
 						<div class="img-box">
 							<div class="overlay"><a href="add_work/{{$userworks->id}}" class="btn-edit" title="Edit">Edit</a></div>
 							<?php if(!empty($userworks->images)) { ?>
-								<img src="/work_image/{{ $userworks->images }}" alt="img001" class="img-reponsive" width="512" height="375">
+								<img src="/work_image/{{ $userworks->images }}" alt="<?php echo $userworks->images?>" class="img-reponsive" width="512" height="375">
 								<?php } else { ?>
-								<img src="" alt="img001" class="img-reponsive" width="512" height="375">
+								<img src="" alt="" class="img-reponsive" width="512" height="375">
 								<?php } ?>
 						</div>
 						<div class="text-box">
 							<?php if(!empty($userworks->profile_image)) { ?>
-							<div class="img"><img src="/uploads/avatars/{{ $userworks->profile_image }}" alt="user" class="img-reponsive" width="47" height="51"></div>
+							<div class="img"><img src="/uploads/avatars/{{ $userworks->profile_image }}" alt="<?php echo $userworks->profile_image?>" class="img-reponsive" width="47" height="51"></div>
 							<?php } else { ?>
-							<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="user" class="img-reponsive" width="47" height="51"></div>
+							<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive" width="47" height="51"></div>
 							<?php } ?>
 							<div class="text">
 							<b><a href="{{ url('/v') }}/{{$userworks->id}}-{{$user->first_name}}-{{$user->last_name}}" > {{$userworks->title}}</a></b>

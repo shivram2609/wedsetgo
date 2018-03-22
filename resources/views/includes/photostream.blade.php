@@ -5,16 +5,16 @@
 				<div class="inner-box">
 					<div class="img-box">
 						<?php if(!empty($userphotogrids->images)) { ?>
-							<img src="/work_image/{{$userphotogrids->images}}" class="img-reponsive" alt="img013" width="493" height="437">
+							<img src="/work_image/{{$userphotogrids->images}}" class="img-reponsive" alt="{{$userphotogrids->first_name}}" width="493" height="437">
 						<?php } else { ?>
-							<img src="img/img013.jpg" class="img-reponsive" alt="img013" width="493" height="437">
+							<img src="{{URL::to('img/user-dummy.jpg')}}" class="img-reponsive" alt="" width="493" height="437">
 						<?php } ?>
 					</div>
 					<div class="text-box">
 						<?php if(!empty($userphotogrids->profile_image)) { ?>
-							<div class="img"><img src="/uploads/avatars/{{$userphotogrids->profile_image}}" alt="user" class="img-reponsive" width="47" height="51"></div>
+							<div class="img"><img src="/uploads/avatars/{{$userphotogrids->profile_image}}" alt="{{$userphotogrids->first_name}}" class="img-reponsive" width="47" height="51"></div>
 						<?php } else { ?>
-							<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="user" class="img-reponsive" width="47" height="51"></div>
+							<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive" width="47" height="51"></div>
 						<?php } ?>
 						<div class="text">
 							<b>{{$userphotogrids->title}}</b>
