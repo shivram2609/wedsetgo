@@ -3,15 +3,16 @@
 @include('includes.top')
 	<div class="dashboard-wrapper">
 		<?php if(Auth::user()->id == $vision_title->user_id){?>
-			<h1 class="form-group heading">{{$vision_title->vision_title}}<a href="javascript:void(0)" title="Edit" class="btn btn-white"></i></a> 
+			<h1 class="form-group heading">{{$vision_title->vision_title}}
+			<a href="javascript:void(0)" title="Edit" class="btn btn-white"></i></a> 
 			</h1>
+			<a href="mailto:?subject=Wedsetgo:Album&body={{$album_url}}" title="Share Album with friends"  class="btn btn-gray form-group"><i class="fa fas fa-share-alt" aria-hidden="true"></i></i> Share Album with friends</a>
 			<h2 class="heading-sub"><span><i class="fa fa-home" aria-hidden="true"></i> Add new photo in vision book</h2>
 			<div class="file-loading">
 				<a href="/photostream"><span class="add-icon"></span></a>
 						<br>
 						 Add new photo in vision book
 			</div>
-			<a href="mailto:?subject=Wedsetgo:Album&body={{$album_url}}" title="Share Album with friends"  class="btn btn-gray btn-block form-group"><i class="fa fa-user-plus" aria-hidden="true"></i></i> Share Album with friends</a>
 			<?php } else { ?>
 				
 			<h1 class="form-group heading">{{ucfirst($vision_title->first_name)}} {{ucfirst($vision_title->last_name)}} 's Album {{$vision_title->vision_title}}<a href="javascript:void(0)" title="Edit" class="btn btn-white"></i> </a> 
