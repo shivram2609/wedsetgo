@@ -151,7 +151,7 @@
 			  {!! Form::input('password', 'password_confirmation', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Confirm Password' ,'required'=>'Please enter confirm password']) !!}
 			 </div>
 			 <div class="text-center">
-				<!--div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"></div-->
+				<div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"></div>
 			  
 			 </div>
 			 <p><input name="term" type="checkbox" value="1" id ="term_condition">By clicking Sign up  you agree to our <a href="/st/term-condtions" title="Terms of Use" data-toggle="modal" data-target="#term_and_conditions">Terms of Use</a></p>
