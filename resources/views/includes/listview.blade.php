@@ -29,7 +29,7 @@
 						<?php } else { ?>
 							<a href="#" title="Login" data-toggle="modal" data-target="#signIn" class="btn btn-bdrSml">Add to vision book</a>
 						<?php }?></b>
-					<div class="share-links">
+					<!--div class="share-links">
 					like the idea and the concept :
 						<div class="social-links">
 							 <a class="nav-link" href="#" title="Facebook"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
@@ -37,7 +37,7 @@
 							 <a class="nav-link" href="#" title="Google Plus"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
 							 <a class="nav-link" href="#" title="Linkedin"><img src="{{URL::to('img/linkedin-icon.png')}}" alt="Linkedin"></a>
 						</div>
-					</div>
+					</div-->
 			</div>
 			</div>
 @endforeach
