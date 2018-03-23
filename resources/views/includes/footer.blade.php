@@ -344,6 +344,10 @@
 			}
 			
 			});
+			$('.view_image').on('click', function(){
+				var images = $(this).children("img").attr('src');
+				$("#popup_image").attr("src",images);
+		});
 	});
   
 </script>

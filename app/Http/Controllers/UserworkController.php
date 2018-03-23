@@ -293,13 +293,19 @@ class UserworkController extends Controller{
 		
 	}
 	
-	public function list_vision_book($id=NULL){
+	public function list_vision_book($id=NULL, Request $request){
 		$id = explode("-",$id);
 		$id = $id[0];
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();	
-		$vision_title =  DB::table('vision_books')->select('vision_books.vision_title')->where('vision_books.id', '=', $id)->first();
+		$vision_title =  DB::table('vision_books')->select('vision_books.vision_title', 'vision_books.user_id', 'user_details.first_name','user_details.last_name' )->join('user_details', 'user_details.user_id', '=','vision_books.user_id' )->where('vision_books.id', '=', $id)->first();
 		$album= DB::table('vision_books')->select('vision_books.*','vision_book_collections.images','vision_book_collections.id as vbc','vision_book_collections.old_title','vision_book_collections.comments')->join('vision_book_collections','vision_book_collections.vision_book_id','=','vision_books.id')->where('vision_book_collections.vision_book_id','=',$id)->get();
-		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album, 'vision_book_id'=>$id, 'vision_title'=>$vision_title));
+		
+		Controller::getEmailData('ALBUM');
+		$album_url = $request->fullUrl();
+		$album_url = str_replace("{LINK}",$album_url,$this->email_body);
+		$album_url = str_replace("</p>","%0A%0A",$album_url);
+		$album_url = strip_tags($album_url);
+		return view('userwork.list_vision_book', array('title' =>'Album', 'user'=>$user, 'id'=>	Auth::user()->id, 'album'=>$album, 'vision_book_id'=>$id, 'vision_title'=>$vision_title, 'album_url'=>$album_url));
 	}
 	
 	public function delete_vision_book($id=NULL){
@@ -311,7 +317,7 @@ class UserworkController extends Controller{
 				if ( file_exists("visionbook_images/".$image->images) ) {
 					unlink("visionbook_images/".$image->images);
 					}
-			return redirect('/v_list/'.$image->id."-".$image->vision_title);
+			return redirect('/album/'.$image->id."-".$image->vision_title);
 		}
 	}else{
 		return redirect('/vision_book');
