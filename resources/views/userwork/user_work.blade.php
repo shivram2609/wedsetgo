@@ -25,35 +25,43 @@
 					{!! Form::select('catagory_id', [null=>'Please Select'] +$catagory,(isset($tmpQuery['catagory_id'])?$tmpQuery['catagory_id']:''), array("class"=>"custom-select", "id"=>"my_work_select")) !!}
 				</div>
 				</form>
+				<div class="user-work">
 				<div class="masonry">
 					<?php $i = 0; ?>
 					@foreach ($userwork as $userworks)
 					<?php ++$i; ?>
-				    <div class="img-item <?php echo ($i>12)?"hide":""; ?>">
+				    <div class="img-item box-list <?php echo ($i>12)?"hide":""; ?>" >
 						<div class="img-box">
-							<div class="overlay"><a href="add_work/{{$userworks->id}}" class="btn-edit" title="Edit">Edit</a></div>
+							<div class="overlay">
+								<a href="add_work/{{$userworks->id}}" class="btn-edit" title="Edit">Edit</a>
+							</div>
 							<?php if(!empty($userworks->images)) { ?>
 								<img src="/work_image/{{ $userworks->images }}" alt="<?php echo $userworks->images?>" class="img-reponsive" width="512" height="375">
 								<?php } else { ?>
 								<img src="" alt="" class="img-reponsive" width="512" height="375">
 								<?php } ?>
 						</div>
+						<div class="clearfix"></div>
 						<div class="text-box">
 							<?php if(!empty($userworks->profile_image)) { ?>
-							<div class="img"><img src="/uploads/avatars/{{ $userworks->profile_image }}" alt="<?php echo $userworks->profile_image?>" class="img-reponsive" width="47" height="51"></div>
+							<div class="img">
+								<img src="/uploads/avatars/{{ $userworks->profile_image }}" alt="<?php echo $userworks->profile_image?>" class="img-reponsive" width="47" height="51">
+							</div>
 							<?php } else { ?>
-							<div class="img"><img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive" width="47" height="51"></div>
+							<div class="img">
+								<img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive" width="47" height="51">
+							</div>
 							<?php } ?>
 							<div class="text">
-							<b><a href="{{ url('/v') }}/{{$userworks->id}}-{{$user->first_name}}-{{$user->last_name}}" > {{$userworks->title}}</a></b>
-								{{ str_limit($userworks->description, 30) }}
+								<b><a href="{{ url('/v') }}/{{$userworks->id}}-{{$user->first_name}}-{{$user->last_name}}" > {{$userworks->title}}</a></b>
+									{{ str_limit($userworks->description, 30) }}
 							</div>
 						</div>
-					  </div>
-				
+					  </div>				
 				@endforeach
 				</div>
-				<?php if ($i >12) {  ?>
+				
+				</div><?php if ($i >12) {  ?>
 					<div class="text-center"><button class="btn btn-border" id="loadmore">Load More</button></div>
 				<?php } ?>
 			</section>

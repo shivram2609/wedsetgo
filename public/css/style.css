@@ -513,6 +513,7 @@ nav.navbar.shrink .navbar-toggle {margin: 8px 15px 8px 0; padding: 4px 5px;}
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
    }
+div.img-item{}
  /* Signup Signin css strat*/
  .signup-signin .modal-header{background:#761b31; color:#fff; text-align:center; border-radius:0;  padding:10px;}
  .signup-signin .modal-header .close{color:#fff;}
@@ -711,7 +712,8 @@ float: left;}
     font-size: 29px;
     color: #761b31;
 }
- 
+ .user-work{width:100%; position:relative; display:inline-block;}
+ .user-work .box-list{width:auto; position:relative; display:inline-block; border:1px solid #555; margin:10px;}
  
  
  
