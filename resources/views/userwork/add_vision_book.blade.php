@@ -12,9 +12,9 @@
 		<div class="row">
 		  <div class="holder col-sm-8 visionbook_image text-center">
 			  <?php if(!empty($userphotogrid->images)) { ?>
-				<img src="/work_image/{{$userphotogrid->images}}" alt="img012" class="img-fluid" width="981" height="844">
+				<img src="/work_image/{{$userphotogrid->images}}" alt="{{$userphotogrid->first_name}}" class="img-fluid" width="981" height="844">
 			 <?php } else { ?>
-				<img src="img/img015.jpg" alt="img012" class="img-fluid" width="981" height="844">
+				<img src="img/img015.jpg" alt="" class="img-fluid" width="981" height="844">
 			<?php } ?>
 			<div class="slider-btn">
 				 <a href="mailto:?subject=Wedsetgo:{{$userphotogrid->title}}&body={{$url}}" title="Email" text=""><i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -41,9 +41,9 @@
 						</p>
 						<p class=""><b>Created by:</b><br/>
 						<?php if(!empty($userphotogrid->profile_image)) { ?>
-							<img src="/uploads/avatars/{{$userphotogrid->profile_image}}" alt="user" class="img-reponsive product-user" width="47" height="51">
+							<img src="/uploads/avatars/{{$userphotogrid->profile_image}}" alt="{{$userphotogrid->first_name}}" class="img-reponsive product-user" width="47" height="51">
 						<?php } else { ?>
-							<img src="{{URL::to('img/user-dummy.jpg')}}" alt="user" class="img-reponsive product-user" width="47" height="51">
+							<img src="{{URL::to('img/user-dummy.jpg')}}" alt="" class="img-reponsive product-user" width="47" height="51">
 						<?php } ?>
 						<a href="{{ url('/p') }}/{{$userphotogrid->user_id}}-{{$userphotogrid->first_name}}-{{$userphotogrid->last_name}}" title="Your Profile">{{ucfirst($userphotogrid->first_name)}} {{ucfirst($userphotogrid->last_name)}}</a>
 						</p>
