@@ -28,7 +28,7 @@ class UserworkController extends Controller{
 		$user = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 		$catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
 		if(empty($request->catagory_id)){
-		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->get();
+		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('users','users.id','=','user_works.user_id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->where('users.is_active',1)->get();
 		} else {
 		$userwork = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image")->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->where('user_works.user_id', Auth::user()->id)->where('user_works.catagory_id', '=', $tmpQuery['catagory_id'] )->get();
 		}
@@ -136,7 +136,7 @@ class UserworkController extends Controller{
 			  }
 		   }
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
-		  $searchEntity = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address",'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.status',1);
+		  $searchEntity = DB::table('user_works')->select('user_works.*','user_work_images.images',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address",'catagories.name')->join('user_work_images','user_work_images.user_work_id','=','user_works.id')->join('users','users.id','=','user_works.user_id')->join('user_details','user_details.user_id','=','user_works.user_id')->join('catagories','catagories.id' , '=', 'user_works.catagory_id')->where('user_works.status',1)->where('users.is_active',1);
 		  if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$searchEntity->where('user_works.catagory_id','=', $tmpQuery['catagory_id']);
 		  }
