@@ -548,6 +548,8 @@ div.img-item{}
 	opacity: 0.8;
 	padding: ;
 	top: 0;
+	padding: 15px 0px;
+    font-weight: bold;
 }
 .flash_message{
 	position: fixed;
@@ -562,6 +564,8 @@ div.img-item{}
 	opacity: 0.8;
 	padding: ;
 	top: 0;
+	padding: 15px 0px;
+    font-weight: bold;
 }
 .success_message{
 	position: fixed;
@@ -576,6 +580,8 @@ div.img-item{}
 	opacity: 0.8;
 	padding: ;
 	top: 0;
+	padding: 15px 0px;
+    font-weight: bold;
 }
 .data { float:left; width:100%;}
 .overview .product-grid-list .list-box .text-box .text b {
