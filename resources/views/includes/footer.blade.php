@@ -72,7 +72,7 @@
 					$('.error_message').fadeOut('fast');
 					$('.error').fadeOut('fast');
 					$('.success_message').fadeOut('fast');
-				}, 3000);
+				}, 15000);
 				
 				$("#signup").on("click",function(e){
 					$("#signIn").modal("hide");
