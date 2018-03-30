@@ -13,8 +13,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-	RewriteCond %{HTTP_HOST} ^wed-set-go.com [NC]
-	RewriteRule ^(.*)$ http://www.wed-set-go.com/$1 [L,R=301]
+	
 </IfModule>
 <IfModule mod_expires.c>
 
