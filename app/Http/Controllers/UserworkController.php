@@ -269,9 +269,7 @@ class UserworkController extends Controller{
 		   }
 		  $location = DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
 		  $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
-		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.trade_description",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->join('catagories','catagories.id' , '=', 'user_details.category_id')->join('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2);
-		  
-		  
+		  $templist = DB::table('users')->select('users.*',"user_details.profile_image","user_details.first_name","user_details.last_name","user_details.address","user_details.category_id","user_details.trade_description",'catagories.name')->join('user_details','user_details.user_id','=','users.id')->leftJoin('catagories','catagories.id' , '=', 'user_details.category_id')->leftJoin('locations','locations.id' , '=', 'user_details.location_id')->where('users.user_type_id','=', 2)->where(['users.is_active'=>1]);
 		   if (isset($tmpQuery['catagory_id']) && !empty($tmpQuery['catagory_id'])) {
 				$templist->where('user_details.category_id','=', $tmpQuery['catagory_id']);
 		  }

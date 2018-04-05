@@ -11,7 +11,7 @@
 		<tr>
 			<td>Image</td>
 			<?php if(isset($viewprofessionalWorkList->images)) { ?>
-				<td><img class="admin_professional" style="" src="<?php echo asset("/work_image/$viewprofessionalWorkList->images")?>"></td>
+				<td><img class="admin_professional" style="height:100%; width:25%;" src="<?php echo asset("/work_image/$viewprofessionalWorkList->images")?>"></td>
 		   <?php } else { ?>
 				<td> No Image</td>
 			<?php } ?>

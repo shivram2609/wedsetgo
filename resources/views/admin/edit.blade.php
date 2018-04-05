@@ -14,7 +14,7 @@
 		{!! Form::email('email', (isset($users->email)?$users->email:''), ['class' => 'form-control', 'readonly' => 'true']) !!}
 		
 		{!! Form::label('user_type_id', 'User Type', ['class' => 'control-label']) !!}
-		<?php  $user_type = empty($users->user_type_id =2)?'Professional':'Buyer'; ?>
+		<?php  $user_type = (!empty($users->user_type_id =2)?'Professional':'Buyer'); ?>
 		{!! Form::text('user_type_id', $user_type, ['class' => 'form-control', 'readonly' => 'true']) !!}
 		<br/>
 		<br/>
