@@ -137,13 +137,13 @@
 					<div class="right-row social-links"> 
 						
 						<?php if(!empty($socialVal['fb'])) { ?>
-							<a class="nav-link" href="//<?php echo $socialVal['fb']?>" title="Facebook" target="_blank"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
+							<a class="nav-link" href="<?php echo $socialVal['fb']?>" title="Facebook" target="_blank"><img src="{{URL::to('img/facebook-icon.png')}}" alt="Facebook"></a>
 						<?php }?>
 						 <?php if(!empty($socialVal['twitter'])) { ?>
-							<a class="nav-link" href="//<?php echo $socialVal['twitter']?>" title="Twitter" target="_blank"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
+							<a class="nav-link" href="<?php echo $socialVal['twitter']?>" title="Twitter" target="_blank"><img src="{{URL::to('img/twitter-icon.png')}}" alt="Twitter"></a>
 						 <?php } ?>
 						 <?php if(!empty($socialVal['google'])) { ?>
-							<a class="nav-link" href="//<?php echo $socialVal['google']?>" title="Google Plus" target="_blank"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
+							<a class="nav-link" href="<?php echo $socialVal['google']?>" title="Google Plus" target="_blank"><img src="{{URL::to('img/googlePlus-icon.png')}}" alt="Google Plus"></a>
 						 <?php } ?>
 						 <?php if(!empty($socialVal['instagram'])) { ?>
 							<a class="nav-link" href="<?php echo $socialVal['instagram']?>" title="Instagram" target="_blank"><img src="{{URL::to('img/instagram-icon.png')}}" alt="Instagram"></a>
