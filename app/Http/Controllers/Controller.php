@@ -24,7 +24,8 @@ abstract class Controller extends BaseController
     //public $staticLink = "http://35.154.146.218:8000/";
     public $email_title = "WedSetGo";
     public $terms = false;
-    function __construct(Request $request) {    
+    function __construct(Request $request) {   
+		View::share("staticLink",$this->staticLink); 
 		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
 		//dd($request->url());
 		View::share('headCategory', $headCategory);
