@@ -18,13 +18,13 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public $email_body = '';
-    public $email_from = 'ranjana@zestminds.com';
+    public $email_from = 'contact@wed-set-go.com';
     public $email_subject = 'test';
     public $staticLink = "http://wed-set-go.com/";
     //public $staticLink = "http://35.154.146.218:8000/";
     public $email_title = "WedSetGo";
     public $terms = false;
-    function __construct(Request $request) {
+    function __construct(Request $request) {    
 		$headCategory =  DB::table('catagories')->where(['is_active'=>1])->get();
 		//dd($request->url());
 		View::share('headCategory', $headCategory);
