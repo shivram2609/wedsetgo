@@ -8,7 +8,7 @@
     <body>
         <div style="width:700px; margin:auto; font-family:arial; font-size:15px; color:#333333; line-height:18px;">
 			<!--a href="<?php // echo SITE_LINK; ?>" ><img src="<?php //echo SITE_LINK; ?>img/logo.png" alt="<?php // echo "SwankCook"; ?>" title="<?php //echo "SwankCook"; ?>" border="0" style="margin:10px;"></a-->
-			<a href="<?php echo $staticLink; ?>" ><img src=" http://wed-set-go.com/img/logo.png';" alt="minicsc-logo" border="0" style="margin:10px;"></a>
+			<a href="<?php echo $staticLink; ?>" ><img src="<?php echo $staticLink.'img/logo.png'; ?>" alt="wed-set-go logo" border="0" style="margin:10px;"></a>
 			 <div style="margin:auto; border:1px solid #761b31; height:auto; border-bottom:none; padding:15px; margin:0px; font-family:arial; font-size:15px; color:#333333; line-height:18px;" >
 				<?php echo $email_content; ?>
 			</div>
