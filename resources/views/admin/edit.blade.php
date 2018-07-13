@@ -14,8 +14,13 @@
 		{!! Form::email('email', (isset($users->email)?$users->email:''), ['class' => 'form-control', 'readonly' => 'true']) !!}
 		
 		{!! Form::label('user_type_id', 'User Type', ['class' => 'control-label']) !!}
+		{!! Form::select('user_type_id', ["2"=>"Professional","3"=>"Bride/Groom"],(isset($users->user_type_id)?$users->user_type_id:''), array("class"=>"form-control", "id"=>"user_type_id", "placeholder"=>"Please select your user type")) !!}
+		
+<!--
+		{!! Form::label('user_type_id', 'User Type', ['class' => 'control-label']) !!}
 		<?php  $user_type = (!empty($users->user_type_id==2)?'Professional':'Buyer'); ?>
 		{!! Form::text('user_type_id', $user_type, ['class' => 'form-control', 'readonly' => 'true']) !!}
+-->
 		<br/>
 		<br/>
 		<?php if (isset($users->is_active) && $users->is_active == 1 ) { ?>
