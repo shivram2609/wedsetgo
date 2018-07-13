@@ -284,10 +284,12 @@
 	  
 	  $("#brideSignin").on("click",function(){
 		  $("#u_type").val("1");
+		  $("#user_type_id").val("3");
 	  });
 	  
 	  $("#sellerSignin").on("click",function(){
 		  $("#u_type").val("2");
+		  $("#user_type_id").val("2");
 	  });
 	var keyFlag = false;
 	$("#search_text").on("keyup",function(){

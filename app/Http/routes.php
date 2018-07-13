@@ -54,6 +54,9 @@ Route::group(['middleware' => 'admin.middleware'], function () {
 	Route::get('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'AdminController@adminchangepassword'));
 	Route::post('ad_changepassword', array('as' => 'admin.adminchangepassword', 'uses' => 'AdminController@adminchangepassword'));
 	
+	
+	Route::get('add_user', array('as' => 'admin.add_user', 'uses' => 'AdminController@add'));
+	Route::post('add_user', array('as' => 'admin.add_user', 'uses' => 'AdminController@add'));
 	Route::get('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
 	Route::post('users',array('as' => 'admin.admin_userlist', 'uses'=>'AdminController@index'));
 	Route::get('user/{id}', array('as' => 'admin.edit', 'uses' => 'AdminController@edit'));

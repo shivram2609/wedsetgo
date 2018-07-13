@@ -138,10 +138,14 @@
 			 <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
 			  {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Last Name' ,'required'=>'Please enter last name']) !!}
 			 </div>
+			  <div class="input-group form-group">
+			  <span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+			  {!! Form::select('user_type_id', [ "2"=>"Professional","3"=>"Bride/Groom"],(isset($user->user_type_id)?$user->user_type_id:''), array("class"=>"form-control", "id"=>"user_type_id", "placeholder"=>"Please select your user type")) !!}
+			 </div> 
 			 <div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
 			  {!! Form::input('email', 'email', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Email' ,'required'=>'Please enter email']) !!}
-			 </div> 
+			 </div>
 			 <div class="input-group form-group">
 			 <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
 			  {!! Form::input('password', 'password', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Password','required'=>'Please enter password' ]) !!}

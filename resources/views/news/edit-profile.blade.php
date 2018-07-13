@@ -80,16 +80,19 @@
 					</div>
 					<br>
 
-					<?php if($user->porfessional_request == 1 And $user->user_type_id == 3) { ?>
+<!--
+					<?php //if($user->porfessional_request == 1 And $user->user_type_id == 3) { ?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional" checked />If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request.
-					<?php } else if($user->user_type_id == 3) {?>
+					<?php// } else if($user->user_type_id == 3) {?>
 						<input name="agree" type="checkbox" value="1" id="checkbox_professional" />If you are a Professional, then please tick this box and fill out some additional info below in order to send us a Professional Profile request.
-					<?php } elseif($user->user_type_id == 2 ) { ?>
+					<?php// } elseif($user->user_type_id == 2 ) { ?>
 						<input type="hidden" name="agree" value="1" />
-					<?php } ?>
+					<?php //} ?>
+-->
 					   
 					
-					<?php if($user->porfessional_request == 1 OR $user->user_type_id == 2){ ?>
+					<?php //if($user->porfessional_request == 1 OR $user->user_type_id == 2){ ?>
+					<?php if($user->user_type_id == 2){ ?>
 						<div class="professional_status">
 					<?php } else {?>
 						<div class="professional_status hide">
@@ -187,11 +190,14 @@
 						</div>
 				</div>
 				<br>
-			<?php if($user->porfessional_request == 1 OR $user->user_type_id == 3) { ?>
+<!--
+			<?php// if($user->porfessional_request == 1 OR $user->user_type_id == 3) { ?>
 			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more confirm ', 'data-confirm' => 'Thank you for filling out the information! We will review your details and activate your profile as soon as possible']) !!}
-			<?php } else { ?>
+			<?php //} else { ?>
+-->
+			
 			{!! Form::submit('Update Profile', ['class' => 'btn btn-submit read-more']) !!}
-			<?php }?>
+			<?php //}?>
 				</div>
 		
 		</div>

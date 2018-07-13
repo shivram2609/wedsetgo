@@ -88,7 +88,46 @@ class AdminController extends Controller
 				$users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
 				return view('admin.edit', array('title' => 'Update User',"users"=>$users));
 		}
+		
 	}
+	
+	public function add(Request $request){
+		if ($request->isMethod('post')){	
+		$this->validate($request, array(
+                                'first_name' => 'required|max:255',
+                                'last_name' => 'required|max:255',
+                                'user_type_id' => 'required',
+                                'email' => 'required|email|max:255|unique:users',
+                                'password' => 'required|min:6|'
+                            )
+                        );
+        
+        $input = $request->all(); 
+        $token = str_random(64);
+        $user = User::create(array(
+			'email' => $request->email,
+			'password' => bcrypt($request->password),
+			'user_type_id' => $request->user_type_id,
+			'is_active'=> ($request->is_active == 'on')?1:0,
+			'confimation_token'=>$token,
+			'porfessional_request'=>0
+        ));
+        if ( $user ) {
+			UserDetail::create(array(
+						'user_id'=>$user->id,
+						'first_name' => $request->first_name, 
+						'last_name' => $request->last_name
+					));
+			Session::flash('flash_message', 'User added successfully.');
+		} else {
+			Session::flash('error', 'User can not be added, Please try again.');
+		}
+	}
+	
+    $users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
+	return view('admin.add_user',array('title' => 'Add User',"users"=>$users));
+}
+	
     /**
      * Update the specified resource in storage.
      *

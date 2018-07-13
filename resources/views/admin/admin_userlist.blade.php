@@ -12,11 +12,12 @@
 					<button type="submit" class="btn btn-default categories-submit"><span class="glyphicon glyphicon-search"></span>Search</button>
 					<a href="{{ url('users') }}" class="btn btn-submit add-btn clear-category"> Clear</a>
 				</span>
+					<div class="rhs_actions right ">
+						<a href="{{ url('add_user') }}" class="btn btn-submit add-btn "> Add</a>
+					</div>
 			</div>
 		</form>
-		<div class="rhs_actions right">
 		
-		</div>
 	</div>
 		{!! Form::open() !!}
 	<table cellpadding="0" cellspacing="0">

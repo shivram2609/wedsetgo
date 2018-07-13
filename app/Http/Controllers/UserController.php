@@ -57,25 +57,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-		//dd($request->all());
+    {	
 		//$request->merge(['captcha' => $this->captchaCheck()]);
 		$this->validate($request, array(
                                 'first_name' => 'required|max:255',
                                 'last_name' => 'required|max:255',
+                                'user_type_id' => 'required',
                                 'email' => 'required|email|max:255|unique:users',
                                 'password' => 'required|min:6|confirmed',
-                                'g-recaptcha-response'  => 'required',
+                                //~ 'g-recaptcha-response'  => 'required',
 				//				'captcha'               => 'required|min:1',
                             )
                         );
         
-        $input = $request->all();      
+        $input = $request->all();  
         $token = str_random(64);
         $user = User::create(array(
 			'email' => $request->email,
 			'password' => bcrypt($request->password),
-			'user_type_id' => 3,
+			'user_type_id' => $request->user_type_id,
 			'confimation_token'=>$token,
 			'porfessional_request'=>0
         ));
@@ -86,16 +86,21 @@ class UserController extends Controller
 						'first_name' => $request->first_name, 
 						'last_name' => $request->last_name
 					));
-			if($request->u_type == 1) { 
+			if($request->user_type_id == 3) { 
 				 Controller::getEmailData('SIGNUP');
 			 } else { 
 				 Controller::getEmailData('PROFESSIONAl');
 			 }
 			 $this->email_body = str_replace("{USER}",ucfirst($request->first_name),$this->email_body);
-			$link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
+			 $link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
 			 $this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
 			Controller::sendMail($request->email);
-			Session::flash('flash_message', 'User registration successfully, please check your email to confirm your account.');
+			if($request->user_type_id == 3) {
+			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, you are good to go! Find inspiration, create vision books and search for professionals.');
+			}
+			else{
+			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, make sure to edit your profile to add additional information so that our brides and grooms can find you and learn more about your business.');
+			}
 		} else {
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
