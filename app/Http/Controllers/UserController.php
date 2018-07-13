@@ -65,7 +65,7 @@ class UserController extends Controller
                                 'user_type_id' => 'required',
                                 'email' => 'required|email|max:255|unique:users',
                                 'password' => 'required|min:6|confirmed',
-                                //~ 'g-recaptcha-response'  => 'required',
+                                'g-recaptcha-response'  => 'required',
 				//				'captcha'               => 'required|min:1',
                             )
                         );
