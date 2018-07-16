@@ -11,7 +11,8 @@
         "ckeditor/ckeditor": "^4.8",
         "laravel/socialite": "~2.0",
          "intervention/image": "dev-master",
-         "google/recaptcha": "~1.1"
+         "google/recaptcha": "~1.1",
+         "aws/aws-sdk-php": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
