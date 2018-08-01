@@ -67,11 +67,11 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-6 form-group">
-							<label class="required">Gender</label>
+							<label>Gender</label>
 							{!! Form::select('gender', ["m"=>"Male","f"=>"Female","o"=>"Other"],(isset($user->gender)?$user->gender:''), array("class"=>"form-control custom-select")) !!}
 						</div>
 						<div class="col-sm-6 form-group">
-							<label class="required">Dob</label>
+							<label>Dob</label>
 							<div class="input-group date" >
 							{!! Form::text('dob', (isset($user->dob)?$user->dob:''), ['class' => 'form-control', 'id'=> 'event_date']) !!}
 							  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -120,21 +120,27 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12 form-group">
-								<label class="required">Street Address</label>
+								<label >Street Address</label>
 								<textarea class="form-control" placeholder="Street and number, P.O. box, c/o." name="address"> <?php echo isset($user->address)?$user->address:''?></textarea>
 							</div>						
 						</div>
 						<div class="row">
 							<div class="col-sm-4 form-group">
+<!--
 								<label class="required">Country</label>
+-->
+								<label>Country</label>
 								<input type="text" name="country" class="form-control" value="<?php echo isset($user->country)?$user->country:''?>"/>
 							</div>
 							<div class="col-sm-4 form-group">
+<!--
 								<label class="required">State/County</label>
+-->
+								<label>State/County</label>
 								<input type="text" name="state" class="form-control" value="<?php echo isset($user->state)?$user->state:''?>"/>
 							</div>
 							<div class="col-sm-4 form-group">
-								<label class="required">Zipcode</label>
+								<label >Zipcode</label>
 								<input type="text" name="zipcode" class="form-control" value="<?php echo isset($user->zipcode)?$user->zipcode:''?>"/>
 							</div>
 						</div>
@@ -164,11 +170,11 @@
 							
 						<div class="row">
 							<div class="col-sm-6 form-group">
-								<label class="required">Trade Description</label>
+								<label >Trade Description</label>
 								<textarea class="form-control" placeholder="Tell us more about your products, services or business" name="trade_description"><?php echo isset($user->trade_description)?$user->trade_description:''?></textarea>
 							</div>
 							<div class="col-sm-6 form-group">
-								<label class="required">Detail</label>
+								<label>Detail</label>
 								<textarea class="form-control" placeholder="Tell us more about you as a person - what you’re like, what you love and what drives you" name="detail"><?php echo isset($user->detail)?$user->detail:''?></textarea>
 							</div>
 						</div>

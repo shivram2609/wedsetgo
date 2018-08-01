@@ -74,7 +74,8 @@ class AdminController extends Controller
     public function edit(Request $request, $id=NULL)
     {
 		if ($request->isMethod('post') || $request->isMethod('put') || empty($id)) {
-			  $data = array();           
+			  $data = array();  
+			  $data['user_type_id'] = $request->user_type_id;       
 			  $data['is_active'] = ($request->is_active == 'on')?1:0;
 			  if( !empty($id) ){
 				$result = DB::table('users')->where('id',$request->id)->update($data);
@@ -92,12 +93,14 @@ class AdminController extends Controller
 	}
 	
 	public function add(Request $request){
+
 		if ($request->isMethod('post')){	
 		$this->validate($request, array(
                                 'first_name' => 'required|max:255',
-                                'last_name' => 'required|max:255',
                                 'user_type_id' => 'required',
                                 'email' => 'required|email|max:255|unique:users',
+                                'category_id'=>'required',
+                                'location_id'=>'required',
                                 'password' => 'required|min:6|'
                             )
                         );
@@ -107,25 +110,68 @@ class AdminController extends Controller
         $user = User::create(array(
 			'email' => $request->email,
 			'password' => bcrypt($request->password),
+			'user_password' => $request->password,
 			'user_type_id' => $request->user_type_id,
 			'is_active'=> ($request->is_active == 'on')?1:0,
+			'is_change'=> 0, 
 			'confimation_token'=>$token,
 			'porfessional_request'=>0
         ));
+        $socialArray['fb'] = $request->fb;
+			$socialArray['twitter'] = $request->twitter;
+			$socialArray['google'] = $request->google;
+			$socialArray['instagram'] = $request->instagram;
+			$socialVal = serialize($socialArray);
         if ( $user ) {
 			UserDetail::create(array(
 						'user_id'=>$user->id,
 						'first_name' => $request->first_name, 
-						'last_name' => $request->last_name
+						'last_name' => $request->last_name,
+						'gender' => $request->gender,
+						'phone_no' => $request->phone,
+						'website' => $request->website,
+						'category_id' => $request->category_id,
+						'dob' => $request->dob,
+						'social_media' => $socialVal,
+						'trade_description' => $request->trade_description,
+						'detail'=> $request->detail,
+						'location_id' => $request->location_id,
+						'other_location' => $request->other_location,
+						'other_category' => $request->other_category,
+						'country' => $request->country,
+						'state' => $request->state,
+						'zipcode' => $request->zipcode
+						
 					));
-			Session::flash('flash_message', 'User added successfully.');
+					
+			if($request->user_type_id == 3) { 
+				 Controller::getEmailData('SIGNUP');
+			 } else { 
+				 Controller::getEmailData('PROFESSIONAl');
+			 }
+			 $this->email_body = str_replace("{USER}",ucfirst($request->first_name),$this->email_body);
+			 $link = "<a href='".$this->staticLink."confirmation/".$token."'>Click Here</a>";
+			 $this->email_body = str_replace("{CLICK_HERE}",$link,$this->email_body);
+			Controller::sendMail($request->email);
+			if($request->user_type_id == 3) {
+			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, you are good to go! Find inspiration, create vision books and search for professionals.');
+			}
+			else{
+			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, make sure to edit your profile to add additional information so that our brides and grooms can find you and learn more about your business.');
+			}
+			return redirect()->route('admin.admin_userlist');
 		} else {
-			Session::flash('error', 'User can not be added, Please try again.');
+			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
-	}
-	
+     }
+
     $users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
-	return view('admin.add_user',array('title' => 'Add User',"users"=>$users));
+    $location= DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
+    $location[0] = "Other";
+    $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
+    $catagory[0] = "Other";
+	return view('admin.add_user',array('title' => 'Add User',"users"=>$users, "location"=>$location, "catagory"=>$catagory));
+
 }
 	
     /**

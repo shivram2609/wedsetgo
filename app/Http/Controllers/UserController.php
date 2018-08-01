@@ -136,6 +136,11 @@ class UserController extends Controller
 		}
 		if (Auth::attempt($loginCredetials)){ 
 			if (Auth::user()->is_active == 1) {
+				$is_change = DB::table('users')->select("users.is_change")->where('users.email',$request->email)->first();
+				if($is_change->is_change ===  0){
+					DB::table('users')->where('users.email',$request->email)->update(["users.is_change"=>Null]);
+					Session::flash('flash_message', 'You  are logged in, Now you can change your password.');
+				}
 				$users = DB::table('users')->select('user_details.*','users.email')->join('user_details','user_details.user_id','=','users.id')->where('user_details.user_id', Auth::user()->id)->first();
 				Session::put("users",$users);
 				if (Auth::user()->user_type_id == 1) {
@@ -350,23 +355,13 @@ class UserController extends Controller
                                 'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',
                                 'email' => 'required|max:255|email',
-                                'gender' => 'required',
-                                'dob' => 'required',
                                 );
              if ( isset($input["agree"]) && !empty($input["agree"]) ) {
 				 $validateArray = array(
                                 'firstname' => 'required|max:255',
                                 'lastname' => 'required|max:255',
-                                'email' => 'required|email|max:255',
-                                'gender' => 'required',
-                                'dob' => 'required',
-                                'address' => 'required',
-                                'country' => 'required',
-                                'state' => 'required',
-                                'zipcode' => 'required',
+                                'email' => 'required|email|max:255',	
                                 'location_id' => 'required',
-                                'trade_description' => 'required',
-                                'detail' => 'required',
                                 );
 			 }                    
 			 $this->validate($request, $validateArray);

@@ -8,6 +8,8 @@
 		<script type="text/javascript" src="/js/admin/jquery.validate.js"></script>
 		<script type="text/javascript" src="/js/admin/validationmessages.js"></script>
 		<script type="text/javascript" src="/js/admin/validate.js"></script>
+		
+		
         <title>@yield('title')</title>
     </head>
     <body>

@@ -12,7 +12,13 @@
 		
 		{!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
 		{!! Form::email('email', (isset($users->email)?$users->email:''), ['class' => 'form-control', 'readonly' => 'true']) !!}
-		
+		<?php if ($users->is_change == '0') { ?>
+		{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
+		{!! Form::text('password', (isset($users->user_password)?$users->user_password:''), ['class' => 'form-control', 'readonly' => 'true']) !!}
+		<?php } else if(($users->is_change == '1')) { ?>
+		{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
+		{!! Form::password('password', null, ['class' => 'form-control', 'readonly' => 'true']) !!}
+		<?php }?>
 		{!! Form::label('user_type_id', 'User Type', ['class' => 'control-label']) !!}
 		{!! Form::select('user_type_id', ["2"=>"Professional","3"=>"Bride/Groom"],(isset($users->user_type_id)?$users->user_type_id:''), array("class"=>"form-control", "id"=>"user_type_id", "placeholder"=>"Please select your user type")) !!}
 		
