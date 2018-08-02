@@ -15,7 +15,7 @@
 		<?php if ($users->is_change == '0') { ?>
 		{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
 		{!! Form::text('password', (isset($users->user_password)?$users->user_password:''), ['class' => 'form-control', 'readonly' => 'true']) !!}
-		<?php } else if(($users->is_change == '1')) { ?>
+		<?php } else if(($users->is_change == 'NULL')) { ?>
 		{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
 		{!! Form::password('password', null, ['class' => 'form-control', 'readonly' => 'true']) !!}
 		<?php }?>
