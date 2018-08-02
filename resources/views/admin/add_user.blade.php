@@ -1,37 +1,37 @@
 @extends('layouts.admin')
 @section('content')
-
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <div class="categories form">
 	{!! Form::open() !!}
 <fieldset>
 		<legend><?php echo $title; ?></legend>
-		{!! Form::label('first_name', 'First Name', ['class' => 'control-label ']) !!}
-		{!! Form::text('first_name', null, ['class' => 'form-control new' ]) !!}
+		{!! Form::label('first_name', 'First Name', ['class' => 'control-label required']) !!}
+		{!! Form::text('first_name', null, ['class' => 'form-control', 'required'=>'Please enter your name' ]) !!}
 		
 		{!! Form::label('last_name', 'Last Name', ['class' => 'control-label']) !!}
-		{!! Form::text('last_name', null, ['class' => 'form-control new']) !!}
+		{!! Form::text('last_name', null, ['class' => 'form-control']) !!}
 		
-		{!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
-		{!! Form::email('email', null, ['class' => 'form-control new']) !!}
+		{!! Form::label('email', 'Email', ['class' => 'control-label required']) !!}
+		{!! Form::email('email', null, ['class' => 'form-control', 'required'=>'Please enter your name']) !!}
 		
 		
 		{!! Form::label('user_type_id', 'User Type', ['class' => 'control-label']) !!}
-		{!! Form::select('user_type_id', ["-1"=>"Select User Type", "2"=>"Professional","3"=>"Bride/Groom"], array("class"=>"form-control new")) !!}
+		{!! Form::select('user_type_id', [""=>"Select User Type", "2"=>"Professional","3"=>"Bride/Groom"], array("class"=>"form-control")) !!}
 		
 		{!! Form::label('gender', 'Gender', ['class' => 'control-label']) !!}
 		{!! Form::select('gender', ["f"=>"Female","m"=>"Male","o"=>"Other"], array("class"=>"form-control new")) !!}
 		
 		{!! Form::label('phone', 'Phone No', ['class' => 'control-label']) !!}
-		{!! Form::text('phone', null, ['class' => 'form-control new']) !!}
+		{!! Form::text('phone', null, ['class' => 'form-control']) !!}
 		
 		{!! Form::label('website', 'Website', ['class' => 'control-label']) !!}
-		{!! Form::text('website', null, ['class' => 'form-control new']) !!}
+		{!! Form::text('website', null, ['class' => 'form-control']) !!}
 		
 		{!! Form::label('dob', 'Dob', ['class' => 'control-label']) !!}
-		{!! Form::text('dob', null, ['class' => 'form-control new', 'id'=> 'dob']) !!}
+		{!! Form::text('dob', null, ['class' => 'form-control', 'id'=> 'dob']) !!}
 		
-		{!! Form::label('category_id', 'Business Category', ['class' => 'control-label']) !!}
-		{!! Form::select('category_id',[-1=>'Please Select Category']+ $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control new", "id"=>"category_selected")) !!}
+		{!! Form::label('category_id', 'Business Category', ['class' => 'control-label required']) !!}
+		{!! Form::select('category_id',[""=>'Please Select Category']+ $catagory,(isset($user->category_id)?$user->category_id:''), array("class"=>"form-control", "id"=>"category_selected")) !!}
 
 		<div class="col-sm-6 form-group hide" id="other_cate">
 			<label class="required">Other Category</label>
@@ -39,32 +39,32 @@
 		</div>
 		
 		{!! Form::label('trade_description', 'Trade Discription', ['class' => 'control-label']) !!}
-		{!! Form::text('trade_description', null, ['class' => 'form-control new', ]) !!}
+		{!! Form::text('trade_description', null, ['class' => 'form-control', ]) !!}
 
 		{!! Form::label('detail', 'Detail', ['class' => 'control-label']) !!}
-		{!! Form::text('detail', null, ['class' => 'form-control new', ]) !!}
+		{!! Form::text('detail', null, ['class' => 'form-control', ]) !!}
 		
 		{!! Form::label('address', 'Street Address', ['class' => 'control-label']) !!}
-		{!! Form::text('address', null, ['class' => 'form-control new', 'id'=> 'address']) !!}
+		{!! Form::text('address', null, ['class' => 'form-control', 'id'=> 'address']) !!}
 		
 		{!! Form::label('country', 'Country', ['class' => 'control-label']) !!}
-		{!! Form::text('country', null, ['class' => 'form-control new', 'id'=> 'country']) !!}
+		{!! Form::text('country', null, ['class' => 'form-control', 'id'=> 'country']) !!}
 		
 		{!! Form::label('state', 'State/County', ['class' => 'control-label']) !!}
-		{!! Form::text('state', null, ['class' => 'form-control new', 'id'=> 'state']) !!}
+		{!! Form::text('state', null, ['class' => 'form-control', 'id'=> 'state']) !!}
 		
 		{!! Form::label('zipcode', 'Zipcode', ['class' => 'control-label']) !!}
-		{!! Form::text('zipcode', null, ['class' => 'form-control new', 'id'=> 'zipcode']) !!}
+		{!! Form::text('zipcode', null, ['class' => 'form-control', 'id'=> 'zipcode']) !!}
 		
-		{!! Form::label('location', 'City', ['class' => 'control-label']) !!}
-		{!! Form::select('location_id',[-1=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control new", 'id'=>"location_select")) !!}
+		{!! Form::label('location', 'City', ['class' => 'control-label required']) !!}
+		{!! Form::select('location_id',[-1=>'Please Select Location'] +$location,(isset($user->location_id)?$user->location_id:''), array("class"=>"form-control", 'id'=>"location_select")) !!}
 		
 		<div class="col-sm-6 form-group hide" id="other_loc">
 			<label class="required">Other City</label>
 			<input type="text" name="other_location" class="form-control" value="" />
 		</div>
-		{!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
-		{!! Form::input('text', 'password', null, ['class' => 'form-control new', 'size' => 40, 'placeholder' => 'Password','required'=>'Please enter password' ]) !!}
+		{!! Form::label('password', 'Password', ['class' => 'control-label required']) !!}
+		{!! Form::input('text', 'password', null, ['class' => 'form-control', 'size' => 40, 'placeholder' => 'Password','required'=>'Please enter password' ]) !!}
 		
 		<button type="button" class="btn btn-submit add-btn" onClick="populateform(this.form.thelength.value);" id="create_pass">Create Password</button>
 		
