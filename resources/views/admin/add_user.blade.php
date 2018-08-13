@@ -92,6 +92,7 @@
 			<input type="checkbox" name="is_active" id="is_active" /><label for="is_active">Active</label>
 		<?php } ?>
 		
+			<input type="checkbox" name="send_mail" id="send_mail" /><label for="send_mail">Send Mail</label>
 	</fieldset>
 	{!! Form::submit($title, ['class' => 'btn btn-submit']) !!}
 	{!! Form::close() !!}

@@ -113,6 +113,7 @@ class AdminController extends Controller
 			'user_password' => $request->password,
 			'user_type_id' => $request->user_type_id,
 			'is_active'=> ($request->is_active == 'on')?1:0,
+			'send_mail'=> ($request->send_mail == 'on')?1:0,
 			'is_change'=> 0, 
 			'confimation_token'=>$token,
 			'porfessional_request'=>0
@@ -122,6 +123,7 @@ class AdminController extends Controller
 			$socialArray['google'] = $request->google;
 			$socialArray['instagram'] = $request->instagram;
 			$socialVal = serialize($socialArray);
+			//~ dd($user);die;
         if ( $user ) {
 			UserDetail::create(array(
 						'user_id'=>$user->id,
@@ -143,7 +145,7 @@ class AdminController extends Controller
 						'zipcode' => $request->zipcode
 						
 					));
-					
+			if($request->send_mail == 1){		
 			if($request->user_type_id == 3) { 
 				 Controller::getEmailData('SIGNUP');
 			 } else { 
@@ -164,7 +166,7 @@ class AdminController extends Controller
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
      }
-
+}
     $users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
     $location= DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
     $location[0] = "Other";
