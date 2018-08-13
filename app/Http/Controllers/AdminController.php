@@ -93,7 +93,6 @@ class AdminController extends Controller
 	}
 	
 	public function add(Request $request){
-
 		if ($request->isMethod('post')){	
 		$this->validate($request, array(
                                 'first_name' => 'required|max:255',
@@ -123,7 +122,6 @@ class AdminController extends Controller
 			$socialArray['google'] = $request->google;
 			$socialArray['instagram'] = $request->instagram;
 			$socialVal = serialize($socialArray);
-			//~ dd($user);die;
         if ( $user ) {
 			UserDetail::create(array(
 						'user_id'=>$user->id,
@@ -145,7 +143,7 @@ class AdminController extends Controller
 						'zipcode' => $request->zipcode
 						
 					));
-			if($request->send_mail == 1){		
+			if($request->send_mail == 'on'){		
 			if($request->user_type_id == 3) { 
 				 Controller::getEmailData('SIGNUP');
 			 } else { 
@@ -162,11 +160,11 @@ class AdminController extends Controller
 			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, make sure to edit your profile to add additional information so that our brides and grooms can find you and learn more about your business.');
 			}
 			return redirect()->route('admin.admin_userlist');
-		} else {
+		}} else {
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
      }
-}
+
     $users = DB::table('users')->select('user_details.*','users.*')->join('user_details','user_details.user_id','=','users.id')->where('users.id', $request->id)->first();
     $location= DB::table('locations')->where(['is_active'=>1])->orderBy('location_name')->lists('location_name', 'id');
     $location[0] = "Other";
