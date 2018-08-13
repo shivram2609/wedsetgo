@@ -160,7 +160,11 @@ class AdminController extends Controller
 			Session::flash('flash_message', 'Thank you for signing up! Please check your inbox for a link to verify your email address – once you have verified, make sure to edit your profile to add additional information so that our brides and grooms can find you and learn more about your business.');
 			}
 			return redirect()->route('admin.admin_userlist');
-		}} else {
+		}
+		Session::flash('flash_message', 'A new user has been added.');
+		return redirect()->route('admin.admin_userlist');
+		
+		} else {
 			Session::flash('error', 'User registration can not be done, Please try again.');
 		}
      }
@@ -170,6 +174,7 @@ class AdminController extends Controller
     $location[0] = "Other";
     $catagory= DB::table('catagories')->where(['is_active'=>1])->orderBy('name')->lists('name', 'id');
     $catagory[0] = "Other";
+    
 	return view('admin.add_user',array('title' => 'Add User',"users"=>$users, "location"=>$location, "catagory"=>$catagory));
 
 }
